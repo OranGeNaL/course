@@ -21,6 +21,10 @@ public:
         strcpy(contributionDate, contrDate);
         strcpy(lawyerData, lawData);
     }
+    Note()
+    {
+
+    }
 
 private:
 };
@@ -28,21 +32,21 @@ private:
 struct ListElement
 {
 public:
-    Note *note;
+    Note note;
     ListElement *nextElement;
 
-    ListElement(Note *value, ListElement *next)
+    ListElement(Note value, ListElement *next)
     {
         note = value;
         nextElement = next;
     }
     void ShowList()
     {
-        cout << note->contributorData << " "
-             << note->contributionSumm << " "
-             << note->contributionDate << " "
-             << note->lawyerData << endl;
-        if (!nextElement)
+        cout << note.contributorData << " "
+             << note.contributionSumm << " "
+             << note.contributionDate << " "
+             << note.lawyerData << endl;
+        if (nextElement)
         {
             nextElement->ShowList();
         }
@@ -87,17 +91,24 @@ int main()
         Note newNote = *new Note(contributorData, contributionSumm, contributionDate, lawyerData);
         if (!head)
         {
-            head = new ListElement(&newNote, NULL);
-            tail = head;
+            head = new ListElement(newNote, NULL);
+            //tail->ShowList();
+        }
+        else if (!tail)
+        {
+            tail = new ListElement(newNote, NULL);
+            head->nextElement = tail;
         }
         else
         {
-            tail->nextElement = new ListElement(&newNote, NULL);
+            tail->nextElement = new ListElement(newNote, NULL);
             tail = tail->nextElement;
         }
     }
 
     head->ShowList();
+    // cout << tail->note.contributorData << endl;
+    // cout << head->note.contributorData << " " << head->nextElement->note.contributorData << endl;
 }
 
 void Fixer(char *input, int length)
