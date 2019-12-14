@@ -5,7 +5,6 @@
 
 using namespace std;
 
-void Fixer(char *, int);
 struct Note
 {
 public:
@@ -23,7 +22,6 @@ public:
     }
     Note()
     {
-
     }
 
 private:
@@ -35,10 +33,14 @@ public:
     Note note;
     ListElement *nextElement = NULL;
 
+    ListElement()
+    {
+    }
     ListElement(Note valueField)
     {
         note = valueField;
     }
+
     void ShowList()
     {
         cout << note.contributorData << " "
@@ -50,9 +52,30 @@ public:
             nextElement->ShowList();
         }
     }
+    int ListLength(int length = 1)
+    {
+        if (nextElement)
+        {
+            nextElement->ListLength(length + 1);
+        }
+        else
+        {
+            return length;
+        }
+    }
+    ListElement *ElementGetter(int ind)
+    {
+        if (ind > 0)
+            nextElement->ElementGetter(ind - 1);
+        else
+            return this;
+    }
 
 private:
 };
+
+void Fixer(char *, int);
+void DigitalSorting(int, ListElement **, ListElement **, ListElement *);
 
 int main()
 {
@@ -108,9 +131,9 @@ int main()
 
     ListElement *tempElement = head;
 
-    while(tempElement->nextElement)
+    while (tempElement->nextElement)
     {
-        if(tempElement->nextElement == tail)
+        if (tempElement->nextElement == tail)
         {
             tempElement->nextElement = NULL;
             tail = tempElement;
@@ -120,11 +143,75 @@ int main()
     }
 
     head->ShowList();
-    // cout << tail->note.contributorData << endl;
-    // cout << head->note.contributorData << " " << head->nextElement->note.contributorData << endl;
+
+
+    ListElement **indMass = new ListElement *[head->ListLength()];
+    ListElement **tempSortMass = new ListElement *[head->ListLength()];
+    for (int i = 0; i < head->ListLength(); i++)
+    {
+        indMass[i] = head->ElementGetter(i);
+        tempSortMass[i] = indMass[i];
+    }
+
+    DigitalSorting(3, indMass, tempSortMass, head);
+    printf("-----------------------------------------------------------------\n");
+    for(int i = 0; i < head->ListLength(); i++)
+    {
+        cout << indMass[i]->note.contributorData << " "
+             << indMass[i]->note.contributionSumm << " "
+             << indMass[i]->note.contributionDate << " "
+             << indMass[i]->note.lawyerData << endl;
+    }
+    delete (tempSortMass);
 }
 
 //TODO:
+
+void DigitalSorting(int digit, ListElement **mass, ListElement **tempMass, ListElement *head)
+{
+    int ind = 0;
+    if (digit % 2 == 0)
+    {
+        for (int i = 65; i < 123; i++)
+        {
+            if (i == 91 || i == 92 || i == 93 || i == 94)
+            {
+                continue;
+            }
+            for (int j = 0; j < head->ListLength(); j++)
+            {
+                if (tempMass[j]->note.contributorData[digit] - '0' + 48 == i)
+                {
+                    mass[ind] = tempMass[j];
+                    ind++;
+                }
+            }
+        }
+    }
+    else if (digit % 2 == 1)
+    {
+        for (int i = 65; i < 123; i++)
+        {
+            if (i == 91 || i == 92 || i == 93 || i == 94)
+            {
+                continue;
+            }
+            for (int j = 0; j < head->ListLength(); j++)
+            {
+                if (mass[j]->note.contributorData[digit] - '0' + 48 == i)
+                {
+                    tempMass[ind] = mass[j];
+                    ind++;
+                }
+            }
+        }
+    }
+
+    if (digit != 0)
+    {
+        DigitalSorting(digit - 1, mass, tempMass, head);
+    }
+}
 
 void Fixer(char *input, int length)
 {
