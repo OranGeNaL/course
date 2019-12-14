@@ -124,7 +124,7 @@ int main()
     // cout << head->note.contributorData << " " << head->nextElement->note.contributorData << endl;
 }
 
-
+//TODO:
 
 void Fixer(char *input, int length)
 {
