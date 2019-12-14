@@ -98,15 +98,25 @@ int main()
     while (!file.eof())
     {
         char contributorData[30] = "";
+        char fullContributorData[100] = "";
         unsigned short int contributionSumm = NULL;
         char contributionDate[10] = "";
         char lawyerData[22] = "";
 
-        file >> contributorData;
+        file >> fullContributorData;
         file >> contributionSumm;
         file >> contributionDate;
         file >> lawyerData;
 
+        if(strlen(fullContributorData) >= 30)
+        {
+            strncpy(contributorData, fullContributorData, 29);
+        }
+        else
+        {
+            strcpy(contributorData, fullContributorData);
+        }
+        
         Fixer(contributorData, 30);
         Fixer(lawyerData, 22);
 
@@ -211,6 +221,11 @@ void DigitalSorting(int digit, ListElement **mass, ListElement **tempMass, ListE
     {
         DigitalSorting(digit - 1, mass, tempMass, head);
     }
+}
+
+void DigitalSorting()
+{
+    
 }
 
 void Fixer(char *input, int length)
