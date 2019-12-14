@@ -33,12 +33,11 @@ struct ListElement
 {
 public:
     Note note;
-    ListElement *nextElement;
+    ListElement *nextElement = NULL;
 
-    ListElement(Note value, ListElement *next)
+    ListElement(Note valueField)
     {
-        note = value;
-        nextElement = next;
+        note = valueField;
     }
     void ShowList()
     {
@@ -58,7 +57,7 @@ private:
 int main()
 {
     ListElement *head = NULL;
-    ListElement *tail = head;
+    ListElement *tail = NULL;
     string inputPath = "";
 
     cout << "Enter input file path: ";
@@ -75,10 +74,10 @@ int main()
 
     while (!file.eof())
     {
-        char contributorData[30];
-        unsigned short int contributionSumm;
-        char contributionDate[10];
-        char lawyerData[22];
+        char contributorData[30] = "";
+        unsigned short int contributionSumm = NULL;
+        char contributionDate[10] = "";
+        char lawyerData[22] = "";
 
         file >> contributorData;
         file >> contributionSumm;
@@ -91,19 +90,33 @@ int main()
         Note newNote = *new Note(contributorData, contributionSumm, contributionDate, lawyerData);
         if (!head)
         {
-            head = new ListElement(newNote, NULL);
+            head = new ListElement(newNote);
             //tail->ShowList();
         }
         else if (!tail)
         {
-            tail = new ListElement(newNote, NULL);
+            tail = new ListElement(newNote);
             head->nextElement = tail;
         }
         else
         {
-            tail->nextElement = new ListElement(newNote, NULL);
+            tail->nextElement = new ListElement(newNote);
             tail = tail->nextElement;
+            //tail->ShowList();
         }
+    }
+
+    ListElement *tempElement = head;
+
+    while(tempElement->nextElement)
+    {
+        if(tempElement->nextElement == tail)
+        {
+            tempElement->nextElement = NULL;
+            tail = tempElement;
+            break;
+        }
+        tempElement = tempElement->nextElement;
     }
 
     head->ShowList();
@@ -111,10 +124,13 @@ int main()
     // cout << head->note.contributorData << " " << head->nextElement->note.contributorData << endl;
 }
 
+
+
 void Fixer(char *input, int length)
 {
-    for (int i = strlen(input) - length; i > 0; i--)
+    for (int i = length - strlen(input); i > 1; i--)
     {
-        input[strlen(input) - 1] = '_';
+        input[length - i] = '_';
     }
+    input[strlen(input)] = '\0';
 }
