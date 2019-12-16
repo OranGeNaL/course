@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <fstream>
 
 using namespace std;
@@ -76,6 +78,8 @@ private:
 
 void Fixer(char *, int);
 void DigitalSorting(int, ListElement **, ListElement **, ListElement *);
+void DigitalSorting(ListElement **, ListElement *);
+int MaxLength(ListElement **, int);
 
 int main()
 {
@@ -108,7 +112,7 @@ int main()
         file >> contributionDate;
         file >> lawyerData;
 
-        if(strlen(fullContributorData) >= 30)
+        if (strlen(fullContributorData) >= 30)
         {
             strncpy(contributorData, fullContributorData, 29);
         }
@@ -116,7 +120,7 @@ int main()
         {
             strcpy(contributorData, fullContributorData);
         }
-        
+
         Fixer(contributorData, 30);
         Fixer(lawyerData, 22);
 
@@ -124,7 +128,6 @@ int main()
         if (!head)
         {
             head = new ListElement(newNote);
-            //tail->ShowList();
         }
         else if (!tail)
         {
@@ -135,7 +138,6 @@ int main()
         {
             tail->nextElement = new ListElement(newNote);
             tail = tail->nextElement;
-            //tail->ShowList();
         }
     }
 
@@ -154,7 +156,6 @@ int main()
 
     head->ShowList();
 
-
     ListElement **indMass = new ListElement *[head->ListLength()];
     ListElement **tempSortMass = new ListElement *[head->ListLength()];
     for (int i = 0; i < head->ListLength(); i++)
@@ -165,7 +166,7 @@ int main()
 
     DigitalSorting(3, indMass, tempSortMass, head);
     printf("-----------------------------------------------------------------\n");
-    for(int i = 0; i < head->ListLength(); i++)
+    for (int i = 0; i < head->ListLength(); i++)
     {
         cout << indMass[i]->note.contributorData << " "
              << indMass[i]->note.contributionSumm << " "
@@ -173,6 +174,8 @@ int main()
              << indMass[i]->note.lawyerData << endl;
     }
     delete (tempSortMass);
+
+    DigitalSorting(indMass, head);
 }
 
 //TODO:
@@ -223,9 +226,84 @@ void DigitalSorting(int digit, ListElement **mass, ListElement **tempMass, ListE
     }
 }
 
-void DigitalSorting()
+void DigitalSorting(ListElement **mass, ListElement *head)
 {
-    
+    char lastName[15] = "";
+    int firstEnter = 0, lastEnter = 0, lastNameLength = 0;
+
+    for (int i = 0; i < head->ListLength(); i++)
+    {
+        if (!strcmp(lastName, ""))
+        {
+            for (int j = 0; j < strlen(mass[i]->note.contributorData); j++)
+            {
+                if (mass[i]->note.contributorData[j] != '_')
+                {
+                    lastName[j] = mass[i]->note.contributorData[j];
+                    lastNameLength++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            cout << lastName << endl;
+            firstEnter = i;
+            continue;
+        }
+
+        char subStr[15] = "";
+        strncpy(subStr, mass[i]->note.contributorData, lastNameLength);
+        if (!strcmp(lastName, subStr))
+        {
+            lastEnter = i;
+        }
+
+        else if (strcmp(lastName, subStr))
+        {
+            if (lastEnter - firstEnter > 1)
+            {
+                ListElement **subMass = new ListElement *[lastEnter - firstEnter + 1];
+                ListElement **tempSubMass = new ListElement *[lastEnter - firstEnter + 1];
+                for (int j = 0; j <= lastEnter; j++)
+                {
+                    subMass[j] = mass[firstEnter + j];
+                    tempSubMass[j] = subMass[j];
+                }
+                int cycleAmount = MaxLength(subMass, lastEnter - firstEnter + 1);
+                for(int j = cycleAmount - 1; j >= 0; j--)
+                {
+                    if(j % 2 == 0)
+                    {
+                        for(int k = 0; k <= 9; k++)
+                        {
+
+                        }
+                    }
+                }
+
+
+                delete(subMass);
+                delete(tempSubMass);
+            }
+
+            firstEnter = 0;
+            lastEnter = 0;
+            lastNameLength = 0;
+            for (int j = 14; j >= 0; j--)
+            {
+                if (j != 0)
+                {
+                    lastName[j] = NULL;
+                }
+                else
+                {
+                    lastName[j] = '\0';
+                }
+            }
+            i--;
+        }
+    }
 }
 
 void Fixer(char *input, int length)
@@ -235,4 +313,32 @@ void Fixer(char *input, int length)
         input[length - i] = '_';
     }
     input[strlen(input)] = '\0';
+}
+
+int MaxLength(ListElement **mass, int massLength)
+{
+    int maxLength = 0;
+    for (int i = 0; i < massLength; i++)
+    {
+        char chSumm[15];
+        sprintf(chSumm, "%d", mass[i]->note.contributionSumm);
+        if(strlen(chSumm) > maxLength)
+        {
+            maxLength = strlen(chSumm);
+        }
+    }
+    return maxLength;
+}
+
+char *ISummToChSumm(ListElement **mass, int ind, int maxLength)
+{
+    char chSumm[15];
+    sprintf(chSumm, "%d", mass[ind]->note.contributionSumm);
+    while(strlen(chSumm) < maxLength)
+    {
+        for(int i = 14; i >= 0; i--)
+        {
+            
+        }
+    }
 }
