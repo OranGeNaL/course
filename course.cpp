@@ -80,6 +80,7 @@ void Fixer(char *, int);
 void DigitalSorting(int, ListElement **, ListElement **, ListElement *);
 void DigitalSorting(ListElement **, ListElement *);
 int MaxLength(ListElement **, int);
+void ISummToChSumm(char *, ListElement **, int, int);
 
 int main()
 {
@@ -165,6 +166,7 @@ int main()
     }
 
     DigitalSorting(3, indMass, tempSortMass, head);
+    DigitalSorting(indMass, head);
     printf("-----------------------------------------------------------------\n");
     for (int i = 0; i < head->ListLength(); i++)
     {
@@ -175,7 +177,6 @@ int main()
     }
     delete (tempSortMass);
 
-    DigitalSorting(indMass, head);
 }
 
 //TODO:
@@ -247,9 +248,13 @@ void DigitalSorting(ListElement **mass, ListElement *head)
                     break;
                 }
             }
-            cout << lastName << endl;
             firstEnter = i;
             continue;
+        }
+
+        if(i == head->ListLength() - 1)
+        {
+            lastEnter = i;
         }
 
         char subStr[15] = "";
@@ -259,32 +264,59 @@ void DigitalSorting(ListElement **mass, ListElement *head)
             lastEnter = i;
         }
 
-        else if (strcmp(lastName, subStr))
+        if (strcmp(lastName, subStr) || lastEnter == head->ListLength() - 1)
         {
-            if (lastEnter - firstEnter > 1)
+            if (lastEnter - firstEnter >= 1)
             {
                 ListElement **subMass = new ListElement *[lastEnter - firstEnter + 1];
                 ListElement **tempSubMass = new ListElement *[lastEnter - firstEnter + 1];
-                for (int j = 0; j <= lastEnter; j++)
+                for (int j = 0; j <= lastEnter - firstEnter; j++)
                 {
                     subMass[j] = mass[firstEnter + j];
                     tempSubMass[j] = subMass[j];
                 }
                 int cycleAmount = MaxLength(subMass, lastEnter - firstEnter + 1);
-                for(int j = cycleAmount - 1; j >= 0; j--)
+                for (int j = cycleAmount - 1; j >= 0; j--)
                 {
-                    if(j % 2 == 0)
+                    int index = 0;
+                    for (int k = 0; k <= 9; k++)
                     {
-                        for(int k = 0; k <= 9; k++)
+                        if (j % 2 == 0)
                         {
-
+                            for (int h = 0; h <= lastEnter - firstEnter; h++)
+                            {
+                                char chSumm[15];
+                                ISummToChSumm(chSumm, tempSubMass, h, cycleAmount);
+                                if (chSumm[j] - '0' == k)
+                                {
+                                    subMass[index] = tempSubMass[h];
+                                    index++;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int h = 0; h <= lastEnter - firstEnter; h++)
+                            {
+                                char chSumm[15];
+                                ISummToChSumm(chSumm, subMass, h, cycleAmount);
+                                if (chSumm[j] - '0' == k)
+                                {
+                                    tempSubMass[index] = subMass[h];
+                                    index++;
+                                }
+                            }
                         }
                     }
                 }
 
+                for(int j = 0; j <= lastEnter - firstEnter; j++)
+                {
+                    mass[j + firstEnter] = subMass[j];
+                }
 
-                delete(subMass);
-                delete(tempSubMass);
+                delete (subMass);
+                delete (tempSubMass);
             }
 
             firstEnter = 0;
@@ -322,7 +354,7 @@ int MaxLength(ListElement **mass, int massLength)
     {
         char chSumm[15];
         sprintf(chSumm, "%d", mass[i]->note.contributionSumm);
-        if(strlen(chSumm) > maxLength)
+        if (strlen(chSumm) > maxLength)
         {
             maxLength = strlen(chSumm);
         }
@@ -330,15 +362,21 @@ int MaxLength(ListElement **mass, int massLength)
     return maxLength;
 }
 
-char *ISummToChSumm(ListElement **mass, int ind, int maxLength)
+void ISummToChSumm(char *chSumm, ListElement **mass, int ind, int maxLength)
 {
-    char chSumm[15];
     sprintf(chSumm, "%d", mass[ind]->note.contributionSumm);
-    while(strlen(chSumm) < maxLength)
+    while (strlen(chSumm) < maxLength)
     {
-        for(int i = 14; i >= 0; i--)
+        for (int i = 14; i >= 0; i--)
         {
-            
+            if (i != 0)
+            {
+                chSumm[i] = chSumm[i - 1];
+            }
+            else
+            {
+                chSumm[i] = '0';
+            }
         }
     }
 }

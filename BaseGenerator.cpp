@@ -31,12 +31,12 @@ string firstName[30] = {
     "Mallie", "Rupert", "Mathilde", "Brandi", "Anabelle"};
 
 string otchestvo[10] = {
-    "Olegovich", "Artemov", "Nikitievich", "Vadimov", "Denisovich",
+    "Olegovich", "Artemovich", "Nikitievich", "Vadimovich", "Denisovich",
     "Valentinovich", "Maksimovich", "Vitalievich", "Evgenievich", "Sergeevich"};
 
 int main()
 {
-    char path[] = "/home/orangenal/Документы/course/Base";
+    char path[] = "/home/orangenal/Документы/course/BaseNik";
     string result = "";
     srand(time(0));
     int K;
