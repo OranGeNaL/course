@@ -36,7 +36,7 @@ string otchestvo[10] = {
 
 int main()
 {
-    char path[] = "/home/orangenal/Документы/course/BaseNik";
+    char path[] = "/home/orangenal/Документы/course/Base";
     string result = "";
     srand(time(0));
     int K;

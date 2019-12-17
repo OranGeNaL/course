@@ -54,7 +54,7 @@ public:
             nextElement->ShowList();
         }
     }
-    int ListLength(int length = 1)
+    int ListLength(int length = 1) //Returns lenth of list in a human vision
     {
         if (nextElement)
         {
@@ -80,7 +80,10 @@ void Fixer(char *, int);
 void DigitalSorting(int, ListElement **, ListElement **, ListElement *);
 void DigitalSorting(ListElement **, ListElement *);
 int MaxLength(ListElement **, int);
+void ShowUnsorted(ListElement *);
+void ShowSorted(ListElement **, int);
 void ISummToChSumm(char *, ListElement **, int, int);
+void ConsoleClean();
 
 int main()
 {
@@ -100,7 +103,7 @@ int main()
         return 0;
     }
 
-    while (!file.eof())
+    while (!file.eof()) //Чтение из файла
     {
         char contributorData[30] = "";
         char fullContributorData[100] = "";
@@ -155,7 +158,7 @@ int main()
         tempElement = tempElement->nextElement;
     }
 
-    head->ShowList();
+    //head->ShowList();
 
     ListElement **indMass = new ListElement *[head->ListLength()];
     ListElement **tempSortMass = new ListElement *[head->ListLength()];
@@ -167,21 +170,71 @@ int main()
 
     DigitalSorting(3, indMass, tempSortMass, head);
     DigitalSorting(indMass, head);
-    printf("-----------------------------------------------------------------\n");
-    for (int i = 0; i < head->ListLength(); i++)
-    {
-        cout << indMass[i]->note.contributorData << " "
-             << indMass[i]->note.contributionSumm << " "
-             << indMass[i]->note.contributionDate << " "
-             << indMass[i]->note.lawyerData << endl;
-    }
     delete (tempSortMass);
+    char marker[4] = {' ', ' ', ' ', ' '}; //вверх = 65, вниз = 66, лево = 68, право = 67, y = 121
+    int choise = 0;
+    while (true)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (i == choise)
+                marker[i] = '>';
+            else
+                marker[i] = ' ';
+        }
+        ConsoleClean();
+        cout << "Main menu:\n";
+        cout << marker[0] << "Show unsorted base\n";
+        cout << marker[1] << "Show sorted base\n";
+        cout << marker[2] << "Search in base\n";
+        cout << marker[3] << "Exit\n";
+        cout << "\n\n\n\n\nUse up/down keys to navigate. To accept your choise press 'y'. After you press the key you want, press \"Enter\"\n";
+        while (getchar() != '\n')
+            ;
+        cin.clear();
 
+        int keyCode = getchar();
+        cout << keyCode;
+        if (keyCode == 27)
+        {
+            keyCode = getchar();
+            keyCode = getchar();
+        }
+        switch (keyCode)
+        {
+        case 65:
+            if (choise > 0)
+                choise--;
+            break;
+        case 66:
+            if (choise < 3)
+                choise++;
+            break;
+        case 121:
+            switch (choise)
+            {
+            case 0:
+                ShowUnsorted(head);
+                break;
+            case 1:
+                ShowSorted(indMass, head->ListLength());
+                break;
+            case 2:
+                break;
+            case 3:
+                return 0;
+                break;
+            default:
+                break;
+            }
+            break;
+        default:
+            break;
+        }
+    }
 }
 
-//TODO:
-
-void DigitalSorting(int digit, ListElement **mass, ListElement **tempMass, ListElement *head)
+void DigitalSorting(int digit, ListElement **mass, ListElement **tempMass, ListElement *head) //Первый проход с сортирровкой по Фамилии
 {
     int ind = 0;
     if (digit % 2 == 0)
@@ -227,7 +280,7 @@ void DigitalSorting(int digit, ListElement **mass, ListElement **tempMass, ListE
     }
 }
 
-void DigitalSorting(ListElement **mass, ListElement *head)
+void DigitalSorting(ListElement **mass, ListElement *head) //Второй проход с сортировкой по сумме вклада
 {
     char lastName[15] = "";
     int firstEnter = 0, lastEnter = 0, lastNameLength = 0;
@@ -252,14 +305,14 @@ void DigitalSorting(ListElement **mass, ListElement *head)
             continue;
         }
 
-        if(i == head->ListLength() - 1)
+        char subStr[15] = "";
+        strncpy(subStr, mass[i]->note.contributorData, lastNameLength);
+        if (!strcmp(lastName, subStr))
         {
             lastEnter = i;
         }
 
-        char subStr[15] = "";
-        strncpy(subStr, mass[i]->note.contributorData, lastNameLength);
-        if (!strcmp(lastName, subStr))
+        if (i == head->ListLength() - 1 && !strcmp(lastName, subStr))
         {
             lastEnter = i;
         }
@@ -310,7 +363,7 @@ void DigitalSorting(ListElement **mass, ListElement *head)
                     }
                 }
 
-                for(int j = 0; j <= lastEnter - firstEnter; j++)
+                for (int j = 0; j <= lastEnter - firstEnter; j++)
                 {
                     mass[j + firstEnter] = subMass[j];
                 }
@@ -377,6 +430,169 @@ void ISummToChSumm(char *chSumm, ListElement **mass, int ind, int maxLength)
             {
                 chSumm[i] = '0';
             }
+        }
+    }
+}
+
+void ConsoleClean()
+{
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+}
+
+void ShowUnsorted(ListElement *head)
+{
+    int firstEnter = 0;
+    int lastEnter, pagesAmount, currentPage = 1;
+    int listLength = head->ListLength();
+
+    pagesAmount = listLength / 20;
+    if (listLength % 20 > 0)
+        pagesAmount++;
+
+    if (listLength <= 20)
+        lastEnter = listLength;
+    else
+        lastEnter = 20;
+
+    char pages[20] = "";
+
+    while (true)
+    {
+        for (int i = 0; i < pagesAmount; i++)
+        {
+            if (i + 1 == currentPage)
+                pages[i] = currentPage + '0';
+            else
+                pages[i] = '*';
+        }
+        ConsoleClean();
+        cout << "Unsorted base:\n\n";
+        for (int i = firstEnter; i < lastEnter; i++)
+        {
+            cout << i + 1 << ")" << head->ElementGetter(i)->note.contributorData << " "
+                 << head->ElementGetter(i)->note.contributionSumm << " "
+                 << head->ElementGetter(i)->note.contributionDate << " "
+                 << head->ElementGetter(i)->note.lawyerData << endl;
+        }
+        cout << "\n\n\n<" << pages << ">\n";
+        cout << "Use left/right keys to navigate. To quit press 'q'. After you press the key you want, press \"Enter\"\n";
+
+        while (getchar() != '\n')
+            ;
+        cin.clear();
+
+        int keyCode = getchar();
+        if (keyCode == 27)
+        {
+            keyCode = getchar();
+            keyCode = getchar();
+        }
+        switch (keyCode)
+        {
+        case 68: //left
+            if (currentPage > 1)
+            {
+                currentPage--;
+                firstEnter = 20 * (currentPage - 1);
+                lastEnter = 20 * currentPage;
+                if (lastEnter > listLength)
+                    lastEnter = listLength;
+            }
+            break;
+        case 67:
+            if (currentPage < pagesAmount)
+            {
+                currentPage++;
+                firstEnter = 20 * (currentPage - 1);
+                lastEnter = 20 * currentPage;
+                if (lastEnter > listLength)
+                    lastEnter = listLength;
+            }
+            break;
+        case 113:
+            return;
+            break;
+        default:
+            break;
+        }
+    }
+}
+
+void ShowSorted(ListElement **mass, int length)
+{
+    int firstEnter = 0;
+    int lastEnter, pagesAmount, currentPage = 1;
+    int listLength = length;
+
+    pagesAmount = listLength / 20;
+    if (listLength % 20 > 0)
+        pagesAmount++;
+
+    if (listLength <= 20)
+        lastEnter = listLength;
+    else
+        lastEnter = 20;
+
+    char pages[20] = "";
+
+    while (true)
+    {
+        for (int i = 0; i < pagesAmount; i++)
+        {
+            if (i + 1 == currentPage)
+                pages[i] = currentPage + '0';
+            else
+                pages[i] = '*';
+        }
+        ConsoleClean();
+        cout << "Sorted base:\n\n";
+        for (int i = firstEnter; i < lastEnter; i++)
+        {
+            cout << i + 1 << ")" << mass[i]->note.contributorData << " "
+                 << mass[i]->note.contributionSumm << " "
+                 << mass[i]->note.contributionDate << " "
+                 << mass[i]->note.lawyerData << endl;
+        }
+        cout << "\n\n\n<" << pages << ">\n";
+        cout << "Use left/right keys to navigate. To quit press 'q'. After you press the key you want, press \"Enter\"\n";
+
+        while (getchar() != '\n')
+            ;
+        cin.clear();
+
+        int keyCode = getchar();
+        if (keyCode == 27)
+        {
+            keyCode = getchar();
+            keyCode = getchar();
+        }
+        switch (keyCode)
+        {
+        case 68: //left
+            if (currentPage > 1)
+            {
+                currentPage--;
+                firstEnter = 20 * (currentPage - 1);
+                lastEnter = 20 * currentPage;
+                if (lastEnter > listLength)
+                    lastEnter = listLength;
+            }
+            break;
+        case 67:
+            if (currentPage < pagesAmount)
+            {
+                currentPage++;
+                firstEnter = 20 * (currentPage - 1);
+                lastEnter = 20 * currentPage;
+                if (lastEnter > listLength)
+                    lastEnter = listLength;
+            }
+            break;
+        case 113:
+            return;
+            break;
+        default:
+            break;
         }
     }
 }
