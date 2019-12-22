@@ -76,13 +76,15 @@ public:
 private:
 };
 
+int MaxLength(ListElement **, int);
+int FindBorder(ListElement **, char *, bool, int, int, int, int);
 void Fixer(char *, int);
 void DigitalSorting(int, ListElement **, ListElement **, ListElement *);
 void DigitalSorting(ListElement **, ListElement *);
-int MaxLength(ListElement **, int);
 void ShowUnsorted(ListElement *);
 void ShowSorted(ListElement **, int);
 void ISummToChSumm(char *, ListElement **, int, int);
+void BinarySearch(ListElement **, int);
 void ConsoleClean();
 
 int main()
@@ -168,7 +170,7 @@ int main()
         tempSortMass[i] = indMass[i];
     }
 
-    DigitalSorting(3, indMass, tempSortMass, head);
+    DigitalSorting(2, indMass, tempSortMass, head);
     DigitalSorting(indMass, head);
     delete (tempSortMass);
     char marker[4] = {' ', ' ', ' ', ' '}; //вверх = 65, вниз = 66, лево = 68, право = 67, y = 121
@@ -220,6 +222,7 @@ int main()
                 ShowSorted(indMass, head->ListLength());
                 break;
             case 2:
+                BinarySearch(indMass, head->ListLength() - 1);
                 break;
             case 3:
                 return 0;
@@ -593,6 +596,180 @@ void ShowSorted(ListElement **mass, int length)
             break;
         default:
             break;
+        }
+    }
+}
+
+void BinarySearch(ListElement **mass, int lastInd)
+{
+    ConsoleClean();
+    int leftBorder = 0, rightBorder = lastInd, tempLeft, tempRight;
+    int searchPointer = -1;
+    char input[10] = "";
+    char key[4] = "";
+    bool goingLeft = true;
+    cout << "Enter 3 first letters from last name.(Register is important!): ";
+    cin >> input;
+    strncpy(key, input, 3);
+    key[3] = '\0';
+
+    while (leftBorder <= rightBorder)
+    {
+        int midInd = (rightBorder + leftBorder) / 2;
+        if (mass[midInd]->note.contributorData[0] - '0' > key[0] - '0')
+        {
+            rightBorder = midInd - 1;
+        }
+        else if (mass[midInd]->note.contributorData[0] - '0' < key[0] - '0')
+        {
+            leftBorder = midInd + 1;
+        }
+        else if (mass[midInd]->note.contributorData[0] - '0' == key[0] - '0')
+        {
+            searchPointer = midInd;
+            break;
+        }
+    }
+
+    if (searchPointer == -1)
+    {
+        cout << "Element doesn't exist!";
+        cout << "Press any key to continue and then press Enter";
+        return;
+        getchar();
+    }
+    else
+    {
+        leftBorder = FindBorder(mass, key, true, searchPointer, 0, lastInd, 0);
+        tempLeft = leftBorder;
+        rightBorder = FindBorder(mass, key, false, searchPointer, 0, lastInd, 0);
+        tempRight = rightBorder;
+
+        searchPointer = -1;
+        while (leftBorder <= rightBorder)
+        {
+            int midInd = (rightBorder + leftBorder) / 2;
+            if (mass[midInd]->note.contributorData[1] - '0' > key[1] - '0')
+            {
+                rightBorder = midInd - 1;
+            }
+            else if (mass[midInd]->note.contributorData[1] - '0' < key[1] - '0')
+            {
+                leftBorder = midInd + 1;
+            }
+            else if (mass[midInd]->note.contributorData[1] - '0' == key[1] - '0')
+            {
+                searchPointer = midInd;
+                break;
+            }
+        }
+
+        if (searchPointer == -1)
+        {
+            cout << "Element doesn't exist!";
+            cout << "Press any key to continue and then press Enter";
+            getchar();
+            return;
+        }
+        else
+        {
+            leftBorder = FindBorder(mass, key, true, searchPointer, tempLeft, tempRight, 1);
+            rightBorder = FindBorder(mass, key, false, searchPointer, tempLeft, tempRight, 1);
+
+            tempLeft = leftBorder;
+            tempRight = rightBorder;
+
+            searchPointer = -1;
+            while (leftBorder <= rightBorder)
+            {
+                int midInd = (rightBorder + leftBorder) / 2;
+                if (mass[midInd]->note.contributorData[2] - '0' > key[2] - '0')
+                {
+                    rightBorder = midInd - 1;
+                }
+                else if (mass[midInd]->note.contributorData[2] - '0' < key[2] - '0')
+                {
+                    leftBorder = midInd + 1;
+                }
+                else if (mass[midInd]->note.contributorData[2] - '0' == key[2] - '0')
+                {
+                    searchPointer = midInd;
+                    break;
+                }
+            }
+            if (searchPointer == -1)
+            {
+                cout << "Element doesn't exist!";
+                cout << "Press any key to continue and then press Enter";
+                getchar();
+                return;
+            }
+            else
+            {
+                leftBorder = FindBorder(mass, key, true, searchPointer, tempLeft, tempRight, 2);
+                rightBorder = FindBorder(mass, key, false, searchPointer, tempLeft, tempRight, 2);
+
+                for (int i = leftBorder; i <= rightBorder; i++)
+                {
+                    cout << mass[i]->note.contributorData << " "
+                         << mass[i]->note.contributionSumm << " "
+                         << mass[i]->note.contributionDate << " "
+                         << mass[i]->note.lawyerData << endl;
+                }
+                cout << "Press any key to continue and then press Enter";
+                getchar();
+                return;
+            }
+        }
+    }
+}
+
+int FindBorder(ListElement **mass, char *key, bool goingLeft, int pointer, int leftRamp, int rightRamp, int digit)
+{
+    char subStr[4] = "";
+
+    if (goingLeft)
+    {
+        int leftBorder = pointer;
+        while (true)
+        {
+            if (pointer == leftRamp)
+            {
+                return leftRamp;
+            }
+            strncpy(subStr, mass[pointer]->note.contributorData, 3);
+            subStr[3] = '\0';
+            if (key[digit] == subStr[digit])
+            {
+                leftBorder = pointer;
+            }
+            else
+            {
+                return leftBorder;
+            }
+            pointer--;
+        }
+    }
+    else
+    {
+        int rightBorder = pointer;
+        while (true)
+        {
+            if (pointer == rightRamp)
+            {
+                return rightRamp;
+            }
+            strncpy(subStr, mass[pointer]->note.contributorData, 3);
+            subStr[3] = '\0';
+            if (key[digit] == subStr[digit])
+            {
+                rightBorder = pointer;
+            }
+            else
+            {
+                return rightBorder;
+            }
+            pointer++;
         }
     }
 }
