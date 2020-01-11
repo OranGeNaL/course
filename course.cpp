@@ -87,7 +87,6 @@ public:
     }
     Queue()
     {
-
     }
     void ShowList(int i = 0)
     {
@@ -103,7 +102,7 @@ public:
     }
     void Delete()
     {
-        if(nextElement)
+        if (nextElement)
         {
             note = nextElement->note;
             nextElement = nextElement->nextElement;
@@ -652,6 +651,18 @@ void BinarySearch(ListElement **mass, int lastInd)
 
     cout << "Enter 3 first letters from last name.(Register is important!): ";
     cin >> input;
+
+    if (strlen(input) < 3)
+    {
+        cout << "You must enter at least 3 letters!\n";
+        cout << "Press any key to continue";
+        while (getchar() != '\n')
+            ;
+        cin.clear();
+        searchPointer = getchar();
+        return;
+    }
+
     strncpy(key, input, 3);
     key[3] = '\0';
 
@@ -691,7 +702,8 @@ void BinarySearch(ListElement **mass, int lastInd)
         }
         head->ShowList();
         head->Delete();
-        head->ShowList();
+        free(head);
+        free(tail);
         // cout << mass[searchPointer]->note.contributorData << endl;
     }
     else
