@@ -27,6 +27,8 @@ namespace GrafBuilder
             new Pen(Color.Brown, 2),
             new Pen(Color.Magenta, 2) };
 
+        int[,] matrix;
+
         public Form1()
         {
             InitializeComponent();
@@ -84,7 +86,7 @@ namespace GrafBuilder
 
             foreach(Dot x in Main.dots) // Отрисовка точек
             {
-                graphics.DrawRectangle(pen[x.DotInd], x.DotX, x.DotY, 2, 2);
+                graphics.DrawRectangle(pen[x.DotInd], x.DotX, x.DotY, 3, 3);
             }
 
             foreach(Line x in Main.lines) // Отрисовка линий
@@ -254,7 +256,17 @@ namespace GrafBuilder
 
         private void exportButton_Click(object sender, EventArgs e)
         {
-
+            var newM = Main.CreateIncMatrix();
+            string res = "";
+            for (int i = 0; i < Main.dots.Count; i++)
+            {
+                for (int j = 0; j < Main.lines.Count; j++)
+                {
+                    res += newM[i, j] + " ";
+                }
+                res += '\n';
+            }
+            MessageBox.Show(res);
         }
 
         private void importButton_Click(object sender, EventArgs e)
@@ -288,7 +300,7 @@ namespace GrafBuilder
             n = int.Parse(splittedText[0]);
             m = int.Parse(splittedText[1]);
 
-            int[,] matrix = new int[n, m];
+            matrix = new int[n, m];
 
             for(int i = 0; i < n; i++)
             {

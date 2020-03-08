@@ -34,5 +34,26 @@ namespace GrafBuilder
                 dots.Add(new Dot((int)x, (int)y, dotCount));
             }
         }
+
+        public static int[,] CreateIncMatrix()
+        {
+            int[,] resultMatrix = new int[dots.Count, lines.Count];
+
+            for(int i = 0; i < dots.Count; i++)
+            {
+                for(int j = 0; j < lines.Count; j++)
+                {
+                    resultMatrix[i, j] = 0;
+                }
+            }
+
+            for(int j = 0; j < lines.Count; j++)
+            {
+                resultMatrix[lines[j].dot1.DotInd - 1, j] = 1;
+                resultMatrix[lines[j].dot2.DotInd - 1, j] = -1;
+            }
+
+            return resultMatrix;
+        }
     }
 }
