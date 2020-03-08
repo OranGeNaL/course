@@ -52,6 +52,9 @@
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.importButton = new System.Windows.Forms.Button();
+            this.exportButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -66,11 +69,11 @@
             // 
             // add_dot
             // 
-            this.add_dot.Location = new System.Drawing.Point(624, 389);
+            this.add_dot.Location = new System.Drawing.Point(531, 396);
             this.add_dot.Name = "add_dot";
-            this.add_dot.Size = new System.Drawing.Size(75, 23);
+            this.add_dot.Size = new System.Drawing.Size(75, 42);
             this.add_dot.TabIndex = 0;
-            this.add_dot.Text = "Add point";
+            this.add_dot.Text = "Добавить точку";
             this.add_dot.UseVisualStyleBackColor = true;
             this.add_dot.Click += new System.EventHandler(this.Add_dot_Click);
             // 
@@ -88,16 +91,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(570, 353);
+            this.textBox1.Location = new System.Drawing.Point(531, 361);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(49, 20);
+            this.textBox1.Size = new System.Drawing.Size(30, 20);
             this.textBox1.TabIndex = 2;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(650, 353);
+            this.textBox2.Location = new System.Drawing.Point(576, 361);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(49, 20);
+            this.textBox2.Size = new System.Drawing.Size(30, 20);
             this.textBox2.TabIndex = 3;
             // 
             // label1
@@ -111,24 +114,24 @@
             // 
             // add_line
             // 
-            this.add_line.Location = new System.Drawing.Point(793, 388);
+            this.add_line.Location = new System.Drawing.Point(632, 396);
             this.add_line.Name = "add_line";
-            this.add_line.Size = new System.Drawing.Size(75, 23);
+            this.add_line.Size = new System.Drawing.Size(75, 42);
             this.add_line.TabIndex = 5;
-            this.add_line.Text = "Add line";
+            this.add_line.Text = "Добавить линию";
             this.add_line.UseVisualStyleBackColor = true;
             this.add_line.Click += new System.EventHandler(this.Add_line_Click);
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(793, 353);
+            this.textBox3.Location = new System.Drawing.Point(632, 361);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(30, 20);
             this.textBox3.TabIndex = 6;
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(838, 353);
+            this.textBox4.Location = new System.Drawing.Point(677, 361);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(30, 20);
             this.textBox4.TabIndex = 6;
@@ -138,26 +141,27 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(570, 52);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 13);
+            this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Точки:";
+            this.label2.Text = "Вершины:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(787, 52);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 13);
+            this.label3.Size = new System.Drawing.Size(41, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Линии:";
+            this.label3.Text = "Ребра:";
             // 
             // clear_button
             // 
-            this.clear_button.Location = new System.Drawing.Point(914, 415);
+            this.clear_button.Location = new System.Drawing.Point(632, 320);
             this.clear_button.Name = "clear_button";
             this.clear_button.Size = new System.Drawing.Size(75, 23);
             this.clear_button.TabIndex = 9;
-            this.clear_button.Text = "Clear";
+            this.clear_button.Text = "Очистить";
             this.clear_button.UseVisualStyleBackColor = true;
             this.clear_button.Click += new System.EventHandler(this.Clear_button_Click);
             // 
@@ -172,19 +176,19 @@
             // 
             // remove_button
             // 
-            this.remove_button.Location = new System.Drawing.Point(913, 353);
+            this.remove_button.Location = new System.Drawing.Point(531, 320);
             this.remove_button.Name = "remove_button";
             this.remove_button.Size = new System.Drawing.Size(75, 23);
             this.remove_button.TabIndex = 11;
-            this.remove_button.Text = "Remove";
+            this.remove_button.Text = "Удалить";
             this.remove_button.UseVisualStyleBackColor = true;
             this.remove_button.Click += new System.EventHandler(this.Remove_button_Click);
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(948, 327);
+            this.textBox5.Location = new System.Drawing.Point(576, 285);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(39, 20);
+            this.textBox5.Size = new System.Drawing.Size(30, 20);
             this.textBox5.TabIndex = 12;
             // 
             // pictureBox1
@@ -277,11 +281,43 @@
             this.pictureBox10.TabIndex = 13;
             this.pictureBox10.TabStop = false;
             // 
+            // importButton
+            // 
+            this.importButton.Location = new System.Drawing.Point(733, 396);
+            this.importButton.Name = "importButton";
+            this.importButton.Size = new System.Drawing.Size(75, 21);
+            this.importButton.TabIndex = 14;
+            this.importButton.Text = "Импорт";
+            this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.importButton_Click);
+            // 
+            // exportButton
+            // 
+            this.exportButton.Location = new System.Drawing.Point(733, 417);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(75, 21);
+            this.exportButton.TabIndex = 15;
+            this.exportButton.Text = "Экспорт";
+            this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(531, 198);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(181, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Ребра имеют цвет вершины стока";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1010, 450);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.exportButton);
+            this.Controls.Add(this.importButton);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.pictureBox8);
@@ -350,6 +386,9 @@
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.Button importButton;
+        private System.Windows.Forms.Button exportButton;
+        private System.Windows.Forms.Label label5;
     }
 }
 
