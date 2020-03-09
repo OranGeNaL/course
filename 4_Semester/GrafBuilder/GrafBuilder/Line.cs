@@ -11,8 +11,6 @@ namespace GrafBuilder
         public Dot dot1;
         public Dot dot2;
         public int line_ind;
-        public Dot arrow_up;
-        public Dot arrow_down;
 
         public Line(Dot first_dot, Dot second_dot, int ind)
         {

@@ -16,15 +16,16 @@ namespace GrafBuilder
         public static int mouseX;
         public static int mouseY;
         public static string sourcePath = "";
+        public static string destPath = "";
 
         public static List<Dot> dots = new List<Dot>();
         public static List<Line> lines = new List<Line>();
 
         public static void CreateDots(int n)
         {
-            int r = 50;
-            int OX = 150;
-            int OY = 100;
+            int r = 100;
+            int OX = 250;
+            int OY = 200;
             for(int i = 1; i <= n; i++)
             {
                 double x, y;
@@ -33,6 +34,30 @@ namespace GrafBuilder
                 dotCount++;
                 dots.Add(new Dot((int)x, (int)y, dotCount));
             }
+        }
+
+        public static bool CheckLineAviability(Dot firstDot, Dot secondDot)
+        {
+            foreach(Line x in lines)
+            {
+                if (x.dot1 == firstDot && x.dot2 == secondDot)
+                    return false;
+            }
+
+            return true;
+        }
+
+        public static Dot FindByInd(int ind)
+        {
+            Dot temp = new Dot(0, 0, 0);
+            for (int i = 0; i < dots.Count(); i++)
+            {
+                if (dots[i].DotInd == ind)
+                {
+                    temp = dots[i];
+                }
+            }
+            return temp;
         }
 
         public static int[,] CreateIncMatrix()

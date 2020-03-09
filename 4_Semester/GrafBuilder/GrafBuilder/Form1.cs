@@ -72,7 +72,7 @@ namespace GrafBuilder
             string lineList = "";
             foreach(Line x in Main.lines)
             {
-                lineList += x.line_ind.ToString() + ".    " + x.dot1.DotInd.ToString() + "   ->   " + x.dot2.DotInd.ToString() + "\n";
+                lineList += (x.line_ind + 1).ToString() + ".    " + x.dot1.DotInd.ToString() + "   ->   " + x.dot2.DotInd.ToString() + "\n";
             }
 
             label4.Text = lineList;
@@ -102,13 +102,22 @@ namespace GrafBuilder
                 int first = int.Parse(textBox3.Text);
                 int second = int.Parse(textBox4.Text);
 
-                if (first > 0 && first <= Main.dotCount && second > 0 && second <= Main.dotCount && first != second)
+                if (Main.CheckLineAviability(Main.FindByInd(first), Main.FindByInd(second)))
                 {
-                    Main.lineCount++;
-                    Main.lines.Add(new Line(FindByInd(first), FindByInd(second), Main.lineCount));
+                    if (first > 0 && first <= Main.dotCount && second > 0 && second <= Main.dotCount && first != second)
+                    {
+                        Main.lineCount++;
+                        Main.lines.Add(new Line(Main.FindByInd(first), Main.FindByInd(second), Main.lineCount));
+                    }
+                    else
+                    { 
+                        MessageBox.Show("Введены неверные значения!!!"); 
+                    }
                 }
                 else
-                    MessageBox.Show("Введены неверные значения!!!");
+                {
+                    MessageBox.Show("Такое ребро уже существует!");
+                }
             }
             catch
             {
@@ -118,18 +127,7 @@ namespace GrafBuilder
             RefreshForm();
         }
 
-        private Dot FindByInd(int ind)
-        {
-            Dot temp = new Dot(0, 0, 0);
-            for (int i = 0; i < Main.dots.Count(); i++)
-            {
-                if (Main.dots[i].DotInd == ind)
-                {
-                    temp = Main.dots[i];
-                }
-            }
-            return temp;
-        }
+        
 
         private void Panel1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -151,7 +149,7 @@ namespace GrafBuilder
             Main.mouseY = e.Y;
             if (Main.activeDotInd != 0)
             {
-                Dot temp = FindByInd(Main.activeDotInd);
+                Dot temp = Main.FindByInd(Main.activeDotInd);
                 temp.DotX = e.X;
                 temp.DotY = e.Y;
                 RefreshForm();
@@ -258,15 +256,29 @@ namespace GrafBuilder
         {
             var newM = Main.CreateIncMatrix();
             string res = "";
+            res += Main.dots.Count.ToString() + " " + Main.lines.Count.ToString() + "\n";
             for (int i = 0; i < Main.dots.Count; i++)
             {
                 for (int j = 0; j < Main.lines.Count; j++)
                 {
-                    res += newM[i, j] + " ";
+                    if (j != Main.lines.Count - 1)
+                        res += newM[i, j] + " ";
+                    else
+                        res += newM[i, j];
                 }
                 res += '\n';
             }
-            MessageBox.Show(res);
+
+            Form3 exportForm = new Form3();
+            exportForm.Owner = this;
+            exportForm.ShowDialog();
+            if(exportForm.DialogResult == DialogResult.OK)
+            {
+                var exportFile = new StreamWriter(Main.destPath, false);
+                MessageBox.Show(Main.destPath);
+                exportFile.Close();
+            }
+
         }
 
         private void importButton_Click(object sender, EventArgs e)
@@ -288,7 +300,7 @@ namespace GrafBuilder
                     MessageBox.Show("Введён неверный путь к файлу!");
                     return;
                 }
-            }
+                file.Close();    
 
             Main.sourcePath = "";
 
@@ -326,15 +338,53 @@ namespace GrafBuilder
                         ind2 = i + 1;
                     }
                 }
-                Main.lines.Add(new Line(FindByInd(ind1), FindByInd(ind2), Main.lineCount));
+                Main.lines.Add(new Line(Main.FindByInd(ind1), Main.FindByInd(ind2), Main.lineCount));
                 Main.lineCount++;
             }
             RefreshForm();
+            }
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void incMatrixShow_Click(object sender, EventArgs e)
+        {
+            var newM = Main.CreateIncMatrix();
+            string res = "";
+            //res += Main.dots.Count.ToString() + " " + Main.lines.Count.ToString() + "\n";
+            for (int i = 0; i < Main.dots.Count; i++)
+            {
+                for (int j = 0; j < Main.lines.Count; j++)
+                {
+                    if(newM[i, j] == -1)
+                    {
+                        if (j != Main.lines.Count - 1)
+                        {
+                            res += newM[i, j] + " "; 
+                        }
+                        else
+                        { 
+                            res += newM[i, j]; 
+                        }
+                    }
+                    else
+                    {
+                        if (j != Main.lines.Count - 1)
+                        {
+                            res += " " + newM[i, j] + " ";
+                        }
+                        else
+                        {
+                            res += " " + newM[i, j];
+                        }
+                    }
+                }
+                res += '\n';
+            }
+            MessageBox.Show(res);
         }
     }
 }

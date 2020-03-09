@@ -55,6 +55,7 @@
             this.importButton = new System.Windows.Forms.Button();
             this.exportButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.incMatrixShow = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -108,9 +109,8 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(570, 68);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(22, 130);
+            this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "1.\r\n2.\r\n3.\r\n4.\r\n5.\r\n6.\r\n7.\r\n8.\r\n9.\r\n10.";
             // 
             // add_line
             // 
@@ -310,11 +310,22 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Ребра имеют цвет вершины стока";
             // 
+            // incMatrixShow
+            // 
+            this.incMatrixShow.Location = new System.Drawing.Point(833, 396);
+            this.incMatrixShow.Name = "incMatrixShow";
+            this.incMatrixShow.Size = new System.Drawing.Size(110, 42);
+            this.incMatrixShow.TabIndex = 17;
+            this.incMatrixShow.Text = "Вывести матрицу инцедентности";
+            this.incMatrixShow.UseVisualStyleBackColor = true;
+            this.incMatrixShow.Click += new System.EventHandler(this.incMatrixShow_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1010, 450);
+            this.Controls.Add(this.incMatrixShow);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.exportButton);
             this.Controls.Add(this.importButton);
@@ -389,6 +400,7 @@
         private System.Windows.Forms.Button importButton;
         private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button incMatrixShow;
     }
 }
 
