@@ -91,7 +91,10 @@ namespace GrafBuilder
 
             foreach(Line x in Main.lines) // Отрисовка линий
             {
-                graphics.DrawLine(pen[x.dot2.DotInd], x.dot1.DotX, x.dot1.DotY, x.dot2.DotX, x.dot2.DotY);
+                if (x.dot1 != x.dot2)
+                    graphics.DrawLine(pen[x.dot2.DotInd], x.dot1.DotX, x.dot1.DotY, x.dot2.DotX, x.dot2.DotY);
+                else
+                    graphics.DrawEllipse(pen[x.dot2.DotInd], x.dot1.DotX, x.dot1.DotY, 30f, 30f);
             }
         }
 
@@ -104,7 +107,7 @@ namespace GrafBuilder
 
                 if (Main.CheckLineAviability(Main.FindByInd(first), Main.FindByInd(second)))
                 {
-                    if (first > 0 && first <= Main.dotCount && second > 0 && second <= Main.dotCount && first != second)
+                    if (first > 0 && first <= Main.dotCount && second > 0 && second <= Main.dotCount )// && first != second)
                     {
                         Main.lineCount++;
                         Main.lines.Add(new Line(Main.FindByInd(first), Main.FindByInd(second), Main.lineCount));
@@ -268,14 +271,13 @@ namespace GrafBuilder
                 }
                 res += '\n';
             }
-
             Form3 exportForm = new Form3();
             exportForm.Owner = this;
             exportForm.ShowDialog();
             if(exportForm.DialogResult == DialogResult.OK)
             {
                 var exportFile = new StreamWriter(Main.destPath, false);
-                MessageBox.Show(Main.destPath);
+                exportFile.Write(res);
                 exportFile.Close();
             }
 
@@ -287,7 +289,7 @@ namespace GrafBuilder
             Form2 importForm = new Form2();
             importForm.Owner = this;
             importForm.ShowDialog();
-            if(importForm.DialogResult == DialogResult.OK)
+            if (importForm.DialogResult == DialogResult.OK)
             {
                 Clear();
                 StreamReader file = new StreamReader(Main.sourcePath);
@@ -300,48 +302,58 @@ namespace GrafBuilder
                     MessageBox.Show("Введён неверный путь к файлу!");
                     return;
                 }
-                file.Close();    
+                file.Close();
 
-            Main.sourcePath = "";
+                Main.sourcePath = "";
 
-            int n = 0;
-            int m = 0;
+                int n = 0;
+                int m = 0;
 
-            string[] splittedText = fileText.Split();
-
-            n = int.Parse(splittedText[0]);
-            m = int.Parse(splittedText[1]);
-
-            matrix = new int[n, m];
-
-            for(int i = 0; i < n; i++)
-            {
-                for(int j = 0; j < m; j++)
+                try
                 {
-                    matrix[i, j] = int.Parse(splittedText[2 + i * m + j]);
-                }
-            }
+                    string[] splittedText = fileText.Split();
 
-            Main.CreateDots(n);
-            for(int j = 0; j < m; j++)
-            {
-                int ind1 = 0;
-                int ind2 = 0;
-                for(int i = 0; i < n; i++)
-                {
-                    if(matrix[i,j] == 1)
+                    n = int.Parse(splittedText[0]);
+                    m = int.Parse(splittedText[1]);
+
+                    matrix = new int[n, m];
+
+                    for (int i = 0; i < n; i++)
                     {
-                        ind1 = i + 1;
+                        for (int j = 0; j < m; j++)
+                        {
+                            matrix[i, j] = int.Parse(splittedText[2 + i * m + j]);
+                        }
                     }
-                    if(matrix[i,j] == -1)
+
+                    Main.CreateDots(n);
+                    for (int j = 0; j < m; j++)
                     {
-                        ind2 = i + 1;
+                        int ind1 = -1;
+                        int ind2 = -1;
+                        for (int i = 0; i < n; i++)
+                        {
+                            if (matrix[i, j] == 1)
+                            {
+                                ind1 = i + 1;
+                            }
+                            if (matrix[i, j] == -1)
+                            {
+                                ind2 = i + 1;
+                            }
+                        }
+                        if(ind1 != -1 && ind2 != -1)
+                            Main.lines.Add(new Line(Main.FindByInd(ind1), Main.FindByInd(ind2), Main.lineCount));
+                        else
+                            Main.lines.Add(new Line(Main.FindByInd(ind2), Main.FindByInd(ind2), Main.lineCount));
+                        Main.lineCount++;
                     }
+                    RefreshForm();
                 }
-                Main.lines.Add(new Line(Main.FindByInd(ind1), Main.FindByInd(ind2), Main.lineCount));
-                Main.lineCount++;
-            }
-            RefreshForm();
+                catch
+                {
+
+                }
             }
         }
 
@@ -354,7 +366,6 @@ namespace GrafBuilder
         {
             var newM = Main.CreateIncMatrix();
             string res = "";
-            //res += Main.dots.Count.ToString() + " " + Main.lines.Count.ToString() + "\n";
             for (int i = 0; i < Main.dots.Count; i++)
             {
                 for (int j = 0; j < Main.lines.Count; j++)
@@ -384,7 +395,53 @@ namespace GrafBuilder
                 }
                 res += '\n';
             }
-            MessageBox.Show(res);
+            MessageBox.Show(res, "Матрица инцидентности");
+        }
+
+        private void adjMatrixShow_Click(object sender, EventArgs e)
+        {
+            var newM = Main.CreateAdjMatrix();
+            string res = "";
+            //res += Main.dots.Count.ToString() + " " + Main.lines.Count.ToString() + "\n";
+            for (int i = 0; i < Main.dots.Count; i++)
+            {
+                for (int j = 0; j < Main.dots.Count; j++)
+                {
+                        if (j != Main.dots.Count - 1)
+                        {
+                            res += newM[i, j] + " ";
+                        }
+                        else
+                        {
+                            res += newM[i, j];
+                        }
+                }
+                res += '\n';
+            }
+            MessageBox.Show(res, "Матрица смежности");
+        }
+
+        private void aviMatrixShow_Click(object sender, EventArgs e)
+        {
+            var newM = Main.CreateAviMatrix();
+            string res = "";
+            //res += Main.dots.Count.ToString() + " " + Main.lines.Count.ToString() + "\n";
+            for (int i = 0; i < Main.dots.Count; i++)
+            {
+                for (int j = 0; j < Main.dots.Count; j++)
+                {
+                    if (j != Main.dots.Count - 1)
+                    {
+                        res += newM[i, j] + " ";
+                    }
+                    else
+                    {
+                        res += newM[i, j];
+                    }
+                }
+                res += '\n';
+            }
+            MessageBox.Show(res, "Матрица достижимости");
         }
     }
 }

@@ -56,6 +56,8 @@
             this.exportButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.incMatrixShow = new System.Windows.Forms.Button();
+            this.adjMatrixShow = new System.Windows.Forms.Button();
+            this.aviMatrixShow = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -107,7 +109,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(570, 68);
+            this.label1.Location = new System.Drawing.Point(567, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 4;
@@ -139,7 +141,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(570, 52);
+            this.label2.Location = new System.Drawing.Point(567, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 7;
@@ -149,7 +151,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(787, 52);
+            this.label3.Location = new System.Drawing.Point(784, 16);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 13);
             this.label3.TabIndex = 8;
@@ -168,11 +170,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(787, 68);
+            this.label4.Location = new System.Drawing.Point(784, 32);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.Size = new System.Drawing.Size(0, 13);
             this.label4.TabIndex = 10;
-            this.label4.Text = "label4";
             // 
             // remove_button
             // 
@@ -194,7 +195,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Black;
-            this.pictureBox1.Location = new System.Drawing.Point(534, 73);
+            this.pictureBox1.Location = new System.Drawing.Point(531, 37);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(30, 10);
             this.pictureBox1.TabIndex = 13;
@@ -203,7 +204,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Red;
-            this.pictureBox2.Location = new System.Drawing.Point(534, 85);
+            this.pictureBox2.Location = new System.Drawing.Point(531, 49);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(30, 10);
             this.pictureBox2.TabIndex = 13;
@@ -212,7 +213,7 @@
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.Blue;
-            this.pictureBox3.Location = new System.Drawing.Point(534, 97);
+            this.pictureBox3.Location = new System.Drawing.Point(531, 61);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(30, 10);
             this.pictureBox3.TabIndex = 13;
@@ -221,7 +222,7 @@
             // pictureBox4
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.Green;
-            this.pictureBox4.Location = new System.Drawing.Point(534, 109);
+            this.pictureBox4.Location = new System.Drawing.Point(531, 73);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(30, 10);
             this.pictureBox4.TabIndex = 13;
@@ -230,7 +231,7 @@
             // pictureBox5
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.Purple;
-            this.pictureBox5.Location = new System.Drawing.Point(534, 121);
+            this.pictureBox5.Location = new System.Drawing.Point(531, 85);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(30, 10);
             this.pictureBox5.TabIndex = 13;
@@ -239,7 +240,7 @@
             // pictureBox6
             // 
             this.pictureBox6.BackColor = System.Drawing.Color.Yellow;
-            this.pictureBox6.Location = new System.Drawing.Point(534, 133);
+            this.pictureBox6.Location = new System.Drawing.Point(531, 97);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(30, 10);
             this.pictureBox6.TabIndex = 13;
@@ -248,7 +249,7 @@
             // pictureBox7
             // 
             this.pictureBox7.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox7.Location = new System.Drawing.Point(534, 145);
+            this.pictureBox7.Location = new System.Drawing.Point(531, 109);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(30, 10);
             this.pictureBox7.TabIndex = 13;
@@ -257,7 +258,7 @@
             // pictureBox8
             // 
             this.pictureBox8.BackColor = System.Drawing.Color.Violet;
-            this.pictureBox8.Location = new System.Drawing.Point(534, 157);
+            this.pictureBox8.Location = new System.Drawing.Point(531, 121);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(30, 10);
             this.pictureBox8.TabIndex = 13;
@@ -266,7 +267,7 @@
             // pictureBox9
             // 
             this.pictureBox9.BackColor = System.Drawing.Color.Brown;
-            this.pictureBox9.Location = new System.Drawing.Point(534, 169);
+            this.pictureBox9.Location = new System.Drawing.Point(531, 133);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(30, 10);
             this.pictureBox9.TabIndex = 13;
@@ -275,7 +276,7 @@
             // pictureBox10
             // 
             this.pictureBox10.BackColor = System.Drawing.Color.Magenta;
-            this.pictureBox10.Location = new System.Drawing.Point(534, 181);
+            this.pictureBox10.Location = new System.Drawing.Point(531, 145);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(30, 10);
             this.pictureBox10.TabIndex = 13;
@@ -304,7 +305,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(531, 198);
+            this.label5.Location = new System.Drawing.Point(528, 162);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(181, 13);
             this.label5.TabIndex = 16;
@@ -320,11 +321,33 @@
             this.incMatrixShow.UseVisualStyleBackColor = true;
             this.incMatrixShow.Click += new System.EventHandler(this.incMatrixShow_Click);
             // 
+            // adjMatrixShow
+            // 
+            this.adjMatrixShow.Location = new System.Drawing.Point(833, 339);
+            this.adjMatrixShow.Name = "adjMatrixShow";
+            this.adjMatrixShow.Size = new System.Drawing.Size(110, 42);
+            this.adjMatrixShow.TabIndex = 18;
+            this.adjMatrixShow.Text = "Вывести матрицу смежности";
+            this.adjMatrixShow.UseVisualStyleBackColor = true;
+            this.adjMatrixShow.Click += new System.EventHandler(this.adjMatrixShow_Click);
+            // 
+            // aviMatrixShow
+            // 
+            this.aviMatrixShow.Location = new System.Drawing.Point(717, 339);
+            this.aviMatrixShow.Name = "aviMatrixShow";
+            this.aviMatrixShow.Size = new System.Drawing.Size(110, 42);
+            this.aviMatrixShow.TabIndex = 19;
+            this.aviMatrixShow.Text = "Вывести матрицу достижимости";
+            this.aviMatrixShow.UseVisualStyleBackColor = true;
+            this.aviMatrixShow.Click += new System.EventHandler(this.aviMatrixShow_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1010, 450);
+            this.Controls.Add(this.aviMatrixShow);
+            this.Controls.Add(this.adjMatrixShow);
             this.Controls.Add(this.incMatrixShow);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.exportButton);
@@ -401,6 +424,8 @@
         private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button incMatrixShow;
+        private System.Windows.Forms.Button adjMatrixShow;
+        private System.Windows.Forms.Button aviMatrixShow;
     }
 }
 

@@ -80,5 +80,65 @@ namespace GrafBuilder
 
             return resultMatrix;
         }
+
+        public static int[,] CreateAdjMatrix()
+        {
+            int[,] res = new int[dots.Count, dots.Count];
+
+            for(int i = 0; i < dots.Count; i++)
+            {
+                for(int j = 0; j < dots.Count; j++)
+                {
+                    res[i, j] = 0;
+                }
+            }
+
+            foreach(var x in lines)
+            {
+                res[x.dot1.DotInd - 1, x.dot2.DotInd - 1] = 1;
+            }
+
+            return res;
+        }
+
+        public static int[,] Multiplication(int[,] a, int[,] b)
+        {
+            int[,] r = new int[a.GetLength(0), b.GetLength(1)];
+            for (int i = 0; i < a.GetLength(0); i++)
+            {
+                for (int j = 0; j < b.GetLength(1); j++)
+                {
+                    for (int k = 0; k < b.GetLength(0); k++)
+                    {
+                        r[i, j] += a[i, k] * b[k, j];
+                    }
+                }
+            }
+            return r;
+        }
+
+        public static int[,] CreateAviMatrix()
+        {
+            int[,] res = CreateAdjMatrix();
+
+            var adjMatrix = CreateAdjMatrix();
+            var firstOperand = adjMatrix;
+
+            for (int n = 1; n < dots.Count; n++)
+            {
+                int[,] tempRes = Multiplication(firstOperand, adjMatrix);
+
+                for (int i = 0; i < dots.Count; i++)
+                {
+                    for (int j = 0; j < dots.Count; j++)
+                    {
+                        res[i, j] += tempRes[i, j];
+                    }
+                }
+
+                firstOperand = tempRes;
+            }
+            return res;
+        }
     }
 }
