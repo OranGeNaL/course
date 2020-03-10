@@ -86,7 +86,7 @@ namespace GrafBuilder
 
             foreach(Dot x in Main.dots) // Отрисовка точек
             {
-                graphics.DrawRectangle(pen[x.DotInd], x.DotX, x.DotY, 3, 3);
+                graphics.DrawRectangle(pen[x.DotInd], x.DotX, x.DotY, 5, 5);
             }
 
             foreach(Line x in Main.lines) // Отрисовка линий
