@@ -311,7 +311,8 @@ namespace GrafBuilder
 
                 try
                 {
-                    string[] splittedText = fileText.Split();
+                    string[] splittedText = fileText.Split(new char[] {'\n', ' '});
+                    string text = "";
 
                     n = int.Parse(splittedText[0]);
                     m = int.Parse(splittedText[1]);
@@ -323,8 +324,12 @@ namespace GrafBuilder
                         for (int j = 0; j < m; j++)
                         {
                             matrix[i, j] = int.Parse(splittedText[2 + i * m + j]);
+                            text += matrix[i, j].ToString() + " ";
                         }
+                        text += '\n';
                     }
+
+                    MessageBox.Show(text);
 
                     Main.CreateDots(n);
                     for (int j = 0; j < m; j++)
@@ -352,7 +357,7 @@ namespace GrafBuilder
                 }
                 catch
                 {
-
+                    MessageBox.Show("Файл не прочитан");
                 }
             }
         }

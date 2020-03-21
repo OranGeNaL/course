@@ -28,3 +28,4 @@ C:\Users\pshen\Documents\GitHub\course\4_Semester\GrafBuilder\GrafBuilder\obj\De
 C:\Users\pshen\Documents\GitHub\course\4_Semester\GrafBuilder\GrafBuilder\obj\Debug\GrafBuilder.pdb
 C:\Users\pshen\Documents\GitHub\course\4_Semester\GrafBuilder\GrafBuilder\obj\Debug\GrafBuilder.Form2.resources
 C:\Users\pshen\Documents\GitHub\course\4_Semester\GrafBuilder\GrafBuilder\obj\Debug\GrafBuilder.Form3.resources
+C:\Users\pshen\Documents\GitHub\course\4_Semester\GrafBuilder\GrafBuilder\obj\Debug\GrafBuilder.csproj.CoreCompileInputs.cache
