@@ -1,0 +1,10 @@
+C:\Users\pshen\Documents\GitHub\course\practice\4_Semester\Vich_Math_Practice\practice\bin\Debug\practice.exe.config
+C:\Users\pshen\Documents\GitHub\course\practice\4_Semester\Vich_Math_Practice\practice\bin\Debug\practice.exe
+C:\Users\pshen\Documents\GitHub\course\practice\4_Semester\Vich_Math_Practice\practice\bin\Debug\practice.pdb
+C:\Users\pshen\Documents\GitHub\course\practice\4_Semester\Vich_Math_Practice\practice\obj\Debug\practice.csprojAssemblyReference.cache
+C:\Users\pshen\Documents\GitHub\course\practice\4_Semester\Vich_Math_Practice\practice\obj\Debug\practice.Form1.resources
+C:\Users\pshen\Documents\GitHub\course\practice\4_Semester\Vich_Math_Practice\practice\obj\Debug\practice.Properties.Resources.resources
+C:\Users\pshen\Documents\GitHub\course\practice\4_Semester\Vich_Math_Practice\practice\obj\Debug\practice.csproj.GenerateResource.cache
+C:\Users\pshen\Documents\GitHub\course\practice\4_Semester\Vich_Math_Practice\practice\obj\Debug\practice.csproj.CoreCompileInputs.cache
+C:\Users\pshen\Documents\GitHub\course\practice\4_Semester\Vich_Math_Practice\practice\obj\Debug\practice.exe
+C:\Users\pshen\Documents\GitHub\course\practice\4_Semester\Vich_Math_Practice\practice\obj\Debug\practice.pdb
