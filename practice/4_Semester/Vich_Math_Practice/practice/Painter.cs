@@ -13,6 +13,9 @@ namespace practice
         public const int SCREEN_HEIGHT = 600;
         public const int SCREEN_DIV_VALUE = 100;
 
+        public static int leftDownX = 0;
+        public static int leftDownY = SCREEN_HEIGHT;
+
         public static double scale = 0.1;
         public static double divisionValue = 1;
 

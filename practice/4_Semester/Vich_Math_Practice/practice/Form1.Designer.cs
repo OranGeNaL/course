@@ -39,10 +39,14 @@
             this.scaleScroll = new System.Windows.Forms.TrackBar();
             this.firstPagePaint = new System.Windows.Forms.Panel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.horizontalScroll = new System.Windows.Forms.TrackBar();
+            this.verticalScroll = new System.Windows.Forms.TrackBar();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.divisionValueScroll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleScroll)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.horizontalScroll)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.verticalScroll)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -52,11 +56,13 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(920, 648);
+            this.tabControl1.Size = new System.Drawing.Size(1075, 756);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.verticalScroll);
+            this.tabPage1.Controls.Add(this.horizontalScroll);
             this.tabPage1.Controls.Add(this.divisionValueValueLable);
             this.tabPage1.Controls.Add(this.divisionValueLabel);
             this.tabPage1.Controls.Add(this.scaleScrollValueLable);
@@ -68,7 +74,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(912, 622);
+            this.tabPage1.Size = new System.Drawing.Size(1067, 730);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -78,7 +84,7 @@
             // 
             this.divisionValueValueLable.AutoSize = true;
             this.divisionValueValueLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.divisionValueValueLable.Location = new System.Drawing.Point(762, 135);
+            this.divisionValueValueLable.Location = new System.Drawing.Point(884, 130);
             this.divisionValueValueLable.Name = "divisionValueValueLable";
             this.divisionValueValueLable.Size = new System.Drawing.Size(29, 20);
             this.divisionValueValueLable.TabIndex = 7;
@@ -88,7 +94,7 @@
             // 
             this.divisionValueLabel.AutoSize = true;
             this.divisionValueLabel.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.divisionValueLabel.Location = new System.Drawing.Point(644, 135);
+            this.divisionValueLabel.Location = new System.Drawing.Point(766, 130);
             this.divisionValueLabel.Name = "divisionValueLabel";
             this.divisionValueLabel.Size = new System.Drawing.Size(123, 20);
             this.divisionValueLabel.TabIndex = 6;
@@ -98,7 +104,7 @@
             // 
             this.scaleScrollValueLable.AutoSize = true;
             this.scaleScrollValueLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scaleScrollValueLable.Location = new System.Drawing.Point(722, 54);
+            this.scaleScrollValueLable.Location = new System.Drawing.Point(844, 49);
             this.scaleScrollValueLable.Name = "scaleScrollValueLable";
             this.scaleScrollValueLable.Size = new System.Drawing.Size(29, 20);
             this.scaleScrollValueLable.TabIndex = 5;
@@ -109,7 +115,7 @@
             // 
             this.scaleScrollLabel.AutoSize = true;
             this.scaleScrollLabel.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scaleScrollLabel.Location = new System.Drawing.Point(644, 54);
+            this.scaleScrollLabel.Location = new System.Drawing.Point(766, 49);
             this.scaleScrollLabel.Name = "scaleScrollLabel";
             this.scaleScrollLabel.Size = new System.Drawing.Size(83, 20);
             this.scaleScrollLabel.TabIndex = 4;
@@ -117,7 +123,7 @@
             // 
             // divisionValueScroll
             // 
-            this.divisionValueScroll.Location = new System.Drawing.Point(648, 158);
+            this.divisionValueScroll.Location = new System.Drawing.Point(770, 153);
             this.divisionValueScroll.Maximum = 1000;
             this.divisionValueScroll.Minimum = 100;
             this.divisionValueScroll.Name = "divisionValueScroll";
@@ -128,7 +134,7 @@
             // 
             // drawFunc
             // 
-            this.drawFunc.Location = new System.Drawing.Point(789, 335);
+            this.drawFunc.Location = new System.Drawing.Point(911, 330);
             this.drawFunc.Name = "drawFunc";
             this.drawFunc.Size = new System.Drawing.Size(75, 23);
             this.drawFunc.TabIndex = 2;
@@ -138,7 +144,7 @@
             // 
             // scaleScroll
             // 
-            this.scaleScroll.Location = new System.Drawing.Point(648, 77);
+            this.scaleScroll.Location = new System.Drawing.Point(770, 72);
             this.scaleScroll.Maximum = 100;
             this.scaleScroll.Minimum = 10;
             this.scaleScroll.Name = "scaleScroll";
@@ -149,7 +155,7 @@
             // 
             // firstPagePaint
             // 
-            this.firstPagePaint.Location = new System.Drawing.Point(12, 10);
+            this.firstPagePaint.Location = new System.Drawing.Point(73, 6);
             this.firstPagePaint.Name = "firstPagePaint";
             this.firstPagePaint.Size = new System.Drawing.Size(601, 601);
             this.firstPagePaint.TabIndex = 0;
@@ -165,11 +171,32 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // horizontalScroll
+            // 
+            this.horizontalScroll.Location = new System.Drawing.Point(73, 613);
+            this.horizontalScroll.Maximum = 0;
+            this.horizontalScroll.Minimum = -600;
+            this.horizontalScroll.Name = "horizontalScroll";
+            this.horizontalScroll.Size = new System.Drawing.Size(601, 45);
+            this.horizontalScroll.TabIndex = 8;
+            this.horizontalScroll.Scroll += new System.EventHandler(this.horizontalScroll_Scroll);
+            // 
+            // verticalScroll
+            // 
+            this.verticalScroll.Location = new System.Drawing.Point(22, 6);
+            this.verticalScroll.Maximum = 0;
+            this.verticalScroll.Minimum = -600;
+            this.verticalScroll.Name = "verticalScroll";
+            this.verticalScroll.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.verticalScroll.Size = new System.Drawing.Size(45, 601);
+            this.verticalScroll.TabIndex = 9;
+            this.verticalScroll.Scroll += new System.EventHandler(this.verticalScroll_Scroll);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(935, 661);
+            this.ClientSize = new System.Drawing.Size(1075, 756);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -178,6 +205,8 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.divisionValueScroll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleScroll)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.horizontalScroll)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.verticalScroll)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -195,6 +224,8 @@
         private System.Windows.Forms.TrackBar divisionValueScroll;
         private System.Windows.Forms.Label divisionValueValueLable;
         private System.Windows.Forms.Label divisionValueLabel;
+        private System.Windows.Forms.TrackBar verticalScroll;
+        private System.Windows.Forms.TrackBar horizontalScroll;
     }
 }
 

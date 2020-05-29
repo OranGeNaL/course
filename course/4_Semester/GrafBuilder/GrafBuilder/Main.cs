@@ -117,9 +117,44 @@ namespace GrafBuilder
             return r;
         }
 
+        public static int[,] Addiction(int[,] a, int[,] b)
+        {
+            int[,] r = new int[a.GetLength(0), a.GetLength(1)];
+            for (int i = 0; i < a.GetLength(0); i++)
+            {
+                for (int j = 0; j < a.GetLength(1); j++)
+                {
+                    r[i, j] = a[i, j] + b[i, j];
+                }
+            }
+            return r;
+        }
+
+        public static int[,] CreateEMatrix(int n)
+        {
+            int[,] r = new int[n, n];
+
+            for(int i = 0; i < n; i++)
+            {
+                for(int j = 0; j < n; j++)
+                {
+                    if(i == j)
+                    {
+                        r[i, j] = 1;
+                        continue;
+                    }
+                    else
+                    {
+                        r[i, j] = 0;
+                    }
+                }
+            }
+            return r;
+        }
+
         public static int[,] CreateAviMatrix()
         {
-            int[,] res = CreateAdjMatrix();
+            int[,] res = Addiction(CreateAdjMatrix(), CreateEMatrix(dots.Count));
 
             var adjMatrix = CreateAdjMatrix();
             var firstOperand = adjMatrix;

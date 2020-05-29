@@ -17,8 +17,8 @@ namespace practice
             for(double i = a; k < N; i += h)
             {
                 result[k, 0] = i;
-                //result[k, 1] = Math.Sin(Math.Pow(i + 3, 2) / 2) / 2 + Math.Log(i + 2) / 2 - 1;
-                result[k, 1] = Math.Pow(Math.E, i);
+                result[k, 1] = Math.Sin(Math.Pow(i + 3, 2) / 2) / 2 + Math.Log(i + 2) / 2 - 1;
+                //result[k, 1] = Math.Pow(Math.E, i);
                 k++;
             }
 

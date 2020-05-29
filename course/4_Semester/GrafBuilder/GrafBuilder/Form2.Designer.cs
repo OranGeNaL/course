@@ -50,7 +50,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(423, 20);
             this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "C:\\Users\\pshen\\Documents\\GitHub\\course\\4_Semester\\source.txt";
+            this.textBox1.Text = "C:\\Users\\pshen\\Documents\\GitHub\\course\\course\\4_Semester\\export1.txt";
             // 
             // importAccept
             // 

@@ -24,14 +24,14 @@ namespace practice
         {
             doubX = _X;
             doubY = _Y;
-            X =  (int)(_X * Painter.SCREEN_DIV_VALUE * Painter.scale / Painter.divisionValue);
-            Y = Painter.SCREEN_HEIGHT - (int)(_Y * Painter.SCREEN_DIV_VALUE * Painter.scale / Painter.divisionValue);
+            X = Painter.leftDownX + (int)(_X * Painter.SCREEN_DIV_VALUE * Painter.scale / Painter.divisionValue);
+            Y = Painter.leftDownY - (int)(_Y * Painter.SCREEN_DIV_VALUE * Painter.scale / Painter.divisionValue);
         }
 
         public void UpdatePosition()
         {
-            X = (int)(doubX * Painter.SCREEN_DIV_VALUE * Painter.scale / Painter.divisionValue);
-            Y = Painter.SCREEN_HEIGHT - (int)(doubY * Painter.SCREEN_DIV_VALUE * Painter.scale / Painter.divisionValue);
+            X = Painter.leftDownX + (int)(doubX * Painter.SCREEN_DIV_VALUE * Painter.scale / Painter.divisionValue);
+            Y = Painter.leftDownY - (int)(doubY * Painter.SCREEN_DIV_VALUE * Painter.scale / Painter.divisionValue);
         }
 
         public Point ConvertToPoint()

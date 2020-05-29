@@ -33,13 +33,13 @@ namespace practice
             Pen greenPen = new Pen(Color.Green, 2);
             Pen redPen = new Pen(Color.Red, 2);
 
-            graphics.DrawLine(blackPen, new Point(0, 0), new Point(0, Painter.SCREEN_HEIGHT));
-            graphics.DrawLine(blackPen, new Point(0, Painter.SCREEN_HEIGHT), new Point(Painter.SCREEN_WIDTH, Painter.SCREEN_HEIGHT));
+            graphics.DrawLine(blackPen, new Point(Painter.leftDownX, 0), new Point(Painter.leftDownX, Painter.SCREEN_HEIGHT));
+            graphics.DrawLine(blackPen, new Point(0, Painter.leftDownY), new Point(Painter.SCREEN_WIDTH, Painter.leftDownY));
 
-            for(int i = 0; i < Painter.SCREEN_WIDTH; i += (int)(Painter.SCREEN_DIV_VALUE * Painter.scale))
+            for(int i = -Painter.SCREEN_WIDTH; i < Painter.SCREEN_WIDTH; i += (int)(Painter.SCREEN_DIV_VALUE * Painter.scale))
             {
-                graphics.DrawLine(blackPen, new Point(0, Painter.SCREEN_HEIGHT - i), new Point(10, Painter.SCREEN_HEIGHT - i));
-                graphics.DrawLine(blackPen, new Point(i, Painter.SCREEN_HEIGHT), new Point(i, Painter.SCREEN_HEIGHT - 10));
+                graphics.DrawLine(blackPen, new Point(Painter.leftDownX - 10, Painter.leftDownY - i), new Point(Painter.leftDownX + 10, Painter.leftDownY - i));
+                graphics.DrawLine(blackPen, new Point(Painter.leftDownX - i, Painter.leftDownY - 10), new Point(Painter.leftDownX - i, Painter.leftDownY + 10));
             }
 
             foreach (Curve i in Painter.curves)
@@ -78,6 +78,18 @@ namespace practice
         private void scaleScrollValueLable_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void verticalScroll_Scroll(object sender, EventArgs e)
+        {
+            Painter.leftDownY = Painter.SCREEN_HEIGHT + verticalScroll.Value;
+            RefreshForm();
+        }
+
+        private void horizontalScroll_Scroll(object sender, EventArgs e)
+        {
+            Painter.leftDownX = 0 - horizontalScroll.Value;
+            RefreshForm();
         }
     }
 }

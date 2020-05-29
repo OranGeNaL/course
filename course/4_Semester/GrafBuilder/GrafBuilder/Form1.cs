@@ -13,19 +13,20 @@ namespace GrafBuilder
 {
     public partial class Form1 : Form
     {
+        static int penWidth = 4;
 
         Pen[] pen = new Pen[] {
-            new Pen(Color.DarkGoldenrod, 2),
-            new Pen(Color.Black, 2),
-            new Pen(Color.Red, 2),
-            new Pen(Color.Blue, 2),
-            new Pen(Color.Green, 2),
-            new Pen(Color.Purple, 2),
-            new Pen(Color.Yellow, 2),
-            new Pen(Color.Pink, 2),
-            new Pen(Color.Violet, 2),
-            new Pen(Color.Brown, 2),
-            new Pen(Color.Magenta, 2) };
+            new Pen(Color.DarkGoldenrod, penWidth),
+            new Pen(Color.Black, penWidth),
+            new Pen(Color.Red, penWidth),
+            new Pen(Color.Blue, penWidth),
+            new Pen(Color.Green, penWidth),
+            new Pen(Color.Purple, penWidth),
+            new Pen(Color.Cyan, penWidth),
+            new Pen(Color.Pink, penWidth),
+            new Pen(Color.Violet, penWidth),
+            new Pen(Color.Brown, penWidth),
+            new Pen(Color.Magenta, penWidth) };
 
         int[,] matrix;
 
@@ -73,6 +74,7 @@ namespace GrafBuilder
             foreach(Line x in Main.lines)
             {
                 lineList += (x.line_ind + 1).ToString() + ".    " + x.dot1.DotInd.ToString() + "   ->   " + x.dot2.DotInd.ToString() + "\n";
+                x.UpdateLine();
             }
 
             label4.Text = lineList;
@@ -84,17 +86,23 @@ namespace GrafBuilder
 
             Graphics graphics = panel1.CreateGraphics();
 
-            foreach(Dot x in Main.dots) // Отрисовка точек
-            {
-                graphics.DrawRectangle(pen[x.DotInd], x.DotX, x.DotY, 5, 5);
-            }
-
-            foreach(Line x in Main.lines) // Отрисовка линий
+            foreach(Line x in Main.lines) // Отрисовка линий и стрелок
             {
                 if (x.dot1 != x.dot2)
+                {
                     graphics.DrawLine(pen[x.dot2.DotInd], x.dot1.DotX, x.dot1.DotY, x.dot2.DotX, x.dot2.DotY);
+                    graphics.DrawLine(pen[x.dot2.DotInd], x.dot2.DotX, x.dot2.DotY, x.firstArrow.DotX, x.firstArrow.DotY);
+                    graphics.DrawLine(pen[x.dot2.DotInd], x.dot2.DotX, x.dot2.DotY, x.secondArrow.DotX, x.secondArrow.DotY);
+                }
                 else
+                {
                     graphics.DrawEllipse(pen[x.dot2.DotInd], x.dot1.DotX, x.dot1.DotY, 30f, 30f);
+                }
+            }
+
+            foreach(Dot x in Main.dots) // Отрисовка точек
+            {
+                graphics.DrawRectangle(pen[x.DotInd], x.DotX - 5, x.DotY - 5, 11, 11);
             }
         }
 
@@ -136,7 +144,7 @@ namespace GrafBuilder
         {
             foreach(Dot x in Main.dots)
             {
-                if (e.X <= x.DotX + 4 && e.X >= x.DotX - 4 && e.Y <= x.DotY + 4 && e.Y >= x.DotY - 4)
+                if (e.X <= x.DotX + 7 && e.X >= x.DotX - 7 && e.Y <= x.DotY + 7 && e.Y >= x.DotY - 7)
                 {
                     Main.activeDotInd = x.DotInd;
                     RefreshForm();
@@ -430,7 +438,6 @@ namespace GrafBuilder
         {
             var newM = Main.CreateAviMatrix();
             string res = "";
-            //res += Main.dots.Count.ToString() + " " + Main.lines.Count.ToString() + "\n";
             for (int i = 0; i < Main.dots.Count; i++)
             {
                 for (int j = 0; j < Main.dots.Count; j++)

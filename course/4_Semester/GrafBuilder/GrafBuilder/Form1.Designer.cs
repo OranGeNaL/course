@@ -72,9 +72,10 @@
             // 
             // add_dot
             // 
+            this.add_dot.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.add_dot.Location = new System.Drawing.Point(531, 396);
             this.add_dot.Name = "add_dot";
-            this.add_dot.Size = new System.Drawing.Size(75, 42);
+            this.add_dot.Size = new System.Drawing.Size(95, 54);
             this.add_dot.TabIndex = 0;
             this.add_dot.Text = "Добавить точку";
             this.add_dot.UseVisualStyleBackColor = true;
@@ -94,16 +95,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(531, 361);
+            this.textBox1.Location = new System.Drawing.Point(531, 370);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(30, 20);
+            this.textBox1.Size = new System.Drawing.Size(44, 20);
             this.textBox1.TabIndex = 2;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(576, 361);
+            this.textBox2.Location = new System.Drawing.Point(581, 370);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(30, 20);
+            this.textBox2.Size = new System.Drawing.Size(43, 20);
             this.textBox2.TabIndex = 3;
             // 
             // label1
@@ -116,9 +117,10 @@
             // 
             // add_line
             // 
+            this.add_line.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.add_line.Location = new System.Drawing.Point(632, 396);
             this.add_line.Name = "add_line";
-            this.add_line.Size = new System.Drawing.Size(75, 42);
+            this.add_line.Size = new System.Drawing.Size(95, 54);
             this.add_line.TabIndex = 5;
             this.add_line.Text = "Добавить линию";
             this.add_line.UseVisualStyleBackColor = true;
@@ -126,24 +128,25 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(632, 361);
+            this.textBox3.Location = new System.Drawing.Point(632, 370);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(30, 20);
+            this.textBox3.Size = new System.Drawing.Size(41, 20);
             this.textBox3.TabIndex = 6;
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(677, 361);
+            this.textBox4.Location = new System.Drawing.Point(679, 370);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(30, 20);
+            this.textBox4.Size = new System.Drawing.Size(48, 20);
             this.textBox4.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(567, 16);
+            this.label2.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(557, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.Size = new System.Drawing.Size(87, 20);
             this.label2.TabIndex = 7;
             this.label2.Text = "Вершины:";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -151,17 +154,19 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(784, 16);
+            this.label3.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(784, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.Size = new System.Drawing.Size(50, 20);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Ребра:";
+            this.label3.Text = "Дуги:";
             // 
             // clear_button
             // 
+            this.clear_button.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.clear_button.Location = new System.Drawing.Point(632, 320);
             this.clear_button.Name = "clear_button";
-            this.clear_button.Size = new System.Drawing.Size(75, 23);
+            this.clear_button.Size = new System.Drawing.Size(95, 35);
             this.clear_button.TabIndex = 9;
             this.clear_button.Text = "Очистить";
             this.clear_button.UseVisualStyleBackColor = true;
@@ -170,16 +175,18 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(784, 32);
+            this.label4.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(804, 37);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 13);
+            this.label4.Size = new System.Drawing.Size(0, 20);
             this.label4.TabIndex = 10;
             // 
             // remove_button
             // 
+            this.remove_button.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.remove_button.Location = new System.Drawing.Point(531, 320);
             this.remove_button.Name = "remove_button";
-            this.remove_button.Size = new System.Drawing.Size(75, 23);
+            this.remove_button.Size = new System.Drawing.Size(93, 35);
             this.remove_button.TabIndex = 11;
             this.remove_button.Text = "Удалить";
             this.remove_button.UseVisualStyleBackColor = true;
@@ -187,9 +194,9 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(576, 285);
+            this.textBox5.Location = new System.Drawing.Point(531, 294);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(30, 20);
+            this.textBox5.Size = new System.Drawing.Size(93, 20);
             this.textBox5.TabIndex = 12;
             // 
             // pictureBox1
@@ -239,7 +246,7 @@
             // 
             // pictureBox6
             // 
-            this.pictureBox6.BackColor = System.Drawing.Color.Yellow;
+            this.pictureBox6.BackColor = System.Drawing.Color.Cyan;
             this.pictureBox6.Location = new System.Drawing.Point(531, 97);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(30, 10);
@@ -284,9 +291,10 @@
             // 
             // importButton
             // 
-            this.importButton.Location = new System.Drawing.Point(733, 396);
+            this.importButton.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.importButton.Location = new System.Drawing.Point(778, 387);
             this.importButton.Name = "importButton";
-            this.importButton.Size = new System.Drawing.Size(75, 21);
+            this.importButton.Size = new System.Drawing.Size(91, 30);
             this.importButton.TabIndex = 14;
             this.importButton.Text = "Импорт";
             this.importButton.UseVisualStyleBackColor = true;
@@ -294,9 +302,10 @@
             // 
             // exportButton
             // 
-            this.exportButton.Location = new System.Drawing.Point(733, 417);
+            this.exportButton.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.exportButton.Location = new System.Drawing.Point(778, 417);
             this.exportButton.Name = "exportButton";
-            this.exportButton.Size = new System.Drawing.Size(75, 21);
+            this.exportButton.Size = new System.Drawing.Size(91, 33);
             this.exportButton.TabIndex = 15;
             this.exportButton.Text = "Экспорт";
             this.exportButton.UseVisualStyleBackColor = true;
@@ -305,17 +314,19 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(528, 162);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(181, 13);
+            this.label5.Size = new System.Drawing.Size(265, 20);
             this.label5.TabIndex = 16;
-            this.label5.Text = "Ребра имеют цвет вершины стока";
+            this.label5.Text = "Дуги имеют цвет вершины стока";
             // 
             // incMatrixShow
             // 
-            this.incMatrixShow.Location = new System.Drawing.Point(833, 396);
+            this.incMatrixShow.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.incMatrixShow.Location = new System.Drawing.Point(875, 387);
             this.incMatrixShow.Name = "incMatrixShow";
-            this.incMatrixShow.Size = new System.Drawing.Size(110, 42);
+            this.incMatrixShow.Size = new System.Drawing.Size(213, 63);
             this.incMatrixShow.TabIndex = 17;
             this.incMatrixShow.Text = "Вывести матрицу инцедентности";
             this.incMatrixShow.UseVisualStyleBackColor = true;
@@ -323,9 +334,10 @@
             // 
             // adjMatrixShow
             // 
-            this.adjMatrixShow.Location = new System.Drawing.Point(833, 339);
+            this.adjMatrixShow.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.adjMatrixShow.Location = new System.Drawing.Point(933, 302);
             this.adjMatrixShow.Name = "adjMatrixShow";
-            this.adjMatrixShow.Size = new System.Drawing.Size(110, 42);
+            this.adjMatrixShow.Size = new System.Drawing.Size(155, 70);
             this.adjMatrixShow.TabIndex = 18;
             this.adjMatrixShow.Text = "Вывести матрицу смежности";
             this.adjMatrixShow.UseVisualStyleBackColor = true;
@@ -333,9 +345,10 @@
             // 
             // aviMatrixShow
             // 
-            this.aviMatrixShow.Location = new System.Drawing.Point(717, 339);
+            this.aviMatrixShow.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.aviMatrixShow.Location = new System.Drawing.Point(778, 302);
             this.aviMatrixShow.Name = "aviMatrixShow";
-            this.aviMatrixShow.Size = new System.Drawing.Size(110, 42);
+            this.aviMatrixShow.Size = new System.Drawing.Size(149, 70);
             this.aviMatrixShow.TabIndex = 19;
             this.aviMatrixShow.Text = "Вывести матрицу достижимости";
             this.aviMatrixShow.UseVisualStyleBackColor = true;
@@ -345,7 +358,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1010, 450);
+            this.ClientSize = new System.Drawing.Size(1129, 507);
             this.Controls.Add(this.aviMatrixShow);
             this.Controls.Add(this.adjMatrixShow);
             this.Controls.Add(this.incMatrixShow);
