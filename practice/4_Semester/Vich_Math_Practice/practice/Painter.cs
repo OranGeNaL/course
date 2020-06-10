@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace practice
 {
@@ -15,6 +17,11 @@ namespace practice
 
         public static int leftDownX = 0;
         public static int leftDownY = SCREEN_HEIGHT;
+
+        
+
+        public static int cursorX = 0;
+        public static int cursorY = 0;
 
         public static double scale = 0.1;
         public static double divisionValue = 1;
@@ -29,6 +36,12 @@ namespace practice
             {
                 i.UpdatePosition();
             }
+        }
+
+        public static void UpdateCursorInfo(MouseEventArgs eventArgs)
+        {
+            cursorX = eventArgs.X;
+            cursorY = eventArgs.Y;
         }
 
         public static void ImportFromMatrix(double[,] matrix)

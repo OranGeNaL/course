@@ -36,7 +36,10 @@ namespace practice
             graphics.DrawLine(blackPen, new Point(Painter.leftDownX, 0), new Point(Painter.leftDownX, Painter.SCREEN_HEIGHT));
             graphics.DrawLine(blackPen, new Point(0, Painter.leftDownY), new Point(Painter.SCREEN_WIDTH, Painter.leftDownY));
 
-            for(int i = -Painter.SCREEN_WIDTH; i < Painter.SCREEN_WIDTH; i += (int)(Painter.SCREEN_DIV_VALUE * Painter.scale))
+            graphics.DrawLine(blackPen, new Point(Painter.cursorX, 0), new Point(Painter.cursorX, Painter.SCREEN_HEIGHT));
+            graphics.DrawLine(blackPen, new Point(0, Painter.cursorY), new Point(Painter.SCREEN_WIDTH, Painter.cursorY));
+
+            for (int i = -Painter.SCREEN_WIDTH; i < Painter.SCREEN_WIDTH; i += (int)(Painter.SCREEN_DIV_VALUE * Painter.scale))
             {
                 graphics.DrawLine(blackPen, new Point(Painter.leftDownX - 10, Painter.leftDownY - i), new Point(Painter.leftDownX + 10, Painter.leftDownY - i));
                 graphics.DrawLine(blackPen, new Point(Painter.leftDownX - i, Painter.leftDownY - 10), new Point(Painter.leftDownX - i, Painter.leftDownY + 10));
@@ -90,6 +93,26 @@ namespace practice
         {
             Painter.leftDownX = 0 - horizontalScroll.Value;
             RefreshForm();
+        }
+
+        private void firstPagePaint_MouseHover(object sender, EventArgs e)
+        {
+
+        }
+
+        private void firstPagePaint_MouseMove(object sender, MouseEventArgs e)
+        {
+            Painter.UpdateCursorInfo(e);
+
+            cursorXLable.Location = new Point(58 + Painter.cursorX, cursorXLable.Location.Y);
+            cursorYLable.Location = new Point(cursorYLable.Location.X, 18 + Painter.cursorY);
+
+            cursorXLable.Text = ((double)(Painter.cursorX - Painter.leftDownX) / Painter.SCREEN_DIV_VALUE / Painter.scale * Painter.divisionValue).ToString();
+            //(_X * Painter.SCREEN_DIV_VALUE * Painter.scale / Painter.divisionValue)
+
+            cursorYLable.Text = ((double)(Painter.leftDownY - Painter.cursorY) / Painter.SCREEN_DIV_VALUE / Painter.scale * Painter.divisionValue).ToString();
+
+            Refresh();
         }
     }
 }
