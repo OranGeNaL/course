@@ -11,9 +11,25 @@ namespace practice
     {
         public List<Dot> dots = new List<Dot>();
 
-        public Curve(List<Dot> _dots)
+        public string name = "";
+
+        public bool enabled = true;
+        public bool drawDots = true;
+        public Color color = Color.Red;
+        public Color dotsColor = Color.Green;
+
+        public Curve(List<Dot> _dots, string _name)
         {
             dots = _dots;
+            name = _name;
+        }
+
+        public Curve(List<Dot> _dots, string _name, Color _curveColor, Color _dotColor)
+        {
+            dots = _dots;
+            name = _name;
+            color = _curveColor;
+            dotsColor = _dotColor;
         }
 
         public Point[] ConvertToPoint()

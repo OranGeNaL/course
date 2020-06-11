@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,6 +17,9 @@ namespace practice
         public Form1()
         {
             InitializeComponent();
+            //DoubleBuffered = true;
+            //Painter.bitmap = new Bitmap(firstPagePaint.Width, firstPagePaint.Height);
+            //Painter.panel1Graphics = firstPagePaint.CreateGraphics();
         }
 
         void RefreshForm()
@@ -28,10 +32,10 @@ namespace practice
 
         private void firstPagePaint_Paint(object sender, PaintEventArgs e)
         {
+            DoubleBuffered = true;
             Graphics graphics = firstPagePaint.CreateGraphics();
             Pen blackPen = new Pen(Color.Black, 1);
             Pen greenPen = new Pen(Color.Green, 2);
-            Pen redPen = new Pen(Color.Red, 2);
 
             graphics.DrawLine(blackPen, new Point(Painter.leftDownX, 0), new Point(Painter.leftDownX, Painter.SCREEN_HEIGHT));
             graphics.DrawLine(blackPen, new Point(0, Painter.leftDownY), new Point(Painter.SCREEN_WIDTH, Painter.leftDownY));
@@ -39,7 +43,8 @@ namespace practice
             graphics.DrawLine(blackPen, new Point(Painter.cursorX, 0), new Point(Painter.cursorX, Painter.SCREEN_HEIGHT));
             graphics.DrawLine(blackPen, new Point(0, Painter.cursorY), new Point(Painter.SCREEN_WIDTH, Painter.cursorY));
 
-            for (int i = -Painter.SCREEN_WIDTH; i < Painter.SCREEN_WIDTH; i += (int)(Painter.SCREEN_DIV_VALUE * Painter.scale))
+            //for (int i = -Painter.SCREEN_WIDTH; i < Painter.SCREEN_WIDTH; i += (int)(Painter.SCREEN_DIV_VALUE * Painter.scale))
+            for (int i = -(int)(Painter.SCREEN_WIDTH - Painter.SCREEN_WIDTH % (Painter.SCREEN_DIV_VALUE * Painter.scale)); i < Painter.SCREEN_WIDTH; i += (int)(Painter.SCREEN_DIV_VALUE * Painter.scale))
             {
                 graphics.DrawLine(blackPen, new Point(Painter.leftDownX - 10, Painter.leftDownY - i), new Point(Painter.leftDownX + 10, Painter.leftDownY - i));
                 graphics.DrawLine(blackPen, new Point(Painter.leftDownX - i, Painter.leftDownY - 10), new Point(Painter.leftDownX - i, Painter.leftDownY + 10));
@@ -47,13 +52,20 @@ namespace practice
 
             foreach (Curve i in Painter.curves)
             {
-                graphics.DrawCurve(redPen, i.ConvertToPoint());
+                graphics.DrawCurve(new Pen(i.color, 2), i.ConvertToPoint());
+
+                if(i.drawDots)
+                    foreach(Dot j in i.dots)
+                    {
+                        graphics.DrawRectangle(new Pen(i.dotsColor, 2), j.X - 1, j.Y - 1, 3, 3);
+                    }
             }
 
             foreach (Dot i in Painter.dots)
             {
                 graphics.DrawRectangle(greenPen, i.X - 1, i.Y - 1, 3, 3);
             }
+
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -69,7 +81,7 @@ namespace practice
 
         private void drawFunc_Click(object sender, EventArgs e)
         {
-            Painter.ImportFromMatrix(Counter.CountFunc(0, 5, 0.1));
+
         }
 
         private void divisionValueScroll_Scroll(object sender, EventArgs e)
@@ -113,6 +125,66 @@ namespace practice
             cursorYLable.Text = ((double)(Painter.leftDownY - Painter.cursorY) / Painter.SCREEN_DIV_VALUE / Painter.scale * Painter.divisionValue).ToString();
 
             Refresh();
+        }
+
+        private void testTaskButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if(testTaskButton.Checked)
+            {
+                try
+                {
+                    double a = double.Parse(aTextBox.Text);
+                    double b = double.Parse(bTextBox.Text);
+                    double h = double.Parse(hTextBox.Text);
+                    
+
+                    Painter.ImportFromMatrix(Counter.AccurateCount(Counter.TestAccurate, 0, a, b, h), /*"Первая тестовая функция"*/"Test1" , Color.Red, Color.Green);
+                    Painter.ImportFromMatrix(Counter.AccurateCount(Counter.TestAccurate, 1, a, b, h), /*"Вторая тестовая функция"*/"Test2" , Color.Purple, Color.Blue);
+                    Refresh();
+                }
+                catch
+                {
+                    MessageBox.Show("Введены неверные значения!!!");
+                }
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (Curve i in Painter.curves)
+            {
+                if (i.name == "Test1" || i.name == "Test2")
+                    i.drawDots = checkBox1.Checked;
+            }
+            Refresh();
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            Painter.Clear();
+            Refresh();
+        }
+
+        private void rungeKuttaTest_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rungeKuttaTest.Checked)
+            {
+                try
+                {
+                    double a = double.Parse(aTextBox.Text);
+                    double b = double.Parse(bTextBox.Text);
+                    double h = double.Parse(hTextBox.Text);
+
+
+                    Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TestODU, 0, a, b, h, a, Counter.GetFirstValues(Counter.TestAccurate, a, 2)),"Test1", Color.Red, Color.Green);
+                    Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TestODU, 1, a, b, h, a, Counter.GetFirstValues(Counter.TestAccurate, a, 2)), "Test2", Color.Red, Color.Green);
+                    Refresh();
+                }
+                catch
+                {
+                    MessageBox.Show("Введены неверные значения!!!");
+                }
+            }
         }
     }
 }

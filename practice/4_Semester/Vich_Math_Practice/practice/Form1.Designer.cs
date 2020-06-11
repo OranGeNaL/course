@@ -30,6 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cursorYLable = new System.Windows.Forms.Label();
+            this.cursorXLable = new System.Windows.Forms.Label();
             this.verticalScroll = new System.Windows.Forms.TrackBar();
             this.horizontalScroll = new System.Windows.Forms.TrackBar();
             this.divisionValueValueLable = new System.Windows.Forms.Label();
@@ -40,21 +42,35 @@
             this.drawFunc = new System.Windows.Forms.Button();
             this.scaleScroll = new System.Windows.Forms.TrackBar();
             this.firstPagePaint = new System.Windows.Forms.Panel();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.cursorXLable = new System.Windows.Forms.Label();
-            this.cursorYLable = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.testTaskButton = new System.Windows.Forms.RadioButton();
+            this.rungeKuttaTest = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.aTextBox = new System.Windows.Forms.TextBox();
+            this.aLable = new System.Windows.Forms.Label();
+            this.bLable = new System.Windows.Forms.Label();
+            this.bTextBox = new System.Windows.Forms.TextBox();
+            this.hLable = new System.Windows.Forms.Label();
+            this.hTextBox = new System.Windows.Forms.TextBox();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.clearButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.verticalScroll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.horizontalScroll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisionValueScroll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleScroll)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(3, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -63,6 +79,15 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.clearButton);
+            this.tabPage1.Controls.Add(this.drawFunc);
+            this.tabPage1.Controls.Add(this.tabControl2);
+            this.tabPage1.Controls.Add(this.hLable);
+            this.tabPage1.Controls.Add(this.hTextBox);
+            this.tabPage1.Controls.Add(this.bLable);
+            this.tabPage1.Controls.Add(this.bTextBox);
+            this.tabPage1.Controls.Add(this.aLable);
+            this.tabPage1.Controls.Add(this.aTextBox);
             this.tabPage1.Controls.Add(this.cursorYLable);
             this.tabPage1.Controls.Add(this.cursorXLable);
             this.tabPage1.Controls.Add(this.verticalScroll);
@@ -72,7 +97,6 @@
             this.tabPage1.Controls.Add(this.scaleScrollValueLable);
             this.tabPage1.Controls.Add(this.scaleScrollLabel);
             this.tabPage1.Controls.Add(this.divisionValueScroll);
-            this.tabPage1.Controls.Add(this.drawFunc);
             this.tabPage1.Controls.Add(this.scaleScroll);
             this.tabPage1.Controls.Add(this.firstPagePaint);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -83,6 +107,26 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // cursorYLable
+            // 
+            this.cursorYLable.AutoSize = true;
+            this.cursorYLable.BackColor = System.Drawing.Color.Yellow;
+            this.cursorYLable.Location = new System.Drawing.Point(668, 25);
+            this.cursorYLable.Name = "cursorYLable";
+            this.cursorYLable.Size = new System.Drawing.Size(35, 13);
+            this.cursorYLable.TabIndex = 11;
+            this.cursorYLable.Text = "label2";
+            // 
+            // cursorXLable
+            // 
+            this.cursorXLable.AutoSize = true;
+            this.cursorXLable.BackColor = System.Drawing.Color.Yellow;
+            this.cursorXLable.Location = new System.Drawing.Point(58, 9);
+            this.cursorXLable.Name = "cursorXLable";
+            this.cursorXLable.Size = new System.Drawing.Size(35, 13);
+            this.cursorXLable.TabIndex = 10;
+            this.cursorXLable.Text = "label1";
             // 
             // verticalScroll
             // 
@@ -159,7 +203,8 @@
             // 
             // drawFunc
             // 
-            this.drawFunc.Location = new System.Drawing.Point(911, 330);
+            this.drawFunc.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.drawFunc.Location = new System.Drawing.Point(966, 537);
             this.drawFunc.Name = "drawFunc";
             this.drawFunc.Size = new System.Drawing.Size(75, 23);
             this.drawFunc.TabIndex = 2;
@@ -170,17 +215,18 @@
             // scaleScroll
             // 
             this.scaleScroll.Location = new System.Drawing.Point(770, 72);
-            this.scaleScroll.Maximum = 100;
+            this.scaleScroll.Maximum = 200;
             this.scaleScroll.Minimum = 10;
             this.scaleScroll.Name = "scaleScroll";
             this.scaleScroll.Size = new System.Drawing.Size(216, 45);
             this.scaleScroll.TabIndex = 1;
+            this.scaleScroll.TickFrequency = 10;
             this.scaleScroll.Value = 10;
             this.scaleScroll.Scroll += new System.EventHandler(this.scaleScroll_Scroll);
             // 
             // firstPagePaint
             // 
-            this.firstPagePaint.BackColor = System.Drawing.Color.Gainsboro;
+            this.firstPagePaint.BackColor = System.Drawing.Color.Transparent;
             this.firstPagePaint.Location = new System.Drawing.Point(61, 25);
             this.firstPagePaint.Name = "firstPagePaint";
             this.firstPagePaint.Size = new System.Drawing.Size(601, 601);
@@ -189,35 +235,161 @@
             this.firstPagePaint.MouseHover += new System.EventHandler(this.firstPagePaint_MouseHover);
             this.firstPagePaint.MouseMove += new System.Windows.Forms.MouseEventHandler(this.firstPagePaint_MouseMove);
             // 
-            // tabPage2
+            // panel1
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1067, 730);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.panel1.Controls.Add(this.radioButton3);
+            this.panel1.Controls.Add(this.rungeKuttaTest);
+            this.panel1.Controls.Add(this.testTaskButton);
+            this.panel1.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.panel1.Location = new System.Drawing.Point(6, 6);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(327, 103);
+            this.panel1.TabIndex = 12;
             // 
-            // cursorXLable
+            // testTaskButton
             // 
-            this.cursorXLable.AutoSize = true;
-            this.cursorXLable.BackColor = System.Drawing.Color.Yellow;
-            this.cursorXLable.Location = new System.Drawing.Point(58, 9);
-            this.cursorXLable.Name = "cursorXLable";
-            this.cursorXLable.Size = new System.Drawing.Size(35, 13);
-            this.cursorXLable.TabIndex = 10;
-            this.cursorXLable.Text = "label1";
+            this.testTaskButton.AutoSize = true;
+            this.testTaskButton.Checked = true;
+            this.testTaskButton.Location = new System.Drawing.Point(4, 17);
+            this.testTaskButton.Name = "testTaskButton";
+            this.testTaskButton.Size = new System.Drawing.Size(309, 24);
+            this.testTaskButton.TabIndex = 0;
+            this.testTaskButton.TabStop = true;
+            this.testTaskButton.Text = "Точное решение тестового примера";
+            this.testTaskButton.UseVisualStyleBackColor = true;
+            this.testTaskButton.CheckedChanged += new System.EventHandler(this.testTaskButton_CheckedChanged);
             // 
-            // cursorYLable
+            // rungeKuttaTest
             // 
-            this.cursorYLable.AutoSize = true;
-            this.cursorYLable.BackColor = System.Drawing.Color.Yellow;
-            this.cursorYLable.Location = new System.Drawing.Point(668, 25);
-            this.cursorYLable.Name = "cursorYLable";
-            this.cursorYLable.Size = new System.Drawing.Size(35, 13);
-            this.cursorYLable.TabIndex = 11;
-            this.cursorYLable.Text = "label2";
+            this.rungeKuttaTest.AutoSize = true;
+            this.rungeKuttaTest.Location = new System.Drawing.Point(4, 41);
+            this.rungeKuttaTest.Name = "rungeKuttaTest";
+            this.rungeKuttaTest.Size = new System.Drawing.Size(271, 24);
+            this.rungeKuttaTest.TabIndex = 1;
+            this.rungeKuttaTest.Text = "Решение методом Рунге-Кутты";
+            this.rungeKuttaTest.UseVisualStyleBackColor = true;
+            this.rungeKuttaTest.CheckedChanged += new System.EventHandler(this.rungeKuttaTest_CheckedChanged);
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(4, 64);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(127, 24);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.Text = "radioButton3";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // aTextBox
+            // 
+            this.aTextBox.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.aTextBox.Location = new System.Drawing.Point(739, 223);
+            this.aTextBox.Name = "aTextBox";
+            this.aTextBox.Size = new System.Drawing.Size(51, 26);
+            this.aTextBox.TabIndex = 13;
+            // 
+            // aLable
+            // 
+            this.aLable.AutoSize = true;
+            this.aLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.aLable.Location = new System.Drawing.Point(714, 226);
+            this.aLable.Name = "aLable";
+            this.aLable.Size = new System.Drawing.Size(22, 20);
+            this.aLable.TabIndex = 14;
+            this.aLable.Text = "a:";
+            // 
+            // bLable
+            // 
+            this.bLable.AutoSize = true;
+            this.bLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bLable.Location = new System.Drawing.Point(714, 253);
+            this.bLable.Name = "bLable";
+            this.bLable.Size = new System.Drawing.Size(23, 20);
+            this.bLable.TabIndex = 16;
+            this.bLable.Text = "b:";
+            // 
+            // bTextBox
+            // 
+            this.bTextBox.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bTextBox.Location = new System.Drawing.Point(739, 251);
+            this.bTextBox.Name = "bTextBox";
+            this.bTextBox.Size = new System.Drawing.Size(51, 26);
+            this.bTextBox.TabIndex = 15;
+            // 
+            // hLable
+            // 
+            this.hLable.AutoSize = true;
+            this.hLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.hLable.Location = new System.Drawing.Point(796, 240);
+            this.hLable.Name = "hLable";
+            this.hLable.Size = new System.Drawing.Size(23, 20);
+            this.hLable.TabIndex = 18;
+            this.hLable.Text = "h:";
+            // 
+            // hTextBox
+            // 
+            this.hTextBox.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.hTextBox.Location = new System.Drawing.Point(822, 237);
+            this.hTextBox.Name = "hTextBox";
+            this.hTextBox.Size = new System.Drawing.Size(51, 26);
+            this.hTextBox.TabIndex = 17;
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.tabPage3);
+            this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Location = new System.Drawing.Point(718, 283);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(327, 248);
+            this.tabControl2.TabIndex = 19;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.checkBox1);
+            this.tabPage3.Controls.Add(this.panel1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(319, 222);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "Тестовый пример";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(319, 168);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "Задача";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox1.Location = new System.Drawing.Point(10, 126);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(310, 24);
+            this.checkBox1.TabIndex = 13;
+            this.checkBox1.Text = "Отображать точки точного решения";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // clearButton
+            // 
+            this.clearButton.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clearButton.Location = new System.Drawing.Point(919, 230);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(107, 40);
+            this.clearButton.TabIndex = 20;
+            this.clearButton.Text = "Очистить";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // Form1
             // 
@@ -234,6 +406,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.horizontalScroll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisionValueScroll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleScroll)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -242,7 +419,6 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel firstPagePaint;
         private System.Windows.Forms.TrackBar scaleScroll;
         private System.Windows.Forms.Button drawFunc;
@@ -255,6 +431,21 @@
         private System.Windows.Forms.TrackBar horizontalScroll;
         private System.Windows.Forms.Label cursorYLable;
         private System.Windows.Forms.Label cursorXLable;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton rungeKuttaTest;
+        private System.Windows.Forms.RadioButton testTaskButton;
+        private System.Windows.Forms.Label hLable;
+        private System.Windows.Forms.TextBox hTextBox;
+        private System.Windows.Forms.Label bLable;
+        private System.Windows.Forms.TextBox bTextBox;
+        private System.Windows.Forms.Label aLable;
+        private System.Windows.Forms.TextBox aTextBox;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Button clearButton;
     }
 }
 
