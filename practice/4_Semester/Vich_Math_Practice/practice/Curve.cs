@@ -15,6 +15,8 @@ namespace practice
 
         public bool enabled = true;
         public bool drawDots = true;
+        public bool drawCurve = true;
+
         public Color color = Color.Red;
         public Color dotsColor = Color.Green;
 

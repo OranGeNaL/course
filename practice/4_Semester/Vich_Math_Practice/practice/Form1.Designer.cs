@@ -30,6 +30,22 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.drawFunc = new System.Windows.Forms.Button();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.togetherRadioButton = new System.Windows.Forms.RadioButton();
+            this.rungeKuttaTest = new System.Windows.Forms.RadioButton();
+            this.testTaskButton = new System.Windows.Forms.RadioButton();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.hLable = new System.Windows.Forms.Label();
+            this.hTextBox = new System.Windows.Forms.TextBox();
+            this.bLable = new System.Windows.Forms.Label();
+            this.bTextBox = new System.Windows.Forms.TextBox();
+            this.aLable = new System.Windows.Forms.Label();
+            this.aTextBox = new System.Windows.Forms.TextBox();
             this.cursorYLable = new System.Windows.Forms.Label();
             this.cursorXLable = new System.Windows.Forms.Label();
             this.verticalScroll = new System.Windows.Forms.TrackBar();
@@ -39,33 +55,20 @@
             this.scaleScrollValueLable = new System.Windows.Forms.Label();
             this.scaleScrollLabel = new System.Windows.Forms.Label();
             this.divisionValueScroll = new System.Windows.Forms.TrackBar();
-            this.drawFunc = new System.Windows.Forms.Button();
             this.scaleScroll = new System.Windows.Forms.TrackBar();
             this.firstPagePaint = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.testTaskButton = new System.Windows.Forms.RadioButton();
-            this.rungeKuttaTest = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.aTextBox = new System.Windows.Forms.TextBox();
-            this.aLable = new System.Windows.Forms.Label();
-            this.bLable = new System.Windows.Forms.Label();
-            this.bTextBox = new System.Windows.Forms.TextBox();
-            this.hLable = new System.Windows.Forms.Label();
-            this.hTextBox = new System.Windows.Forms.TextBox();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.clearButton = new System.Windows.Forms.Button();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.verticalScroll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.horizontalScroll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisionValueScroll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleScroll)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -104,9 +107,180 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1067, 730);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Основная программа";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // clearButton
+            // 
+            this.clearButton.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clearButton.Location = new System.Drawing.Point(919, 230);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(107, 40);
+            this.clearButton.TabIndex = 20;
+            this.clearButton.Text = "Очистить";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
+            // drawFunc
+            // 
+            this.drawFunc.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.drawFunc.Location = new System.Drawing.Point(966, 537);
+            this.drawFunc.Name = "drawFunc";
+            this.drawFunc.Size = new System.Drawing.Size(75, 23);
+            this.drawFunc.TabIndex = 2;
+            this.drawFunc.Text = "button1";
+            this.drawFunc.UseVisualStyleBackColor = true;
+            this.drawFunc.Click += new System.EventHandler(this.drawFunc_Click);
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.tabPage3);
+            this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Location = new System.Drawing.Point(703, 283);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(358, 248);
+            this.tabControl2.TabIndex = 19;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.checkBox4);
+            this.tabPage3.Controls.Add(this.checkBox3);
+            this.tabPage3.Controls.Add(this.checkBox2);
+            this.tabPage3.Controls.Add(this.checkBox1);
+            this.tabPage3.Controls.Add(this.panel1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(350, 222);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "Тестовый пример";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Font = new System.Drawing.Font("Rubik", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox1.Location = new System.Drawing.Point(10, 126);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(252, 20);
+            this.checkBox1.TabIndex = 13;
+            this.checkBox1.Text = "Отображать точки точного решения";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.togetherRadioButton);
+            this.panel1.Controls.Add(this.rungeKuttaTest);
+            this.panel1.Controls.Add(this.testTaskButton);
+            this.panel1.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.panel1.Location = new System.Drawing.Point(6, 6);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(327, 103);
+            this.panel1.TabIndex = 12;
+            // 
+            // togetherRadioButton
+            // 
+            this.togetherRadioButton.AutoSize = true;
+            this.togetherRadioButton.Location = new System.Drawing.Point(4, 64);
+            this.togetherRadioButton.Name = "togetherRadioButton";
+            this.togetherRadioButton.Size = new System.Drawing.Size(115, 24);
+            this.togetherRadioButton.TabIndex = 2;
+            this.togetherRadioButton.Text = "Всё вместе";
+            this.togetherRadioButton.UseVisualStyleBackColor = true;
+            this.togetherRadioButton.CheckedChanged += new System.EventHandler(this.togetherRadioButton_CheckedChanged);
+            // 
+            // rungeKuttaTest
+            // 
+            this.rungeKuttaTest.AutoSize = true;
+            this.rungeKuttaTest.Location = new System.Drawing.Point(4, 41);
+            this.rungeKuttaTest.Name = "rungeKuttaTest";
+            this.rungeKuttaTest.Size = new System.Drawing.Size(271, 24);
+            this.rungeKuttaTest.TabIndex = 1;
+            this.rungeKuttaTest.Text = "Решение методом Рунге-Кутты";
+            this.rungeKuttaTest.UseVisualStyleBackColor = true;
+            this.rungeKuttaTest.CheckedChanged += new System.EventHandler(this.rungeKuttaTest_CheckedChanged);
+            // 
+            // testTaskButton
+            // 
+            this.testTaskButton.AutoSize = true;
+            this.testTaskButton.Checked = true;
+            this.testTaskButton.Location = new System.Drawing.Point(4, 17);
+            this.testTaskButton.Name = "testTaskButton";
+            this.testTaskButton.Size = new System.Drawing.Size(309, 24);
+            this.testTaskButton.TabIndex = 0;
+            this.testTaskButton.TabStop = true;
+            this.testTaskButton.Text = "Точное решение тестового примера";
+            this.testTaskButton.UseVisualStyleBackColor = true;
+            this.testTaskButton.CheckedChanged += new System.EventHandler(this.testTaskButton_CheckedChanged);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(319, 222);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "Задача";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // hLable
+            // 
+            this.hLable.AutoSize = true;
+            this.hLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.hLable.Location = new System.Drawing.Point(796, 240);
+            this.hLable.Name = "hLable";
+            this.hLable.Size = new System.Drawing.Size(23, 20);
+            this.hLable.TabIndex = 18;
+            this.hLable.Text = "h:";
+            // 
+            // hTextBox
+            // 
+            this.hTextBox.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.hTextBox.Location = new System.Drawing.Point(822, 237);
+            this.hTextBox.Name = "hTextBox";
+            this.hTextBox.Size = new System.Drawing.Size(51, 26);
+            this.hTextBox.TabIndex = 17;
+            // 
+            // bLable
+            // 
+            this.bLable.AutoSize = true;
+            this.bLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bLable.Location = new System.Drawing.Point(714, 253);
+            this.bLable.Name = "bLable";
+            this.bLable.Size = new System.Drawing.Size(23, 20);
+            this.bLable.TabIndex = 16;
+            this.bLable.Text = "b:";
+            // 
+            // bTextBox
+            // 
+            this.bTextBox.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bTextBox.Location = new System.Drawing.Point(739, 251);
+            this.bTextBox.Name = "bTextBox";
+            this.bTextBox.Size = new System.Drawing.Size(51, 26);
+            this.bTextBox.TabIndex = 15;
+            // 
+            // aLable
+            // 
+            this.aLable.AutoSize = true;
+            this.aLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.aLable.Location = new System.Drawing.Point(714, 226);
+            this.aLable.Name = "aLable";
+            this.aLable.Size = new System.Drawing.Size(22, 20);
+            this.aLable.TabIndex = 14;
+            this.aLable.Text = "a:";
+            // 
+            // aTextBox
+            // 
+            this.aTextBox.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.aTextBox.Location = new System.Drawing.Point(739, 223);
+            this.aTextBox.Name = "aTextBox";
+            this.aTextBox.Size = new System.Drawing.Size(51, 26);
+            this.aTextBox.TabIndex = 13;
             // 
             // cursorYLable
             // 
@@ -201,17 +375,6 @@
             this.divisionValueScroll.Value = 100;
             this.divisionValueScroll.Scroll += new System.EventHandler(this.divisionValueScroll_Scroll);
             // 
-            // drawFunc
-            // 
-            this.drawFunc.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.drawFunc.Location = new System.Drawing.Point(966, 537);
-            this.drawFunc.Name = "drawFunc";
-            this.drawFunc.Size = new System.Drawing.Size(75, 23);
-            this.drawFunc.TabIndex = 2;
-            this.drawFunc.Text = "button1";
-            this.drawFunc.UseVisualStyleBackColor = true;
-            this.drawFunc.Click += new System.EventHandler(this.drawFunc_Click);
-            // 
             // scaleScroll
             // 
             this.scaleScroll.Location = new System.Drawing.Point(770, 72);
@@ -226,7 +389,7 @@
             // 
             // firstPagePaint
             // 
-            this.firstPagePaint.BackColor = System.Drawing.Color.Transparent;
+            this.firstPagePaint.BackColor = System.Drawing.Color.Gainsboro;
             this.firstPagePaint.Location = new System.Drawing.Point(61, 25);
             this.firstPagePaint.Name = "firstPagePaint";
             this.firstPagePaint.Size = new System.Drawing.Size(601, 601);
@@ -235,161 +398,47 @@
             this.firstPagePaint.MouseHover += new System.EventHandler(this.firstPagePaint_MouseHover);
             this.firstPagePaint.MouseMove += new System.Windows.Forms.MouseEventHandler(this.firstPagePaint_MouseMove);
             // 
-            // panel1
+            // checkBox2
             // 
-            this.panel1.Controls.Add(this.radioButton3);
-            this.panel1.Controls.Add(this.rungeKuttaTest);
-            this.panel1.Controls.Add(this.testTaskButton);
-            this.panel1.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panel1.Location = new System.Drawing.Point(6, 6);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(327, 103);
-            this.panel1.TabIndex = 12;
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Font = new System.Drawing.Font("Rubik", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox2.Location = new System.Drawing.Point(10, 146);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(256, 20);
+            this.checkBox2.TabIndex = 14;
+            this.checkBox2.Text = "Отображать линии точного решения";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // testTaskButton
+            // checkBox3
             // 
-            this.testTaskButton.AutoSize = true;
-            this.testTaskButton.Checked = true;
-            this.testTaskButton.Location = new System.Drawing.Point(4, 17);
-            this.testTaskButton.Name = "testTaskButton";
-            this.testTaskButton.Size = new System.Drawing.Size(309, 24);
-            this.testTaskButton.TabIndex = 0;
-            this.testTaskButton.TabStop = true;
-            this.testTaskButton.Text = "Точное решение тестового примера";
-            this.testTaskButton.UseVisualStyleBackColor = true;
-            this.testTaskButton.CheckedChanged += new System.EventHandler(this.testTaskButton_CheckedChanged);
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Checked = true;
+            this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox3.Font = new System.Drawing.Font("Rubik", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox3.Location = new System.Drawing.Point(10, 168);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(340, 20);
+            this.checkBox3.TabIndex = 15;
+            this.checkBox3.Text = "Отображать точки решения методом Рунге-Кутты";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
-            // rungeKuttaTest
+            // checkBox4
             // 
-            this.rungeKuttaTest.AutoSize = true;
-            this.rungeKuttaTest.Location = new System.Drawing.Point(4, 41);
-            this.rungeKuttaTest.Name = "rungeKuttaTest";
-            this.rungeKuttaTest.Size = new System.Drawing.Size(271, 24);
-            this.rungeKuttaTest.TabIndex = 1;
-            this.rungeKuttaTest.Text = "Решение методом Рунге-Кутты";
-            this.rungeKuttaTest.UseVisualStyleBackColor = true;
-            this.rungeKuttaTest.CheckedChanged += new System.EventHandler(this.rungeKuttaTest_CheckedChanged);
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(4, 64);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(127, 24);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.Text = "radioButton3";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // aTextBox
-            // 
-            this.aTextBox.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.aTextBox.Location = new System.Drawing.Point(739, 223);
-            this.aTextBox.Name = "aTextBox";
-            this.aTextBox.Size = new System.Drawing.Size(51, 26);
-            this.aTextBox.TabIndex = 13;
-            // 
-            // aLable
-            // 
-            this.aLable.AutoSize = true;
-            this.aLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.aLable.Location = new System.Drawing.Point(714, 226);
-            this.aLable.Name = "aLable";
-            this.aLable.Size = new System.Drawing.Size(22, 20);
-            this.aLable.TabIndex = 14;
-            this.aLable.Text = "a:";
-            // 
-            // bLable
-            // 
-            this.bLable.AutoSize = true;
-            this.bLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bLable.Location = new System.Drawing.Point(714, 253);
-            this.bLable.Name = "bLable";
-            this.bLable.Size = new System.Drawing.Size(23, 20);
-            this.bLable.TabIndex = 16;
-            this.bLable.Text = "b:";
-            // 
-            // bTextBox
-            // 
-            this.bTextBox.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bTextBox.Location = new System.Drawing.Point(739, 251);
-            this.bTextBox.Name = "bTextBox";
-            this.bTextBox.Size = new System.Drawing.Size(51, 26);
-            this.bTextBox.TabIndex = 15;
-            // 
-            // hLable
-            // 
-            this.hLable.AutoSize = true;
-            this.hLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.hLable.Location = new System.Drawing.Point(796, 240);
-            this.hLable.Name = "hLable";
-            this.hLable.Size = new System.Drawing.Size(23, 20);
-            this.hLable.TabIndex = 18;
-            this.hLable.Text = "h:";
-            // 
-            // hTextBox
-            // 
-            this.hTextBox.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.hTextBox.Location = new System.Drawing.Point(822, 237);
-            this.hTextBox.Name = "hTextBox";
-            this.hTextBox.Size = new System.Drawing.Size(51, 26);
-            this.hTextBox.TabIndex = 17;
-            // 
-            // tabControl2
-            // 
-            this.tabControl2.Controls.Add(this.tabPage3);
-            this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Location = new System.Drawing.Point(718, 283);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(327, 248);
-            this.tabControl2.TabIndex = 19;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.checkBox1);
-            this.tabPage3.Controls.Add(this.panel1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(319, 222);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "Тестовый пример";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(319, 168);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "Задача";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox1.Location = new System.Drawing.Point(10, 126);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(310, 24);
-            this.checkBox1.TabIndex = 13;
-            this.checkBox1.Text = "Отображать точки точного решения";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // clearButton
-            // 
-            this.clearButton.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.clearButton.Location = new System.Drawing.Point(919, 230);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(107, 40);
-            this.clearButton.TabIndex = 20;
-            this.clearButton.Text = "Очистить";
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Checked = true;
+            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox4.Font = new System.Drawing.Font("Rubik", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox4.Location = new System.Drawing.Point(10, 188);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(344, 20);
+            this.checkBox4.TabIndex = 16;
+            this.checkBox4.Text = "Отображать линии решения методом Рунге-Кутты";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // Form1
             // 
@@ -398,19 +447,19 @@
             this.ClientSize = new System.Drawing.Size(1075, 756);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Решение задачи Коши методом Рунге-Кутты";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.verticalScroll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.horizontalScroll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisionValueScroll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleScroll)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -432,7 +481,7 @@
         private System.Windows.Forms.Label cursorYLable;
         private System.Windows.Forms.Label cursorXLable;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton togetherRadioButton;
         private System.Windows.Forms.RadioButton rungeKuttaTest;
         private System.Windows.Forms.RadioButton testTaskButton;
         private System.Windows.Forms.Label hLable;
@@ -446,6 +495,9 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }
 

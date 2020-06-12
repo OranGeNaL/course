@@ -52,7 +52,8 @@ namespace practice
 
             foreach (Curve i in Painter.curves)
             {
-                graphics.DrawCurve(new Pen(i.color, 2), i.ConvertToPoint());
+                if(i.drawCurve)
+                    graphics.DrawCurve(new Pen(i.color, 2), i.ConvertToPoint());
 
                 if(i.drawDots)
                     foreach(Dot j in i.dots)
@@ -153,7 +154,7 @@ namespace practice
         {
             foreach (Curve i in Painter.curves)
             {
-                if (i.name == "Test1" || i.name == "Test2")
+                if (i.name.Contains("Test"))
                     i.drawDots = checkBox1.Checked;
             }
             Refresh();
@@ -176,8 +177,61 @@ namespace practice
                     double h = double.Parse(hTextBox.Text);
 
 
-                    Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TestODU, 0, a, b, h, a, Counter.GetFirstValues(Counter.TestAccurate, a, 2)),"Test1", Color.Red, Color.Green);
-                    Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TestODU, 1, a, b, h, a, Counter.GetFirstValues(Counter.TestAccurate, a, 2)), "Test2", Color.Red, Color.Green);
+                    Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TestODU, 0, a, b, h, a, Counter.GetFirstValues(Counter.TestAccurate, a, 2)),"Runge1", Color.Red, Color.Cyan);
+                    Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TestODU, 1, a, b, h, a, Counter.GetFirstValues(Counter.TestAccurate, a, 2)), "Runge2", Color.Red, Color.Yellow);
+                    Refresh();
+                }
+                catch
+                {
+                    MessageBox.Show("Введены неверные значения!!!");
+                }
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (Curve i in Painter.curves)
+            {
+                if(i.name.Contains("Test"))
+                    i.drawCurve = checkBox2.Checked;
+            }
+            Refresh();
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (Curve i in Painter.curves)
+            {
+                if (i.name.Contains("Runge"))
+                    i.drawDots = checkBox3.Checked;
+            }
+            Refresh();
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (Curve i in Painter.curves)
+            {
+                if (i.name.Contains("Runge"))
+                    i.drawCurve = checkBox4.Checked;
+            }
+            Refresh();
+        }
+
+        private void togetherRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (togetherRadioButton.Checked)
+            {
+                try
+                {
+                    double a = double.Parse(aTextBox.Text);
+                    double b = double.Parse(bTextBox.Text);
+                    double h = double.Parse(hTextBox.Text);
+
+                    Painter.ImportFromMatrix(Counter.AccurateCount(Counter.TestAccurate, 0, a, b, h), "Test1", Color.Red, Color.Green);
+                    Painter.ImportFromMatrix(Counter.AccurateCount(Counter.TestAccurate, 1, a, b, h), "Test2", Color.Purple, Color.Blue);
+                    Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TestODU, 0, a, b, h, a, Counter.GetFirstValues(Counter.TestAccurate, a, 2)), "Runge1", Color.Red, Color.Cyan);
+                    Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TestODU, 1, a, b, h, a, Counter.GetFirstValues(Counter.TestAccurate, a, 2)), "Runge2", Color.Red, Color.Yellow);
                     Refresh();
                 }
                 catch
@@ -188,3 +242,4 @@ namespace practice
         }
     }
 }
+
