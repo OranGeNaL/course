@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace practice
 {
@@ -34,6 +35,7 @@ namespace practice
         {
             DoubleBuffered = true;
             Graphics graphics = firstPagePaint.CreateGraphics();
+            graphics.SmoothingMode = SmoothingMode.AntiAlias;
             Pen blackPen = new Pen(Color.Black, 1);
             Pen greenPen = new Pen(Color.Green, 2);
 
@@ -87,7 +89,7 @@ namespace practice
 
         private void divisionValueScroll_Scroll(object sender, EventArgs e)
         {
-            Painter.divisionValue = divisionValueScroll.Value / 100.0;
+            Painter.divisionValue = divisionValueScroll.Value / 1000.0;
             RefreshForm();
         }
 
@@ -110,7 +112,7 @@ namespace practice
 
         private void firstPagePaint_MouseHover(object sender, EventArgs e)
         {
-
+            
         }
 
         private void firstPagePaint_MouseMove(object sender, MouseEventArgs e)
@@ -134,6 +136,7 @@ namespace practice
             {
                 try
                 {
+                    Painter.Clear();
                     double a = double.Parse(aTextBox.Text);
                     double b = double.Parse(bTextBox.Text);
                     double h = double.Parse(hTextBox.Text);
@@ -172,6 +175,7 @@ namespace practice
             {
                 try
                 {
+                    Painter.Clear();
                     double a = double.Parse(aTextBox.Text);
                     double b = double.Parse(bTextBox.Text);
                     double h = double.Parse(hTextBox.Text);
@@ -224,6 +228,7 @@ namespace practice
             {
                 try
                 {
+                    Painter.Clear();
                     double a = double.Parse(aTextBox.Text);
                     double b = double.Parse(bTextBox.Text);
                     double h = double.Parse(hTextBox.Text);
@@ -232,6 +237,26 @@ namespace practice
                     Painter.ImportFromMatrix(Counter.AccurateCount(Counter.TestAccurate, 1, a, b, h), "Test2", Color.Purple, Color.Blue);
                     Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TestODU, 0, a, b, h, a, Counter.GetFirstValues(Counter.TestAccurate, a, 2)), "Runge1", Color.Red, Color.Cyan);
                     Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TestODU, 1, a, b, h, a, Counter.GetFirstValues(Counter.TestAccurate, a, 2)), "Runge2", Color.Red, Color.Yellow);
+                    Refresh();
+                }
+                catch
+                {
+                    MessageBox.Show("Введены неверные значения!!!");
+                }
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton2.Checked)
+            {
+                try
+                {
+                    Painter.Clear();
+                    double a = double.Parse(aTextBox.Text);
+                    double b = double.Parse(bTextBox.Text);
+                    double h = double.Parse(hTextBox.Text);
+                    Painter.ImportFromMatrix(Counter.CountErr(Counter.RungeKutta, Counter.TestODU, Counter.TestAccurate, a, b, a, Counter.GetFirstValues(Counter.TestAccurate, a, 2)), "Err1", Color.Red, Color.Yellow);
                     Refresh();
                 }
                 catch

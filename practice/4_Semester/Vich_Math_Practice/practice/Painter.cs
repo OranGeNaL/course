@@ -19,8 +19,6 @@ namespace practice
         public static int leftDownX = 0;
         public static int leftDownY = SCREEN_HEIGHT;
 
-        static object locker = new object();
-
         public static Pen blackPen = new Pen(Color.Black, 1);
         public static Pen greenPen = new Pen(Color.Green, 2);
         public static Pen redPen = new Pen(Color.Red, 2);

@@ -12,7 +12,6 @@ namespace practice
         public List<Dot> dots = new List<Dot>();
 
         public string name = "";
-
         public bool enabled = true;
         public bool drawDots = true;
         public bool drawCurve = true;

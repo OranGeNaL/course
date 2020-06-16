@@ -9,6 +9,7 @@ namespace practice
     public static class Counter
     {
         public delegate double FuncDelegate(int funcInd, double x, double[] y);
+        public delegate List<double[,]> RungeDelegate(FuncDelegate funcDelegate, double a, double b, double h, double t0, double[] y0);
 
         public static double TestAccurate(int funcInd, double x, double[] y)
         {
@@ -68,20 +69,32 @@ namespace practice
             return 0;
         }
 
+        public static double TaskODU(int funcInd, double t, double[] y)
+        {
+            switch (funcInd)
+            {
+                case 0:
+                    return -Math.Sin(t) / Math.Sqrt(1 + Math.Pow(Math.E, 2 * t)) + y[0] * (Math.Pow(y[0], 2) + Math.Pow(y[1], 2) - 1);
+                case 1:
+                    return Math.Cos(t) / Math.Sqrt(1 + Math.Pow(Math.E, 2 * t)) + y[1] * (Math.Pow(y[0], 2) + Math.Pow(y[1], 2) - 1);
+            }
+
+            return 0;
+        }
+
         public static double[,] RungeKutta(FuncDelegate funcDelegate, int funcInd, double a, double b, double h, double t0, double[] y0)
         {
             int N = (int)((b - a) / h);
             List<double[,]> yshtr = new List<double[,]>();
-            int k = 1;
 
-            for(int i = 0; i < y0.Length; i++)
+            for (int i = 0; i < y0.Length; i++)
             {
                 yshtr.Add(new double[N, 2]);
                 yshtr[i][0, 0] = t0;
                 yshtr[i][0, 1] = y0[i];
             }
 
-            for (int i = 1; k < N; i += 1)
+            for (int i = 1; i < N; i += 1)
             {
                 double[] yPrev = new double[y0.Length];
                 for(int j = 0; j < y0.Length; j++)
@@ -99,11 +112,74 @@ namespace practice
 
                     yshtr[j][i, 1] = yshtr[j][i - 1, 1] + h * (2 * k1 + 3 * k2 + 4 * k3) / 9;
                 }
+            }
+
+            return yshtr[funcInd];
+        }
+
+        public static List<double[,]> RungeKutta(FuncDelegate funcDelegate, double a, double b, double h, double t0, double[] y0)
+        {
+            int N = (int)((b - a) / h);
+            List<double[,]> yshtr = new List<double[,]>();
+
+            for (int i = 0; i < y0.Length; i++)
+            {
+                yshtr.Add(new double[N, 2]);
+                yshtr[i][0, 0] = t0;
+                yshtr[i][0, 1] = y0[i];
+            }
+
+            for (int i = 1; i < N; i += 1)
+            {
+                double[] yPrev = new double[y0.Length];
+                for (int j = 0; j < y0.Length; j++)
+                {
+                    yPrev[j] = yshtr[j][i - 1, 1];
+                }
+
+                for (int j = 0; j < y0.Length; j++)
+                {
+                    yshtr[j][i, 0] = a + i * h;
+
+                    double k1 = funcDelegate(j, yshtr[j][i, 0], yPrev);
+                    double k2 = funcDelegate(j, yshtr[j][i, 0] + h / 2, Addict(h * k1 / 2, yPrev));
+                    double k3 = funcDelegate(j, yshtr[j][i, 0] + 3 * h / 4, Addict(3 * h * k2 / 4, yPrev));
+
+                    yshtr[j][i, 1] = yshtr[j][i - 1, 1] + h * (2 * k1 + 3 * k2 + 4 * k3) / 9;
+                }
+            }
+
+            return yshtr;
+        }
+
+        public static double[,] CountErr(RungeDelegate rungeDelegate, FuncDelegate funcDelegate, FuncDelegate trueFunc, double a, double b, double t0, double[] y0)
+        {
+            int k = 0;
+            double[,] res = new double[40, 2];
+            double maxErr = 0;
+
+            for(double i = 0.5; i > 0; i -= 0.0125)
+            {
+                List<double[,]> list = rungeDelegate(funcDelegate, a, b, i, t0, y0);
+                int m = 0;
+                foreach (double[,] j in list)
+                {
+                    for(int p = 0; p < j.GetLength(0); p++)
+                    {
+                        if(Math.Abs(j[p, 1] - trueFunc(m, j[p, 0], y0)) > maxErr)
+                        {
+                            maxErr = Math.Abs(j[p, 1] - trueFunc(m, j[p, 0], y0));
+                        }
+                    }
+                    m++;
+                }
+                res[k, 0] = i;
+                res[k, 1] = maxErr;
+                maxErr = 0;
                 k++;
             }
 
-
-            return yshtr[funcInd];
+            return res;
         }
 
         public static double[] Addict(double num, double[] mass)
