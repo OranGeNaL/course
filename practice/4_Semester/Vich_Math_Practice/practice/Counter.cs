@@ -8,6 +8,13 @@ namespace practice
 {
     public static class Counter
     {
+        public static double lambda1 = 1;
+        public static double lambda2 = 1;
+        public static double beta1 = 1;
+        public static double beta2 = 3;
+        public static double c = 3;
+
+
         public delegate double FuncDelegate(int funcInd, double x, double[] y);
         public delegate List<double[,]> RungeDelegate(FuncDelegate funcDelegate, double a, double b, double h, double t0, double[] y0);
 
@@ -74,9 +81,9 @@ namespace practice
             switch (funcInd)
             {
                 case 0:
-                    return -Math.Sin(t) / Math.Sqrt(1 + Math.Pow(Math.E, 2 * t)) + y[0] * (Math.Pow(y[0], 2) + Math.Pow(y[1], 2) - 1);
+                    return (-lambda1 + beta1 * Math.Pow(y[1] * y[1], 1.0 / 3) * (1 - y[0] / c) / (1 + y[0])) * y[0];
                 case 1:
-                    return Math.Cos(t) / Math.Sqrt(1 + Math.Pow(Math.E, 2 * t)) + y[1] * (Math.Pow(y[0], 2) + Math.Pow(y[1], 2) - 1);
+                    return lambda2 * y[1] - beta2 * y[0] * Math.Pow(y[1] * y[1], 1.0 / 3) / (1 + y[0]);
             }
 
             return 0;
@@ -112,6 +119,7 @@ namespace practice
 
                     yshtr[j][i, 1] = yshtr[j][i - 1, 1] + h * (2 * k1 + 3 * k2 + 4 * k3) / 9;
                 }
+                int baka = 0;
             }
 
             return yshtr[funcInd];
@@ -152,14 +160,16 @@ namespace practice
             return yshtr;
         }
 
-        public static double[,] CountErr(RungeDelegate rungeDelegate, FuncDelegate funcDelegate, FuncDelegate trueFunc, double a, double b, double t0, double[] y0)
+        public static double[,] CountErr(RungeDelegate rungeDelegate, FuncDelegate funcDelegate, FuncDelegate trueFunc, double a, double b, double t0, double[] y0, int errInd)
         {
             int k = 0;
-            double[,] res = new double[40, 2];
-            double maxErr = 0;
+            //double[,] res = new double[(int)(0.5/0.1), 2];
+            double[,] res = new double[/*GetNumOfEls(5)*/ (int)(2 / 0.005), 2];
+            double[,] res2 = new double[/*GetNumOfEls(5)*/(int)(2 / 0.005), 2];
 
-            for(double i = 0.5; i > 0; i -= 0.0125)
+            for (double i = 0.005; i <= 2; i += 0.005)
             {
+                double maxErr = 0;
                 List<double[,]> list = rungeDelegate(funcDelegate, a, b, i, t0, y0);
                 int m = 0;
                 foreach (double[,] j in list)
@@ -174,22 +184,47 @@ namespace practice
                     m++;
                 }
                 res[k, 0] = i;
+                res2[k, 0] = i;
                 res[k, 1] = maxErr;
-                maxErr = 0;
+                //if (i > 0.01)
+                    res2[k, 1] = maxErr / Math.Pow(i, 3);
+                //else
+                    //res2[k, 1] = maxErr / Math.Pow(i*100,3);
                 k++;
             }
 
-            return res;
+            switch(errInd)
+            {
+                case 0:
+                    return res;
+                case 1:
+                    return res2;
+                default:
+                    return new double[1,1];
+            }
+        }
+
+        public static int GetNumOfEls(double b)
+        {
+            int i = 0;
+            double h = 0.0005;
+            while (h <= b)
+            {
+                h += h * 2;
+                i++;
+            }
+            return i;
         }
 
         public static double[] Addict(double num, double[] mass)
         {
             //Мб надо доп массив добавить
+            double[] res = new double[mass.Length];
             for(int i = 0; i < mass.Length; i++)
             {
-                mass[i] += num;
+               res[i] = mass[i] + num;
             }
-            return mass;
+            return res;
         }
     }
 }

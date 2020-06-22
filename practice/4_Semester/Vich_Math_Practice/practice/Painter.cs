@@ -17,7 +17,9 @@ namespace practice
         public const int SCREEN_DIV_VALUE = 100;
 
         public static int leftDownX = 0;
+        public static int leftDownXOld = 0;
         public static int leftDownY = SCREEN_HEIGHT;
+        public static int leftDownYOld = SCREEN_HEIGHT;
 
         public static Pen blackPen = new Pen(Color.Black, 1);
         public static Pen greenPen = new Pen(Color.Green, 2);
@@ -25,6 +27,9 @@ namespace practice
 
         public static int cursorX = 0;
         public static int cursorY = 0;
+        public static int cursorXOld = 0;
+        public static int cursorYOld = 0;
+        public static bool mouseDown = false;
 
         public static double scale = 0.1;
         public static double divisionValue = 1;
