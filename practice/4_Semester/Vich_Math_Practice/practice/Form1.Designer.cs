@@ -71,6 +71,8 @@
             this.divisionValueScroll = new System.Windows.Forms.TrackBar();
             this.scaleScroll = new System.Windows.Forms.TrackBar();
             this.firstPagePaint = new System.Windows.Forms.Panel();
+            this.xLable = new System.Windows.Forms.Label();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -83,6 +85,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.horizontalScroll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisionValueScroll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleScroll)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -337,6 +340,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.xLable);
+            this.tabPage4.Controls.Add(this.trackBar2);
             this.tabPage4.Controls.Add(this.yLable);
             this.tabPage4.Controls.Add(this.trackBar1);
             this.tabPage4.Controls.Add(this.beta2Lable);
@@ -371,7 +376,7 @@
             this.trackBar1.SmallChange = 5;
             this.trackBar1.TabIndex = 4;
             this.trackBar1.TickFrequency = 5;
-            this.trackBar1.Value = 35;
+            this.trackBar1.Value = 5;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // beta2Lable
@@ -595,6 +600,27 @@
             this.firstPagePaint.MouseMove += new System.Windows.Forms.MouseEventHandler(this.firstPagePaint_MouseMove);
             this.firstPagePaint.MouseUp += new System.Windows.Forms.MouseEventHandler(this.firstPagePaint_MouseUp);
             // 
+            // xLable
+            // 
+            this.xLable.AutoSize = true;
+            this.xLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.xLable.Location = new System.Drawing.Point(140, 83);
+            this.xLable.Name = "xLable";
+            this.xLable.Size = new System.Drawing.Size(36, 20);
+            this.xLable.TabIndex = 7;
+            this.xLable.Text = "x: 0";
+            // 
+            // trackBar2
+            // 
+            this.trackBar2.Location = new System.Drawing.Point(141, 108);
+            this.trackBar2.Maximum = 30;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Size = new System.Drawing.Size(172, 45);
+            this.trackBar2.SmallChange = 5;
+            this.trackBar2.TabIndex = 6;
+            this.trackBar2.TickFrequency = 5;
+            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -620,6 +646,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.horizontalScroll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisionValueScroll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleScroll)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -669,6 +696,8 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label beta2Lable;
         private System.Windows.Forms.Label yLable;
+        private System.Windows.Forms.Label xLable;
+        private System.Windows.Forms.TrackBar trackBar2;
     }
 }
 

@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Runtime.CompilerServices;
 
 namespace practice
 {
@@ -398,7 +399,7 @@ namespace practice
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             yLable.Text = "y: " + (trackBar1.Value / 10.0).ToString();
-                TaskGraphic(trackBar1.Value / 10.0);
+            TaskGraphic(trackBar2.Value / 10.0, trackBar1.Value / 10.0);
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
@@ -406,7 +407,7 @@ namespace practice
             if(radioButton3.Checked)
             {
                 Counter.beta2 = 3;
-                TaskGraphic(trackBar1.Value / 10.0);
+                TaskGraphic(trackBar2.Value / 10.0, trackBar1.Value / 10.0);
             }
         }
 
@@ -415,7 +416,7 @@ namespace practice
             if (radioButton4.Checked)
             {
                 Counter.beta2 = 3.48;
-                TaskGraphic(trackBar1.Value / 10.0);
+                TaskGraphic(trackBar2.Value / 10.0, trackBar1.Value / 10.0);
             }
         }
 
@@ -424,18 +425,24 @@ namespace practice
             if (radioButton5.Checked)
             {
                 Counter.beta2 = 5;
-                TaskGraphic(trackBar1.Value / 10.0);
+                TaskGraphic(trackBar2.Value / 10.0, trackBar1.Value / 10.0);
             }
         }
 
-        private void TaskGraphic (double y0)
+        private void TaskGraphic (double x0, double y0)
         {
             Painter.Clear();
-            Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TestODU, 0, 0, 20, 0.1, 0, new double[2] { 0, y0}), "Task1");
-            Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TestODU, 1, 0, 20, 0.1, 0, new double[2] { 0, y0 }), "Task2");
+            Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TaskODU, 0, 0, 10, 0.1, 0, new double[2] { x0, y0 }), "Leiko", Color.Purple, Color.Yellow);
+            Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TaskODU, 1, 0, 10, 0.1, 0, new double[2] { x0, y0 }), "Cancer", Color.Crimson, Color.Blue);
 
             RefreshListBox();
             RefreshForm();
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            xLable.Text = "x: " + (trackBar2.Value / 10.0).ToString();
+                TaskGraphic(trackBar2.Value / 10.0, trackBar1.Value / 10.0);
         }
     }
 }

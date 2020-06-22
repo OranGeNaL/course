@@ -76,14 +76,17 @@ namespace practice
             return 0;
         }
 
-        public static double TaskODU(int funcInd, double t, double[] y)
+        public static double TaskODU(int funcInd, double t, double[] yPrev)
         {
+            double x = yPrev[0];
+            double y = yPrev[1];
             switch (funcInd)
             {
                 case 0:
-                    return (-lambda1 + beta1 * Math.Pow(y[1] * y[1], 1.0 / 3) * (1 - y[0] / c) / (1 + y[0])) * y[0];
+                    return (-lambda1 + beta1 * Math.Pow(y * y, 1.0 / 3) * (1 - x / c) / (1 + x)) * x;
                 case 1:
-                    return lambda2 * y[1] - beta2 * y[0] * Math.Pow(y[1] * y[1], 1.0 / 3) / (1 + y[0]);
+                    double ans = lambda2 * y - beta2 * x * Math.Pow(y * y, 1.0 / 3) / (1 + x);
+                    return ans;
             }
 
             return 0;
@@ -109,17 +112,36 @@ namespace practice
                     yPrev[j] = yshtr[j][i - 1, 1];
                 }
 
+                double[] k1 = new double[y0.Length];
+                double[] k2 = new double[y0.Length];
+                double[] k3 = new double[y0.Length];
+
                 for(int j = 0; j < y0.Length; j++)
                 {
                     yshtr[j][i, 0] = a + i * h;
-
-                    double k1 = funcDelegate(j, yshtr[j][i, 0], yPrev);
-                    double k2 = funcDelegate(j, yshtr[j][i, 0] + h / 2, Addict(h * k1 / 2, yPrev));
-                    double k3 = funcDelegate(j, yshtr[j][i, 0] + 3 * h / 4, Addict(3 * h * k2 / 4, yPrev));
-
-                    yshtr[j][i, 1] = yshtr[j][i - 1, 1] + h * (2 * k1 + 3 * k2 + 4 * k3) / 9;
+                    k1[j] = funcDelegate(j, yshtr[j][i, 0], yPrev);
                 }
-                int baka = 0;
+
+                for(int j = 0; j < y0.Length; j++)
+                {
+                    k2[j] = funcDelegate(j, yshtr[j][i, 0] + h / 2, Addict(/*h * k1 / 2*/ Multyplicate(h / 2, k1), yPrev));
+                }
+
+                for (int j = 0; j < y0.Length; j++)
+                {
+                    k3[j] = funcDelegate(j, yshtr[j][i, 0] + 3 * h / 4, Addict(/*h * k1 / 2*/ Multyplicate(3 * h / 4, k2), yPrev));
+                }
+
+                for (int j = 0; j < y0.Length; j++)
+                {
+
+                    /*double k1 = funcDelegate(j, yshtr[j][i, 0], yPrev);
+                    double k2 = funcDelegate(j, yshtr[j][i, 0] + h / 2, Addict(h * k1 / 2, yPrev));
+                    double k3 = funcDelegate(j, yshtr[j][i, 0] + 3 * h / 4, Addict(3 * h * k2 / 4, yPrev));*/
+
+                    //yshtr[j][i, 1] = yshtr[j][i - 1, 1] + h * (2 * k1 + 3 * k2 + 4 * k3) / 9;
+                    yshtr[j][i, 1] = yshtr[j][i - 1, 1] + h * (2 * k1[j] + 3 * k2[j] + 4 * k3[j]) / 9;
+                }
             }
 
             return yshtr[funcInd];
@@ -223,6 +245,28 @@ namespace practice
             for(int i = 0; i < mass.Length; i++)
             {
                res[i] = mass[i] + num;
+            }
+            return res;
+        }
+
+        public static double[] Addict(double[] mass1, double[] mass2)
+        {
+            //Мб надо доп массив добавить
+            double[] res = new double[mass1.Length];
+            for (int i = 0; i < mass1.Length; i++)
+            {
+                res[i] = mass1[i] + mass2[i];
+            }
+            return res;
+        }
+
+        public static double[] Multyplicate(double num, double[] mass)
+        {
+            //Мб надо доп массив добавить
+            double[] res = new double[mass.Length];
+            for (int i = 0; i < mass.Length; i++)
+            {
+                res[i] = mass[i] * num;
             }
             return res;
         }
