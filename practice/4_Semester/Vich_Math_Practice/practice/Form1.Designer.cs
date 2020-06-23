@@ -48,6 +48,8 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.xLable = new System.Windows.Forms.Label();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.yLable = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.beta2Lable = new System.Windows.Forms.Label();
@@ -71,8 +73,9 @@
             this.divisionValueScroll = new System.Windows.Forms.TrackBar();
             this.scaleScroll = new System.Windows.Forms.TrackBar();
             this.firstPagePaint = new System.Windows.Forms.Panel();
-            this.xLable = new System.Windows.Forms.Label();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.twoFuncButton = new System.Windows.Forms.RadioButton();
+            this.xySystemButton = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -80,12 +83,13 @@
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.verticalScroll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.horizontalScroll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisionValueScroll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleScroll)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -340,6 +344,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.panel2);
             this.tabPage4.Controls.Add(this.xLable);
             this.tabPage4.Controls.Add(this.trackBar2);
             this.tabPage4.Controls.Add(this.yLable);
@@ -355,6 +360,27 @@
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Задача";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // xLable
+            // 
+            this.xLable.AutoSize = true;
+            this.xLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.xLable.Location = new System.Drawing.Point(140, 83);
+            this.xLable.Name = "xLable";
+            this.xLable.Size = new System.Drawing.Size(36, 20);
+            this.xLable.TabIndex = 7;
+            this.xLable.Text = "x: 0";
+            // 
+            // trackBar2
+            // 
+            this.trackBar2.Location = new System.Drawing.Point(141, 108);
+            this.trackBar2.Maximum = 30;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Size = new System.Drawing.Size(172, 45);
+            this.trackBar2.SmallChange = 5;
+            this.trackBar2.TabIndex = 6;
+            this.trackBar2.TickFrequency = 5;
+            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
             // yLable
             // 
@@ -600,26 +626,38 @@
             this.firstPagePaint.MouseMove += new System.Windows.Forms.MouseEventHandler(this.firstPagePaint_MouseMove);
             this.firstPagePaint.MouseUp += new System.Windows.Forms.MouseEventHandler(this.firstPagePaint_MouseUp);
             // 
-            // xLable
+            // panel2
             // 
-            this.xLable.AutoSize = true;
-            this.xLable.Font = new System.Drawing.Font("Rubik", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.xLable.Location = new System.Drawing.Point(140, 83);
-            this.xLable.Name = "xLable";
-            this.xLable.Size = new System.Drawing.Size(36, 20);
-            this.xLable.TabIndex = 7;
-            this.xLable.Text = "x: 0";
+            this.panel2.Controls.Add(this.xySystemButton);
+            this.panel2.Controls.Add(this.twoFuncButton);
+            this.panel2.Location = new System.Drawing.Point(18, 110);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(117, 105);
+            this.panel2.TabIndex = 8;
             // 
-            // trackBar2
+            // twoFuncButton
             // 
-            this.trackBar2.Location = new System.Drawing.Point(141, 108);
-            this.trackBar2.Maximum = 30;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(172, 45);
-            this.trackBar2.SmallChange = 5;
-            this.trackBar2.TabIndex = 6;
-            this.trackBar2.TickFrequency = 5;
-            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            this.twoFuncButton.AutoSize = true;
+            this.twoFuncButton.Checked = true;
+            this.twoFuncButton.Location = new System.Drawing.Point(4, 4);
+            this.twoFuncButton.Name = "twoFuncButton";
+            this.twoFuncButton.Size = new System.Drawing.Size(92, 17);
+            this.twoFuncButton.TabIndex = 0;
+            this.twoFuncButton.TabStop = true;
+            this.twoFuncButton.Text = "Две функции";
+            this.twoFuncButton.UseVisualStyleBackColor = true;
+            this.twoFuncButton.CheckedChanged += new System.EventHandler(this.twoFuncButton_CheckedChanged);
+            // 
+            // xySystemButton
+            // 
+            this.xySystemButton.AutoSize = true;
+            this.xySystemButton.Location = new System.Drawing.Point(4, 25);
+            this.xySystemButton.Name = "xySystemButton";
+            this.xySystemButton.Size = new System.Drawing.Size(94, 17);
+            this.xySystemButton.TabIndex = 1;
+            this.xySystemButton.Text = "Система (x, y)";
+            this.xySystemButton.UseVisualStyleBackColor = true;
+            this.xySystemButton.CheckedChanged += new System.EventHandler(this.xySystemButton_CheckedChanged);
             // 
             // Form1
             // 
@@ -641,12 +679,14 @@
             this.tabPage2.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.verticalScroll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.horizontalScroll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisionValueScroll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleScroll)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -698,6 +738,9 @@
         private System.Windows.Forms.Label yLable;
         private System.Windows.Forms.Label xLable;
         private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.RadioButton xySystemButton;
+        private System.Windows.Forms.RadioButton twoFuncButton;
     }
 }
 

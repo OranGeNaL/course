@@ -134,12 +134,6 @@ namespace practice
 
                 for (int j = 0; j < y0.Length; j++)
                 {
-
-                    /*double k1 = funcDelegate(j, yshtr[j][i, 0], yPrev);
-                    double k2 = funcDelegate(j, yshtr[j][i, 0] + h / 2, Addict(h * k1 / 2, yPrev));
-                    double k3 = funcDelegate(j, yshtr[j][i, 0] + 3 * h / 4, Addict(3 * h * k2 / 4, yPrev));*/
-
-                    //yshtr[j][i, 1] = yshtr[j][i - 1, 1] + h * (2 * k1 + 3 * k2 + 4 * k3) / 9;
                     yshtr[j][i, 1] = yshtr[j][i - 1, 1] + h * (2 * k1[j] + 3 * k2[j] + 4 * k3[j]) / 9;
                 }
             }
@@ -185,9 +179,8 @@ namespace practice
         public static double[,] CountErr(RungeDelegate rungeDelegate, FuncDelegate funcDelegate, FuncDelegate trueFunc, double a, double b, double t0, double[] y0, int errInd)
         {
             int k = 0;
-            //double[,] res = new double[(int)(0.5/0.1), 2];
-            double[,] res = new double[/*GetNumOfEls(5)*/ (int)(2 / 0.005), 2];
-            double[,] res2 = new double[/*GetNumOfEls(5)*/(int)(2 / 0.005), 2];
+            double[,] res = new double[ (int)(2 / 0.005), 2];
+            double[,] res2 = new double[(int)(2 / 0.005), 2];
 
             for (double i = 0.005; i <= 2; i += 0.005)
             {
@@ -208,10 +201,7 @@ namespace practice
                 res[k, 0] = i;
                 res2[k, 0] = i;
                 res[k, 1] = maxErr;
-                //if (i > 0.01)
-                    res2[k, 1] = maxErr / Math.Pow(i, 3);
-                //else
-                    //res2[k, 1] = maxErr / Math.Pow(i*100,3);
+                res2[k, 1] = maxErr / Math.Pow(i, 3);
                 k++;
             }
 
@@ -240,7 +230,6 @@ namespace practice
 
         public static double[] Addict(double num, double[] mass)
         {
-            //Мб надо доп массив добавить
             double[] res = new double[mass.Length];
             for(int i = 0; i < mass.Length; i++)
             {
@@ -251,7 +240,6 @@ namespace practice
 
         public static double[] Addict(double[] mass1, double[] mass2)
         {
-            //Мб надо доп массив добавить
             double[] res = new double[mass1.Length];
             for (int i = 0; i < mass1.Length; i++)
             {
@@ -262,13 +250,25 @@ namespace practice
 
         public static double[] Multyplicate(double num, double[] mass)
         {
-            //Мб надо доп массив добавить
             double[] res = new double[mass.Length];
             for (int i = 0; i < mass.Length; i++)
             {
                 res[i] = mass[i] * num;
             }
             return res;
+        }
+
+        public static double[,] ConvertToXY(double[,] x, double[,] y)
+        {
+            double[,] result = new double[x.GetLength(0), 2];
+
+            for(int i = 0; i < x.GetLength(0); i++)
+            {
+                result[i, 0] = x[i, 1];
+                result[i, 1] = y[i, 1];
+            }
+
+            return result;
         }
     }
 }

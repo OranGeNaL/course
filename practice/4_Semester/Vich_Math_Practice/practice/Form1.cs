@@ -19,9 +19,6 @@ namespace practice
         public Form1()
         {
             InitializeComponent();
-            //DoubleBuffered = true;
-            //Painter.bitmap = new Bitmap(firstPagePaint.Width, firstPagePaint.Height);
-            //Painter.panel1Graphics = firstPagePaint.CreateGraphics();
         }
 
         void RefreshForm()
@@ -74,9 +71,6 @@ namespace practice
 
             for (int i = -(int)(Painter.SCREEN_WIDTH - Painter.SCREEN_WIDTH % (Painter.SCREEN_DIV_VALUE * Painter.scale)); i < Painter.SCREEN_WIDTH; i += (int)(Painter.SCREEN_DIV_VALUE * Painter.scale))
             {
-                //graphics.DrawLine(blackPen, new Point(Painter.leftDownX - 10, Painter.leftDownY - i), new Point(Painter.leftDownX + 10, Painter.leftDownY - i));
-                //graphics.DrawLine(blackPen, new Point(Painter.leftDownX - i, Painter.leftDownY - 10), new Point(Painter.leftDownX - i, Painter.leftDownY + 10));
-
                 if (Painter.leftDownX <= 0)
                     graphics.DrawLine(blackPen, new Point(0 - 10, Painter.leftDownY - i), new Point(0 + 10, Painter.leftDownY - i));
 
@@ -169,7 +163,6 @@ namespace practice
             cursorYLable.Location = new Point(cursorYLable.Location.X, 18 + Painter.cursorY);
 
             cursorXLable.Text = ((double)(Painter.cursorX - Painter.leftDownX) / Painter.SCREEN_DIV_VALUE / Painter.scale * Painter.divisionValue).ToString();
-            //(_X * Painter.SCREEN_DIV_VALUE * Painter.scale / Painter.divisionValue)
 
             cursorYLable.Text = ((double)(Painter.leftDownY - Painter.cursorY) / Painter.SCREEN_DIV_VALUE / Painter.scale * Painter.divisionValue).ToString();
 
@@ -194,8 +187,8 @@ namespace practice
                     double h = double.Parse(hTextBox.Text);
                     
 
-                    Painter.ImportFromMatrix(Counter.AccurateCount(Counter.TestAccurate, 0, a, b, h), /*"Первая тестовая функция"*/"Test1" , Color.Red, Color.Green);
-                    Painter.ImportFromMatrix(Counter.AccurateCount(Counter.TestAccurate, 1, a, b, h), /*"Вторая тестовая функция"*/"Test2" , Color.Purple, Color.Blue);
+                    Painter.ImportFromMatrix(Counter.AccurateCount(Counter.TestAccurate, 0, a, b, h), "Test1" , Color.Red, Color.Green);
+                    Painter.ImportFromMatrix(Counter.AccurateCount(Counter.TestAccurate, 1, a, b, h), "Test2" , Color.Purple, Color.Blue);
                     RefreshForm();
                     RefreshListBox();
                 }
@@ -439,9 +432,15 @@ namespace practice
         private void TaskGraphic (double x0, double y0)
         {
             Painter.Clear();
-            Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TaskODU, 0, 0, 10, 0.1, 0, new double[2] { x0, y0 }), "Leiko", Color.Purple, Color.Yellow);
-            Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TaskODU, 1, 0, 10, 0.1, 0, new double[2] { x0, y0 }), "Cancer", Color.Crimson, Color.Blue);
-
+            if (twoFuncButton.Checked)
+            {
+                Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TaskODU, 0, 0, 10, 0.1, 0, new double[2] { x0, y0 }), "Leiko", Color.Purple, Color.Yellow);
+                Painter.ImportFromMatrix(Counter.RungeKutta(Counter.TaskODU, 1, 0, 10, 0.1, 0, new double[2] { x0, y0 }), "Cancer", Color.Crimson, Color.Blue);
+            }
+            else if (xySystemButton.Checked)
+            {
+                Painter.ImportFromMatrix(Counter.ConvertToXY(Counter.RungeKutta(Counter.TaskODU, 0, 0, 10, 0.1, 0, new double[2] { x0, y0 }), Counter.RungeKutta(Counter.TaskODU, 1, 0, 10, 0.1, 0, new double[2] { x0, y0 })), "XY", Color.Purple, Color.Yellow);
+            }
             RefreshListBox();
             RefreshForm();
         }
@@ -450,6 +449,16 @@ namespace practice
         {
             xLable.Text = "x: " + (trackBar2.Value / 10.0).ToString();
                 TaskGraphic(trackBar2.Value / 10.0, trackBar1.Value / 10.0);
+        }
+
+        private void twoFuncButton_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskGraphic(trackBar2.Value / 10.0, trackBar1.Value / 10.0);
+        }
+
+        private void xySystemButton_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskGraphic(trackBar2.Value / 10.0, trackBar1.Value / 10.0);
         }
     }
 }
