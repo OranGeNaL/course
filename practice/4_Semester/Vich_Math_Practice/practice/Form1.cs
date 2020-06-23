@@ -96,6 +96,8 @@ namespace practice
                     graphics.DrawLine(blackPen, new Point(Painter.leftDownX - i, Painter.leftDownY - 10), new Point(Painter.leftDownX - i, Painter.leftDownY + 10));
             }
 
+            try
+            {
             foreach (Curve i in Painter.curves)
             {
                 if(i.drawCurve)
@@ -111,6 +113,11 @@ namespace practice
             foreach (Dot i in Painter.dots)
             {
                 graphics.DrawRectangle(greenPen, i.X - 1, i.Y - 1, 3, 3);
+            }
+            }
+            catch
+            {
+
             }
 
         }
