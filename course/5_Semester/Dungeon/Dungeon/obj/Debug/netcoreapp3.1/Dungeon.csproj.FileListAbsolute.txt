@@ -1,0 +1,13 @@
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dungeon\Dungeon\bin\Debug\netcoreapp3.1\Dungeon.exe
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dungeon\Dungeon\bin\Debug\netcoreapp3.1\Dungeon.deps.json
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dungeon\Dungeon\bin\Debug\netcoreapp3.1\Dungeon.runtimeconfig.json
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dungeon\Dungeon\bin\Debug\netcoreapp3.1\Dungeon.runtimeconfig.dev.json
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dungeon\Dungeon\bin\Debug\netcoreapp3.1\Dungeon.dll
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dungeon\Dungeon\bin\Debug\netcoreapp3.1\Dungeon.pdb
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dungeon\Dungeon\obj\Debug\netcoreapp3.1\Dungeon.csprojAssemblyReference.cache
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dungeon\Dungeon\obj\Debug\netcoreapp3.1\Dungeon.AssemblyInfoInputs.cache
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dungeon\Dungeon\obj\Debug\netcoreapp3.1\Dungeon.AssemblyInfo.cs
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dungeon\Dungeon\obj\Debug\netcoreapp3.1\Dungeon.csproj.CoreCompileInputs.cache
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dungeon\Dungeon\obj\Debug\netcoreapp3.1\Dungeon.dll
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dungeon\Dungeon\obj\Debug\netcoreapp3.1\Dungeon.pdb
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dungeon\Dungeon\obj\Debug\netcoreapp3.1\Dungeon.genruntimeconfig.cache
