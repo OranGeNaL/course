@@ -17,12 +17,14 @@ namespace Dashboard
         public Form1()
         {
             InitializeComponent();
+            Settings.City = "Абакан";
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             //widgets.Add(new ClockTypeOne(this));
-            widgets.Add(new Weather(this, new Point(0, 0)));
+            widgets.Add(new WeatherWidget(this, new Point(0, 0)));
+            widgets.Add(new ClockTypeOne(this, new Point(0, 100)));
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)

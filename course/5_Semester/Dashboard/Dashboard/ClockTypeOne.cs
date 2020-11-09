@@ -11,9 +11,11 @@ namespace Dashboard
 {
     class ClockTypeOne : IWidget
     {
-        Form form;
+        Control form;
         Thread process;
-        //Point location;
+        Point location;
+
+        int defaultWidth;
 
         Panel panel = new Panel();
         Label time = new Label();
@@ -21,9 +23,10 @@ namespace Dashboard
         Label day = new Label();
 
         public ClockTypeOne() { }
-        public ClockTypeOne(Form _form)
+        public ClockTypeOne(Control _form, Point _location)
         {
             form = _form;
+            location = _location;
             CreateComponents();
 
             process = new Thread(new ThreadStart(Process));
@@ -37,7 +40,7 @@ namespace Dashboard
 
         public void Initialize()
         {
-            panel.Location = new Point(0, 0);
+            panel.Location = location;
 
             date.Text = "11 ноября";
             date.Font = new Font("Rubik", 16, FontStyle.Regular);
@@ -68,6 +71,7 @@ namespace Dashboard
         public void CreateComponents()
         {
             panel.Size = new Size(form.Size.Width - 15, 100);
+            defaultWidth = panel.Size.Width;
             Initialize();
 
             form.Controls.Add(panel);
@@ -75,14 +79,18 @@ namespace Dashboard
 
         public void UpdateAppearance()
         {
-            panel.Size = new Size(form.Size.Width - 15, 100);
+            panel.Location = new Point(0, (int)Math.Round(Settings.Scale(location.Y, defaultWidth, form.Width)));
+            panel.Size = new Size(form.Size.Width - 15, (int)Math.Round(Settings.Scale(100, defaultWidth, panel.Size.Width)));
 
+            date.Font = new Font("Rubik", Settings.Scale(16, defaultWidth, panel.Size.Width), FontStyle.Regular);
             date.Size = new Size(panel.Width / 2, panel.Height / 2);
             date.Location = new Point(0, 0);
 
+            day.Font = new Font("Rubik", Settings.Scale(16, defaultWidth, panel.Size.Width), FontStyle.Regular);
             day.Size = new Size(panel.Width / 2, panel.Height / 2);
             day.Location = new Point(0, date.Size.Height);
 
+            time.Font = new Font("Rubik", Settings.Scale(36, defaultWidth, panel.Size.Width), FontStyle.Regular);
             time.Size = new Size(panel.Width / 2, panel.Height);
             time.Location = new Point(date.Width, 0);
         }
