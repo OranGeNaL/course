@@ -69,5 +69,15 @@ namespace Dungeon
                 Console.Write(i.ToString() + " ");
             }
         }
+
+        public IObject FindByPos(Pos pos)
+        {
+            foreach (var i in objects)
+            {
+                if (i.position == pos)
+                    return i;
+            }
+            return null;
+        }
     }
 }

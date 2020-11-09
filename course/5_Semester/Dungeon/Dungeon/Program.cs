@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 
 namespace Dungeon
 {
@@ -33,7 +34,14 @@ namespace Dungeon
             ScreenManager.UpdateScreen();
             //Console.WriteLine(map.PrintMap());
 
-            while(true)
+            Thread game = new Thread(new ThreadStart(StartGame));
+            game.Start();
+            
+        }
+
+        private static void StartGame()
+        {
+            while (true)
             {
                 ConsoleKey consoleKey = Console.ReadKey().Key;
                 Console.WriteLine(consoleKey);
@@ -55,7 +63,6 @@ namespace Dungeon
                 }
                 ScreenManager.UpdateScreen();
             }
-            
         }
     }
 }

@@ -1,0 +1,10 @@
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\bin\Debug\Dashboard.exe.config
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\bin\Debug\Dashboard.exe
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\bin\Debug\Dashboard.pdb
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\obj\Debug\Dashboard.csprojAssemblyReference.cache
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\obj\Debug\Dashboard.Properties.Resources.resources
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.GenerateResource.cache
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.CoreCompileInputs.cache
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\obj\Debug\Dashboard.exe
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\obj\Debug\Dashboard.pdb
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\obj\Debug\Dashboard.Form1.resources
