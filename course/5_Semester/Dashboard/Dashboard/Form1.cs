@@ -17,7 +17,7 @@ namespace Dashboard
         public Form1()
         {
             InitializeComponent();
-            Settings.City = "Абакан";
+            Settings.City = "Железногорск";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -25,6 +25,7 @@ namespace Dashboard
             //widgets.Add(new ClockTypeOne(this));
             widgets.Add(new WeatherWidget(this, new Point(0, 0)));
             widgets.Add(new ClockTypeOne(this, new Point(0, 100)));
+            widgets.Add(new CurrencyWidget(this, new Point(0, 200)));
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -37,6 +38,16 @@ namespace Dashboard
         {
             foreach (var i in widgets)
                 i.Stop();
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                var cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;    // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
         }
     }
 }

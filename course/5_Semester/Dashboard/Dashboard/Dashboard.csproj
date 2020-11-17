@@ -79,6 +79,8 @@
     <Compile Include="ClockTypeOne.cs" />
     <Compile Include="Clouds.cs" />
     <Compile Include="Coord.cs" />
+    <Compile Include="CurrencyResponse.cs" />
+    <Compile Include="CurrencyWidget.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

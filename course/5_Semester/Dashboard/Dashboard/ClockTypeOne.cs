@@ -102,7 +102,7 @@ namespace Dashboard
                 SafeWriter.WriteTextSafe(DateTime.Now.ToShortTimeString(), time);
                 SafeWriter.WriteTextSafe(DateTime.Now.Day.ToString() + " / " + DateTime.Now.Month.ToString(), date);
                 SafeWriter.WriteTextSafe(DateTime.Now.DayOfWeek.ToString(), day);
-                Thread.Sleep(3000);
+                Thread.Sleep(1000);
             }
         }
 
