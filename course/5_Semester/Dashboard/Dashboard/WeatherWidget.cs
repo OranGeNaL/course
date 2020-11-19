@@ -153,25 +153,25 @@ namespace Dashboard
 
         public void UpdateAppearance()
         {
-            panel.Location = new Point(0, (int)Math.Round(Settings.Scale(location.Y, defaultWidth, form.Width)));
-            panel.Size = new Size(form.Size.Width - 15, (int)Math.Round(Settings.Scale(100, defaultWidth, panel.Size.Width)));
+            panel.Location = new Point(0, (int)Math.Round(Animator.Scale(location.Y, defaultWidth, form.Width)));
+            panel.Size = new Size(form.Size.Width - 15, (int)Math.Round(Animator.Scale(100, defaultWidth, panel.Size.Width)));
 
             /*backImage.Location = panel.Location;
             backImage.Size = panel.Size;*/
 
-            temperature.Font = new Font("Rubik", Settings.Scale(28, defaultWidth, panel.Size.Width), FontStyle.Regular);
+            temperature.Font = new Font("Rubik", Animator.Scale(28, defaultWidth, panel.Size.Width), FontStyle.Regular);
             temperature.Size = new Size(panel.Width / 4, panel.Height / 2);
             temperature.Location = new Point(0, panel.Height / 2);
 
-            date.Font = new Font("Rubik", Settings.Scale(8, defaultWidth, panel.Size.Width), FontStyle.Regular);
+            date.Font = new Font("Rubik", Animator.Scale(8, defaultWidth, panel.Size.Width), FontStyle.Regular);
             date.Size = new Size(panel.Width / 2, panel.Height / 4);
             date.Location = new Point(temperature.Size.Width, panel.Height / 2);
 
-            city.Font = new Font("Rubik", Settings.Scale(8, defaultWidth, panel.Size.Width), FontStyle.Regular);
+            city.Font = new Font("Rubik", Animator.Scale(8, defaultWidth, panel.Size.Width), FontStyle.Regular);
             city.Size = new Size(panel.Width / 2, panel.Height / 4);
             city.Location = new Point(temperature.Size.Width, panel.Height / 2 + date.Size.Height);
 
-            condition.Font = new Font("Rubik", Settings.Scale(10, defaultWidth, panel.Size.Width), FontStyle.Regular);
+            condition.Font = new Font("Rubik", Animator.Scale(10, defaultWidth, panel.Size.Width), FontStyle.Regular);
             condition.Size = new Size(panel.Width / 4, panel.Height / 4);
             condition.Location = new Point(date.Location.X + date.Size.Width, (panel.Height / 4) * 3);
 

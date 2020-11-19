@@ -76,6 +76,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddWidgetButton.cs" />
+    <Compile Include="Animator.cs" />
     <Compile Include="ClockTypeOne.cs" />
     <Compile Include="Clouds.cs" />
     <Compile Include="Coord.cs" />

@@ -13,11 +13,12 @@ namespace Dashboard
     public partial class Form1 : Form
     {
         List<IWidget> widgets = new List<IWidget>();
+        AddWidgetButton addButton;
 
         public Form1()
         {
             InitializeComponent();
-            Settings.City = "Железногорск";
+            Settings.City = "Хабаровск";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -26,16 +27,21 @@ namespace Dashboard
             widgets.Add(new WeatherWidget(this, new Point(0, 0)));
             widgets.Add(new ClockTypeOne(this, new Point(0, 100)));
             widgets.Add(new CurrencyWidget(this, new Point(0, 200)));
+
+            addButton = new AddWidgetButton(this, new Point(this.Width / 2 - 50, widgets.Count * 100));
+
+            Update();
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            foreach (var i in widgets)
-                i.UpdateAppearance();
+            Update();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            addButton.Stop();
+
             foreach (var i in widgets)
                 i.Stop();
         }
@@ -48,6 +54,14 @@ namespace Dashboard
                 cp.ExStyle |= 0x02000000;    // Turn on WS_EX_COMPOSITED
                 return cp;
             }
+        }
+
+        private void Update()
+        {
+            addButton.UpdateAppearance();
+
+            foreach (var i in widgets)
+                i.UpdateAppearance();
         }
     }
 }

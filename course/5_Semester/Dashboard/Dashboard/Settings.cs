@@ -10,9 +10,6 @@ namespace Dashboard
     {
         public static string City { get; set; }
 
-        public static float Scale(int defaultValue, float defaultWidth, float realWidth)
-        {
-            return defaultValue * (realWidth / (defaultWidth));
-        }
+        
     }
 }

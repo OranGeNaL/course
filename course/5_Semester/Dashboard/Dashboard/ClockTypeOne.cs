@@ -79,18 +79,18 @@ namespace Dashboard
 
         public void UpdateAppearance()
         {
-            panel.Location = new Point(0, (int)Math.Round(Settings.Scale(location.Y, defaultWidth, form.Width)));
-            panel.Size = new Size(form.Size.Width - 15, (int)Math.Round(Settings.Scale(100, defaultWidth, panel.Size.Width)));
+            panel.Location = new Point(0, (int)Math.Round(Animator.Scale(location.Y, defaultWidth, form.Width)));
+            panel.Size = new Size(form.Size.Width - 15, (int)Math.Round(Animator.Scale(100, defaultWidth, panel.Size.Width)));
 
-            date.Font = new Font("Rubik", Settings.Scale(16, defaultWidth, panel.Size.Width), FontStyle.Regular);
+            date.Font = new Font("Rubik", Animator.Scale(16, defaultWidth, panel.Size.Width), FontStyle.Regular);
             date.Size = new Size(panel.Width / 2, panel.Height / 2);
             date.Location = new Point(0, 0);
 
-            day.Font = new Font("Rubik", Settings.Scale(16, defaultWidth, panel.Size.Width), FontStyle.Regular);
+            day.Font = new Font("Rubik", Animator.Scale(16, defaultWidth, panel.Size.Width), FontStyle.Regular);
             day.Size = new Size(panel.Width / 2, panel.Height / 2);
             day.Location = new Point(0, date.Size.Height);
 
-            time.Font = new Font("Rubik", Settings.Scale(36, defaultWidth, panel.Size.Width), FontStyle.Regular);
+            time.Font = new Font("Rubik", Animator.Scale(36, defaultWidth, panel.Size.Width), FontStyle.Regular);
             time.Size = new Size(panel.Width / 2, panel.Height);
             time.Location = new Point(date.Width, 0);
         }

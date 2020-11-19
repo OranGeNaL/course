@@ -153,14 +153,14 @@ namespace Dashboard
 
         public void UpdateAppearance()
         {
-            panel.Location = new Point(0, (int)Math.Round(Settings.Scale(location.Y, defaultWidth, form.Width)));
-            panel.Size = new Size(form.Size.Width - 15, (int)Math.Round(Settings.Scale(100, defaultWidth, panel.Size.Width)));
+            panel.Location = new Point(0, (int)Math.Round(Animator.Scale(location.Y, defaultWidth, form.Width)));
+            panel.Size = new Size(form.Size.Width - 15, (int)Math.Round(Animator.Scale(100, defaultWidth, panel.Size.Width)));
 
-            usdLabel.Font = new Font("Rubik", Settings.Scale(24, defaultWidth, panel.Size.Width), FontStyle.Regular);
+            usdLabel.Font = new Font("Rubik", Animator.Scale(24, defaultWidth, panel.Size.Width), FontStyle.Regular);
             usdLabel.Size = new Size((int)Math.Round(panel.Width * 0.4), panel.Height / 2);
             usdLabel.Location = new Point(usdTendency.Location.X - usdLabel.Width, panel.Height / 2);
 
-            eurLabel.Font = new Font("Rubik", Settings.Scale(24, defaultWidth, panel.Size.Width), FontStyle.Regular);
+            eurLabel.Font = new Font("Rubik", Animator.Scale(24, defaultWidth, panel.Size.Width), FontStyle.Regular);
             eurLabel.Size = new Size((int)Math.Round(panel.Width * 0.4), panel.Height / 2);
             eurLabel.Location = new Point(panel.Width / 2, panel.Height / 2);
 
