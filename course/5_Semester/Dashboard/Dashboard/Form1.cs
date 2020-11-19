@@ -18,17 +18,17 @@ namespace Dashboard
         public Form1()
         {
             InitializeComponent();
-            Settings.City = "Хабаровск";
+            Settings.City = "Абакан";
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             //widgets.Add(new ClockTypeOne(this));
-            widgets.Add(new WeatherWidget(this, new Point(0, 0)));
+            /*widgets.Add(new WeatherWidget(this, new Point(0, 0)));
             widgets.Add(new ClockTypeOne(this, new Point(0, 100)));
-            widgets.Add(new CurrencyWidget(this, new Point(0, 200)));
+            widgets.Add(new CurrencyWidget(this, new Point(0, 200)));*/
 
-            addButton = new AddWidgetButton(this, new Point(this.Width / 2 - 50, widgets.Count * 100));
+            addButton = new AddWidgetButton(this, new Point(this.Width / 2 - 50, widgets.Count * 100), widgets);
 
             Update();
         }
@@ -56,7 +56,7 @@ namespace Dashboard
             }
         }
 
-        private void Update()
+        private new void Update()
         {
             addButton.UpdateAppearance();
 

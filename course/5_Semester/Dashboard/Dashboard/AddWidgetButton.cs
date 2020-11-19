@@ -11,6 +11,8 @@ namespace Dashboard
 {
     class AddWidgetButton : IWidget
     {
+        List<IWidget> widgets = new List<IWidget>();
+
         Control form;
         Thread process;
         Point location;
@@ -30,11 +32,12 @@ namespace Dashboard
         Label currencyLabel = new Label();
 
         public AddWidgetButton() { }
-        public AddWidgetButton(Control _form, Point _location)
+        public AddWidgetButton(Control _form, Point _location, List<IWidget> _widgets)
         {
             form = _form;
             location = _location;
             CreateComponents();
+            widgets = _widgets;
 
             process = new Thread(new ThreadStart(Process));
             process.Start();
@@ -47,7 +50,7 @@ namespace Dashboard
 
         public void Initialize()
         {
-            panel.Location = location;
+            panel.Location = new Point(location.X, location.Y + 10);
 
             panel.BackgroundImage = Image.FromFile("button-pictures/add-button.png");
             panel.BackgroundImageLayout = ImageLayout.Zoom;
@@ -106,10 +109,20 @@ namespace Dashboard
             panel.MouseDown += Panel_MouseDown;
             panel.MouseUp += Panel_MouseUp;
 
-            weatherPanel.MouseEnter += WeatherPanel_MouseEnter;
-            /*weatherPanel.MouseLeave += WeatherPanel_MouseLeave;
-            weatherPanel.MouseDown += WeatherPanel_MouseDown;
-            weatherPanel.MouseUp += WeatherPanel_MouseUp;*/
+            weatherLabel.MouseEnter += WeatherPanel_MouseEnter;
+            weatherLabel.MouseLeave += WeatherPanel_MouseLeave;
+            weatherLabel.MouseDown += WeatherPanel_MouseDown;
+            weatherLabel.MouseUp += WeatherPanel_MouseUp;
+
+            currencyLabel.MouseEnter += CurrencyPanel_MouseEnter;
+            currencyLabel.MouseLeave += CurrencyPanel_MouseLeave;
+            currencyLabel.MouseDown += CurrencyPanel_MouseDown;
+            currencyLabel.MouseUp += CurrencyPanel_MouseUp;
+
+            timeLabel.MouseEnter += TimePanel_MouseEnter;
+            timeLabel.MouseLeave += TimePanel_MouseLeave;
+            timeLabel.MouseDown += TimePanel_MouseDown;
+            timeLabel.MouseUp += TimePanel_MouseUp;
 
             form.Controls.Add(timePanel);
             form.Controls.Add(currencyPanel);
@@ -128,7 +141,7 @@ namespace Dashboard
         public void UpdateAppearance()
         {
             panel.Size = new Size((int)Math.Round(Animator.Scale(100, defaultWidth, form.Width)), (int)Math.Round(Animator.Scale(100, defaultWidth, form.Width)));
-            panel.Location = new Point(form.Width / 2 - panel.Width / 2, (int)Math.Round(Animator.Scale(location.Y, defaultWidth, form.Width)));
+            panel.Location = new Point(form.Width / 2 - panel.Width / 2, (int)Math.Round(Animator.Scale(widgets.Count * 100, defaultWidth, form.Width)));
 
             weatherPanel.Size = new Size((int)Math.Round(Animator.Scale(75, defaultWidth, form.Width)), (int)Math.Round(Animator.Scale(30, defaultWidth, form.Width)));
             if (clicked)
@@ -214,31 +227,73 @@ namespace Dashboard
         ///
         /// Обработка кнопки погоды
         /// 
-
-        /*private void WeahterPanel_MouseEnter(object sender, EventArgs e)
+        private void WeatherPanel_MouseEnter(object sender, EventArgs e)
         {
             weatherPanel.BackgroundImage = Image.FromFile("button-pictures/add-weather-button-hovered.png");
         }
 
-        private void WeahterPanel_MouseLeave(object sender, EventArgs e)
+        private void WeatherPanel_MouseLeave(object sender, EventArgs e)
         {
             weatherPanel.BackgroundImage = Image.FromFile("button-pictures/add-weather-button.png");
         }
 
-        private void WeahterPanel_MouseDown(object sender, EventArgs e)
+        private void WeatherPanel_MouseDown(object sender, EventArgs e)
         {
             weatherPanel.BackgroundImage = Image.FromFile("button-pictures/add-weather-button-pressed.png");
-            MessageBox.Show("");
+            widgets.Add(new WeatherWidget(form, new Point(0, widgets.Count * 100)));
+            clicked = false;
+            UpdateAppearance();
         }
 
         private void WeatherPanel_MouseUp(object sender, EventArgs e)
         {
             weatherPanel.BackgroundImage = Image.FromFile("button-pictures/add-weather-button-hovered.png");
-        }*/
+        }
 
-        private void WeatherPanel_MouseEnter(object sender, EventArgs e)
+        ///
+        /// Обработка кнопки валют
+        ///
+        private void CurrencyPanel_MouseEnter(object sender, EventArgs e)
         {
-            weatherPanel.BackgroundImage = Image.FromFile("button-pictures/add-weather-button-hovered.png");
+            currencyPanel.BackgroundImage = Image.FromFile("button-pictures/add-currency-button-hovered.png");
+        }
+
+        private void CurrencyPanel_MouseLeave(object sender, EventArgs e)
+        {
+            currencyPanel.BackgroundImage = Image.FromFile("button-pictures/add-currency-button.png");
+        }
+
+        private void CurrencyPanel_MouseDown(object sender, EventArgs e)
+        {
+            currencyPanel.BackgroundImage = Image.FromFile("button-pictures/add-currency-button-pressed.png");
+        }
+
+        private void CurrencyPanel_MouseUp(object sender, EventArgs e)
+        {
+            currencyPanel.BackgroundImage = Image.FromFile("button-pictures/add-currency-button-hovered.png");
+        }
+
+        ///
+        /// Обработка кнопки времени
+        ///
+        private void TimePanel_MouseEnter(object sender, EventArgs e)
+        {
+            timePanel.BackgroundImage = Image.FromFile("button-pictures/add-time-button-hovered.png");
+        }
+
+        private void TimePanel_MouseLeave(object sender, EventArgs e)
+        {
+            timePanel.BackgroundImage = Image.FromFile("button-pictures/add-time-button.png");
+        }
+
+        private void TimePanel_MouseDown(object sender, EventArgs e)
+        {
+            timePanel.BackgroundImage = Image.FromFile("button-pictures/add-time-button-pressed.png");
+        }
+
+        private void TimePanel_MouseUp(object sender, EventArgs e)
+        {
+            timePanel.BackgroundImage = Image.FromFile("button-pictures/add-time-button-hovered.png");
         }
     }
 }
