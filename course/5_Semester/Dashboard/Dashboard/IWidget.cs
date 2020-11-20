@@ -15,5 +15,7 @@ namespace Dashboard
 
         public void Process();
         public void Stop();
+
+        public Guid ID { get; set; }
     }
 }

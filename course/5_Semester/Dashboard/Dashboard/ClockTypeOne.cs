@@ -15,6 +15,8 @@ namespace Dashboard
         Thread process;
         Point location;
 
+        public Guid ID { get; set; }
+
         int defaultWidth;
 
         Panel panel = new Panel();
@@ -22,12 +24,15 @@ namespace Dashboard
         Label date = new Label();
         Label day = new Label();
 
+        Panel removeButton = new Panel();
+
         public ClockTypeOne() { }
         public ClockTypeOne(Control _form, Point _location)
         {
             form = _form;
             location = _location;
             CreateComponents();
+            ID = Guid.NewGuid();
 
             process = new Thread(new ThreadStart(Process));
             process.Start();
@@ -35,7 +40,7 @@ namespace Dashboard
 
         ~ClockTypeOne()
         {
-            Stop();
+            //Stop();
         }
 
         public void Initialize()
@@ -63,6 +68,18 @@ namespace Dashboard
             time.Location = new Point(date.Width, 0);
             time.TextAlign = ContentAlignment.MiddleCenter;
 
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button.png");
+            removeButton.BackgroundImageLayout = ImageLayout.Zoom;
+            removeButton.Size = new Size(panel.Width / 15, panel.Width / 15);
+            removeButton.Location = new Point(panel.Width - removeButton.Width, 0);
+            removeButton.BackColor = Color.Transparent;
+
+            removeButton.MouseEnter += RemovePanel_MouseEnter;
+            removeButton.MouseLeave += RemovePanel_MouseLeave;
+            removeButton.MouseDown += RemovePanel_MouseDown;
+            removeButton.MouseUp += RemovePanel_MouseUp;
+
+            panel.Controls.Add(removeButton);
             panel.Controls.Add(date);
             panel.Controls.Add(day);
             panel.Controls.Add(time);
@@ -71,7 +88,7 @@ namespace Dashboard
         public void CreateComponents()
         {
             panel.Size = new Size(form.Size.Width - 15, 100);
-            defaultWidth = panel.Size.Width;
+            defaultWidth = Settings.MinimimWidth;
             Initialize();
 
             form.Controls.Add(panel);
@@ -79,8 +96,13 @@ namespace Dashboard
 
         public void UpdateAppearance()
         {
+            location.Y = Settings.widgets.IndexOf(this) * 100;
+
             panel.Location = new Point(0, (int)Math.Round(Animator.Scale(location.Y, defaultWidth, form.Width)));
             panel.Size = new Size(form.Size.Width - 15, (int)Math.Round(Animator.Scale(100, defaultWidth, panel.Size.Width)));
+
+            removeButton.Size = new Size(panel.Width / 15, panel.Width / 15);
+            removeButton.Location = new Point(panel.Width - removeButton.Width, 0);
 
             date.Font = new Font("Rubik", Animator.Scale(16, defaultWidth, panel.Size.Width), FontStyle.Regular);
             date.Size = new Size(panel.Width / 2, panel.Height / 2);
@@ -109,6 +131,30 @@ namespace Dashboard
         public void Stop()
         {
             process.Abort();
+        }
+
+        private void RemovePanel_MouseEnter(object sender, EventArgs e)
+        {
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button-hovered.png");
+        }
+
+        private void RemovePanel_MouseLeave(object sender, EventArgs e)
+        {
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button.png");
+        }
+
+        private void RemovePanel_MouseDown(object sender, EventArgs e)
+        {
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button-pressed.png");
+            Stop();
+            form.Controls.Remove(panel);
+            Settings.widgets.Remove(this);
+            Settings.UpdateWidgets();
+        }
+
+        private void RemovePanel_MouseUp(object sender, EventArgs e)
+        {
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button-hovered.png");
         }
     }
 }

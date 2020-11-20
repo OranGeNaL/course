@@ -17,6 +17,8 @@ namespace Dashboard
         Thread process;
         Point location;
 
+        public Guid ID { get; set; }
+
         int defaultWidth;
 
         Panel panel = new Panel();
@@ -24,6 +26,8 @@ namespace Dashboard
         Label date = new Label();
         Label city = new Label();
         Label condition = new Label();
+
+        Panel removeButton = new Panel();
         //PictureBox image = new PictureBox();
         //PictureBox backImage = new PictureBox();
 
@@ -36,6 +40,7 @@ namespace Dashboard
             form = _form;
             location = _location;
             CreateComponents();
+            ID = Guid.NewGuid();
 
             process = new Thread(new ThreadStart(Process));
             process.Start();
@@ -43,7 +48,7 @@ namespace Dashboard
 
         ~WeatherWidget()
         {
-            Stop();
+            //Stop();
         }
 
         public void Initialize()
@@ -57,6 +62,19 @@ namespace Dashboard
 
             panel.BackgroundImage = Image.FromFile("sunny.png");
             panel.BackgroundImageLayout = ImageLayout.Zoom;
+
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button.png");
+            removeButton.BackgroundImageLayout = ImageLayout.Zoom;
+            removeButton.Size = new Size(panel.Width / 15, panel.Width / 15);
+            removeButton.Location = new Point(panel.Width - removeButton.Width, 0);
+            removeButton.BackColor = Color.Transparent;
+
+            removeButton.MouseEnter += RemovePanel_MouseEnter;
+            removeButton.MouseLeave += RemovePanel_MouseLeave;
+            removeButton.MouseDown += RemovePanel_MouseDown;
+            removeButton.MouseUp += RemovePanel_MouseUp;
+            //MessageBox.Show(string.Format("SizeX: {0}\nSizeY: {1}\nLocX: {2}", removeButton.Width, removeButton.Height, removeButton.Location.X));
+
 
             temperature.Text = "27°";
             temperature.Font = new Font("Rubik", 28, FontStyle.Regular);
@@ -100,6 +118,7 @@ namespace Dashboard
             image.SizeMode = PictureBoxSizeMode.Zoom;
             image.ImageLocation = "01d.png";*/
 
+            panel.Controls.Add(removeButton);
             panel.Controls.Add(temperature);
             panel.Controls.Add(date);
             panel.Controls.Add(city);
@@ -111,7 +130,7 @@ namespace Dashboard
         public void CreateComponents()
         {
             panel.Size = new Size(form.Size.Width, 100);
-            defaultWidth = panel.Size.Width;
+            defaultWidth = Settings.MinimimWidth;
 
             Initialize();
 
@@ -124,6 +143,7 @@ namespace Dashboard
             {
                 try
                 {
+                    weatherRequest = "https://api.openweathermap.org/data/2.5/weather?q=" + Settings.City + "&appid=da5bd0105833e7d94fbfcb03212a19b6&units=metric";
                     WebClient webClient = new WebClient();
                     weatherResponse = webClient.DownloadString(weatherRequest).Replace("base", "based");//замена из-за резервации base языком
                     WeatherResponse responseObject = JsonSerializer.Deserialize<WeatherResponse>(weatherResponse);
@@ -138,7 +158,7 @@ namespace Dashboard
                     //MessageBox.Show(weatherResponse);
                     //MessageBox.Show(responseObject.weather[0].description.ToString());
                 }
-                catch (Exception ex)
+                catch (WebException ex)
                 {
                     MessageBox.Show(ex.Message + ex.Data);
                 }
@@ -153,13 +173,18 @@ namespace Dashboard
 
         public void UpdateAppearance()
         {
+            location.Y = Settings.widgets.IndexOf(this) * 100;
+
             panel.Location = new Point(0, (int)Math.Round(Animator.Scale(location.Y, defaultWidth, form.Width)));
             panel.Size = new Size(form.Size.Width - 15, (int)Math.Round(Animator.Scale(100, defaultWidth, panel.Size.Width)));
+
+            removeButton.Size = new Size(panel.Width / 15, panel.Width / 15);
+            removeButton.Location = new Point(panel.Width - removeButton.Width, 0);
 
             /*backImage.Location = panel.Location;
             backImage.Size = panel.Size;*/
 
-            temperature.Font = new Font("Rubik", Animator.Scale(28, defaultWidth, panel.Size.Width), FontStyle.Regular);
+            temperature.Font = new Font("Rubik", Animator.Scale(28, defaultWidth, panel.Width), FontStyle.Regular);
             temperature.Size = new Size(panel.Width / 4, panel.Height / 2);
             temperature.Location = new Point(0, panel.Height / 2);
 
@@ -179,6 +204,28 @@ namespace Dashboard
             image.Location = new Point(date.Location.X + date.Size.Width, 0);*/
         }
 
+        private void RemovePanel_MouseEnter(object sender, EventArgs e)
+        {
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button-hovered.png");
+        }
 
+        private void RemovePanel_MouseLeave(object sender, EventArgs e)
+        {
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button.png");
+        }
+
+        private void RemovePanel_MouseDown(object sender, EventArgs e)
+        {
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button-pressed.png");
+            Stop();
+            form.Controls.Remove(panel);
+            Settings.widgets.Remove(this);
+            Settings.UpdateWidgets();
+        }
+
+        private void RemovePanel_MouseUp(object sender, EventArgs e)
+        {
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button-hovered.png");
+        }
     }
 }

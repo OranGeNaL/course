@@ -19,6 +19,7 @@ namespace Dashboard
         {
             InitializeComponent();
             Settings.City = "Абакан";
+            Settings.widgets = widgets;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -28,7 +29,8 @@ namespace Dashboard
             widgets.Add(new ClockTypeOne(this, new Point(0, 100)));
             widgets.Add(new CurrencyWidget(this, new Point(0, 200)));*/
 
-            addButton = new AddWidgetButton(this, new Point(this.Width / 2 - 50, widgets.Count * 100), widgets);
+            addButton = new AddWidgetButton(this, new Point(this.Width / 2 - 50, widgets.Count * 100));
+            Settings.AddButton = addButton;
 
             Update();
         }

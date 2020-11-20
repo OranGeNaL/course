@@ -11,11 +11,11 @@ namespace Dashboard
 {
     class AddWidgetButton : IWidget
     {
-        List<IWidget> widgets = new List<IWidget>();
-
         Control form;
         Thread process;
         Point location;
+
+        public Guid ID { get; set; }
 
         int defaultWidth;
 
@@ -32,12 +32,13 @@ namespace Dashboard
         Label currencyLabel = new Label();
 
         public AddWidgetButton() { }
-        public AddWidgetButton(Control _form, Point _location, List<IWidget> _widgets)
+        public AddWidgetButton(Control _form, Point _location)
         {
             form = _form;
             location = _location;
             CreateComponents();
-            widgets = _widgets;
+
+            ID = Guid.NewGuid();
 
             process = new Thread(new ThreadStart(Process));
             process.Start();
@@ -141,7 +142,7 @@ namespace Dashboard
         public void UpdateAppearance()
         {
             panel.Size = new Size((int)Math.Round(Animator.Scale(100, defaultWidth, form.Width)), (int)Math.Round(Animator.Scale(100, defaultWidth, form.Width)));
-            panel.Location = new Point(form.Width / 2 - panel.Width / 2, (int)Math.Round(Animator.Scale(widgets.Count * 100, defaultWidth, form.Width)));
+            panel.Location = new Point(form.Width / 2 - panel.Width / 2, (int)Math.Round(Animator.Scale(Settings.widgets.Count * 100, defaultWidth, form.Width)));
 
             weatherPanel.Size = new Size((int)Math.Round(Animator.Scale(75, defaultWidth, form.Width)), (int)Math.Round(Animator.Scale(30, defaultWidth, form.Width)));
             if (clicked)
@@ -240,9 +241,10 @@ namespace Dashboard
         private void WeatherPanel_MouseDown(object sender, EventArgs e)
         {
             weatherPanel.BackgroundImage = Image.FromFile("button-pictures/add-weather-button-pressed.png");
-            widgets.Add(new WeatherWidget(form, new Point(0, widgets.Count * 100)));
+            Settings.widgets.Add(new WeatherWidget(form, new Point(0, Settings.widgets.Count * 100)));
             clicked = false;
             UpdateAppearance();
+            Settings.UpdateWidgets();
         }
 
         private void WeatherPanel_MouseUp(object sender, EventArgs e)
@@ -266,6 +268,10 @@ namespace Dashboard
         private void CurrencyPanel_MouseDown(object sender, EventArgs e)
         {
             currencyPanel.BackgroundImage = Image.FromFile("button-pictures/add-currency-button-pressed.png");
+            Settings.widgets.Add(new CurrencyWidget(form, new Point(0, Settings.widgets.Count * 100)));
+            clicked = false;
+            UpdateAppearance();
+            Settings.UpdateWidgets();
         }
 
         private void CurrencyPanel_MouseUp(object sender, EventArgs e)
@@ -289,6 +295,10 @@ namespace Dashboard
         private void TimePanel_MouseDown(object sender, EventArgs e)
         {
             timePanel.BackgroundImage = Image.FromFile("button-pictures/add-time-button-pressed.png");
+            Settings.widgets.Add(new ClockTypeOne(form, new Point(0, Settings.widgets.Count * 100)));
+            clicked = false;
+            UpdateAppearance();
+            Settings.UpdateWidgets();
         }
 
         private void TimePanel_MouseUp(object sender, EventArgs e)

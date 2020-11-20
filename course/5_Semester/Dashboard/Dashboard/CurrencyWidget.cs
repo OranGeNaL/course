@@ -18,6 +18,8 @@ namespace Dashboard
         Thread process;
         Point location;
 
+        public Guid ID { get; set; }
+
         int defaultWidth;
 
         Panel panel = new Panel();
@@ -25,6 +27,8 @@ namespace Dashboard
         Label eurLabel = new Label();
         PictureBox usdTendency = new PictureBox();
         PictureBox eurTendency = new PictureBox();
+
+        Panel removeButton = new Panel();
 
         string currencyRequest = "https://openexchangerates.org/api/latest.json?app_id=837b5e828db04d0dbb2a01367acfad5c&symbols=RUB,EUR";
         string currentCurrencyResponse;
@@ -37,6 +41,7 @@ namespace Dashboard
             form = _form;
             location = _location;
             CreateComponents();
+            ID = Guid.NewGuid();
 
             process = new Thread(new ThreadStart(Process));
             process.Start();
@@ -44,7 +49,7 @@ namespace Dashboard
 
         ~CurrencyWidget()
         {
-            Stop();
+            //Stop();
         }
 
         public void Initialize()
@@ -83,8 +88,18 @@ namespace Dashboard
             eurTendency.BackColor = Color.Transparent;
             eurTendency.ImageLocation = "currency-pictures/up-tendency.png";
 
-            //MessageBox.Show(usdTendency.Width.ToString());
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button.png");
+            removeButton.BackgroundImageLayout = ImageLayout.Zoom;
+            removeButton.Size = new Size(panel.Width / 15, panel.Width / 15);
+            removeButton.Location = new Point(panel.Width - removeButton.Width, 0);
+            removeButton.BackColor = Color.Transparent;
 
+            removeButton.MouseEnter += RemovePanel_MouseEnter;
+            removeButton.MouseLeave += RemovePanel_MouseLeave;
+            removeButton.MouseDown += RemovePanel_MouseDown;
+            removeButton.MouseUp += RemovePanel_MouseUp;
+
+            panel.Controls.Add(removeButton);
             panel.Controls.Add(usdTendency);
             panel.Controls.Add(usdLabel);
             panel.Controls.Add(eurTendency);
@@ -95,7 +110,7 @@ namespace Dashboard
         public void CreateComponents()
         {
             panel.Size = new Size(form.Size.Width, 100);
-            defaultWidth = panel.Size.Width;
+            defaultWidth = Settings.MinimimWidth;
 
             Initialize();
 
@@ -138,7 +153,7 @@ namespace Dashboard
                     SafeWriter.WriteTextSafe("USD: " + Math.Round(currencyResponse.rates["RUB"], 2).ToString(), usdLabel);
                     SafeWriter.WriteTextSafe("EUR: " + Math.Round(currencyResponse.rates["RUB"] / currencyResponse.rates["EUR"], 2).ToString(), eurLabel);
                 }
-                catch (Exception ex)
+                catch (WebException ex)
                 {
                     MessageBox.Show(ex.Message + ex.Data);
                 }
@@ -153,8 +168,13 @@ namespace Dashboard
 
         public void UpdateAppearance()
         {
+            location.Y = Settings.widgets.IndexOf(this) * 100;
+
             panel.Location = new Point(0, (int)Math.Round(Animator.Scale(location.Y, defaultWidth, form.Width)));
             panel.Size = new Size(form.Size.Width - 15, (int)Math.Round(Animator.Scale(100, defaultWidth, panel.Size.Width)));
+
+            removeButton.Size = new Size(panel.Width / 15, panel.Width / 15);
+            removeButton.Location = new Point(panel.Width - removeButton.Width, 0);
 
             usdLabel.Font = new Font("Rubik", Animator.Scale(24, defaultWidth, panel.Size.Width), FontStyle.Regular);
             usdLabel.Size = new Size((int)Math.Round(panel.Width * 0.4), panel.Height / 2);
@@ -171,6 +191,28 @@ namespace Dashboard
             eurTendency.Size = new Size((int)Math.Round(panel.Width * 0.06), panel.Height / 2);
         }
 
+        private void RemovePanel_MouseEnter(object sender, EventArgs e)
+        {
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button-hovered.png");
+        }
 
+        private void RemovePanel_MouseLeave(object sender, EventArgs e)
+        {
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button.png");
+        }
+
+        private void RemovePanel_MouseDown(object sender, EventArgs e)
+        {
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button-pressed.png");
+            Stop();
+            form.Controls.Remove(panel);
+            Settings.widgets.Remove(this);
+            Settings.UpdateWidgets();
+        }
+
+        private void RemovePanel_MouseUp(object sender, EventArgs e)
+        {
+            removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button-hovered.png");
+        }
     }
 }
