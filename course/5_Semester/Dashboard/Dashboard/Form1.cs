@@ -18,8 +18,10 @@ namespace Dashboard
         public Form1()
         {
             InitializeComponent();
-            Settings.City = "Абакан";
+            //Settings.City = "Уссурийск";
             Settings.widgets = widgets;
+            Settings.form = this;
+            Settings.LoadFromFile();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -46,6 +48,8 @@ namespace Dashboard
 
             foreach (var i in widgets)
                 i.Stop();
+
+            Settings.WritoToFile();
         }
 
         protected override CreateParams CreateParams

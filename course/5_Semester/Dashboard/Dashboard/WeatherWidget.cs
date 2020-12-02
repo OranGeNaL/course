@@ -17,6 +17,7 @@ namespace Dashboard
         Thread process;
         Point location;
 
+        public string Name { get; set; } = "weather";
         public Guid ID { get; set; }
 
         int defaultWidth;
@@ -154,6 +155,7 @@ namespace Dashboard
                     SafeWriter.WriteTextSafe(Math.Round(responseObject.main.temp).ToString() + "°", temperature);
                     SafeWriter.WriteTextSafe(DateTime.Now.DayOfWeek.ToString() + ", " + DateTime.Now.Date.Day.ToString() + " " + DateTime.Now.ToString("MMMM"), date);
                     SafeWriter.WriteTextSafe(responseObject.weather[0].description, condition);
+                    SafeWriter.WriteTextSafe(Settings.City, city);
 
                     //MessageBox.Show(weatherResponse);
                     //MessageBox.Show(responseObject.weather[0].description.ToString());
@@ -162,7 +164,7 @@ namespace Dashboard
                 {
                     MessageBox.Show(ex.Message + ex.Data);
                 }
-                Thread.Sleep(20000);
+                Thread.Sleep(5000);
             }
         }
 

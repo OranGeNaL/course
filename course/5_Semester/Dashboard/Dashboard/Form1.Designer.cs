@@ -132,6 +132,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 608);
             this.Controls.Add(this.panel1);
+            this.DoubleBuffered = true;
             this.MinimumSize = new System.Drawing.Size(500, 39);
             this.Name = "Form1";
             this.Text = "Dashboard";

@@ -18,6 +18,7 @@ namespace Dashboard
         Thread process;
         Point location;
 
+        public string Name { get; set; } = "currency";
         public Guid ID { get; set; }
 
         int defaultWidth;
@@ -126,10 +127,14 @@ namespace Dashboard
                     WebClient webClient = new WebClient();
 
                     currentCurrencyResponse = webClient.DownloadString(currencyRequest).Replace("base", "based");
+                    //MessageBox.Show(currentCurrencyResponse);
                     CurrencyResponse currencyResponse = JsonSerializer.Deserialize<CurrencyResponse>(currentCurrencyResponse);
 
-                    yesterdayCurrencyRequest = "https://openexchangerates.org/api/historical/" + DateTime.Now.AddDays(-1).Year + "-" + DateTime.Now.AddDays(-1).Month + "-" + DateTime.Now.AddDays(-1).Day + ".json?app_id=837b5e828db04d0dbb2a01367acfad5c&symbols=RUB,EUR";
+                    yesterdayCurrencyRequest = "https://openexchangerates.org/api/historical/" + DateTime.Now.AddDays(-1).Year + "-" + DateTime.Now.AddDays(-1).ToString("MM") + "-" + DateTime.Now.AddDays(-1).ToString("dd") + ".json?app_id=837b5e828db04d0dbb2a01367acfad5c&symbols=RUB,EUR";
+                    //MessageBox.Show(yesterdayCurrencyRequest);
+                    
                     yesterdayCurrencyResponse = webClient.DownloadString(yesterdayCurrencyRequest).Replace("base", "based");
+                    //MessageBox.Show(yesterdayCurrencyResponse);
                     CurrencyResponse currencyResponseYesterday = JsonSerializer.Deserialize<CurrencyResponse>(yesterdayCurrencyResponse);
 
                     if (currencyResponse.rates["RUB"] > currencyResponseYesterday.rates["RUB"])

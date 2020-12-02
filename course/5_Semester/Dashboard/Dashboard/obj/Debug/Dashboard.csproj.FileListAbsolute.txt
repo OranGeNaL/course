@@ -27,3 +27,4 @@ C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\bin
 C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\bin\Debug\System.ValueTuple.xml
 C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.CopyComplete
+C:\Users\pshen\Documents\GitHub\course\course\5_Semester\Dashboard\Dashboard\obj\Debug\Dashboard.SettingsForm.resources

@@ -15,6 +15,8 @@ namespace Dashboard
         Thread process;
         Point location;
 
+        public string Name { get; set; } = "button";
+
         public Guid ID { get; set; }
 
         int defaultWidth;
@@ -26,6 +28,8 @@ namespace Dashboard
         Panel timePanel = new Panel();
         Panel weatherPanel = new Panel();
         Panel currencyPanel = new Panel();
+
+        Panel settingsPanel = new Panel();
 
         Label timeLabel = new Label();
         Label weatherLabel = new Label();
@@ -55,6 +59,12 @@ namespace Dashboard
 
             panel.BackgroundImage = Image.FromFile("button-pictures/add-button.png");
             panel.BackgroundImageLayout = ImageLayout.Zoom;
+
+            settingsPanel.Size = new Size(50, 50);
+            settingsPanel.Location = new Point(0, form.Height);
+            settingsPanel.BackgroundImage = Image.FromFile("button-pictures/setting-button.png");
+            settingsPanel.BackColor = Color.Transparent;
+            settingsPanel.BackgroundImageLayout = ImageLayout.Zoom;
 
             weatherPanel.Size = new Size(75, 30);
             weatherPanel.Location = new Point(panel.Location.X, panel.Location.Y + panel.Height + 10);
@@ -104,6 +114,10 @@ namespace Dashboard
             timeLabel.BackColor = Color.Transparent;
             timePanel.Controls.Add(timeLabel);
 
+            settingsPanel.MouseEnter += SettingsPanel_MouseEnter;
+            settingsPanel.MouseLeave += SettingsPanel_MouseLeave;
+            settingsPanel.MouseDown += SettingsPanel_MouseDown;
+            settingsPanel.MouseUp += SettingsPanel_MouseUp;
 
             panel.MouseEnter += Panel_MouseEnter;
             panel.MouseLeave += Panel_MouseLeave;
@@ -125,6 +139,7 @@ namespace Dashboard
             timeLabel.MouseDown += TimePanel_MouseDown;
             timeLabel.MouseUp += TimePanel_MouseUp;
 
+            form.Controls.Add(settingsPanel);
             form.Controls.Add(timePanel);
             form.Controls.Add(currencyPanel);
             form.Controls.Add(weatherPanel);
@@ -143,6 +158,9 @@ namespace Dashboard
         {
             panel.Size = new Size((int)Math.Round(Animator.Scale(100, defaultWidth, form.Width)), (int)Math.Round(Animator.Scale(100, defaultWidth, form.Width)));
             panel.Location = new Point(form.Width / 2 - panel.Width / 2, (int)Math.Round(Animator.Scale(Settings.widgets.Count * 100, defaultWidth, form.Width)));
+
+            settingsPanel.Size = new Size((int)Math.Round(Animator.Scale(50, defaultWidth, form.Width)), (int)Math.Round(Animator.Scale(50, defaultWidth, form.Width)));
+            settingsPanel.Location = new Point(0, (int)(form.Height - settingsPanel.Height * 1.8));
 
             weatherPanel.Size = new Size((int)Math.Round(Animator.Scale(75, defaultWidth, form.Width)), (int)Math.Round(Animator.Scale(30, defaultWidth, form.Width)));
             if (clicked)
@@ -174,13 +192,13 @@ namespace Dashboard
 
         public void Process()
         {
-            while (true)
+            /*while (true)
             {
-                /*SafeWriter.WriteTextSafe(DateTime.Now.ToShortTimeString(), time);
+                SafeWriter.WriteTextSafe(DateTime.Now.ToShortTimeString(), time);
                 SafeWriter.WriteTextSafe(DateTime.Now.Day.ToString() + " / " + DateTime.Now.Month.ToString(), date);
                 SafeWriter.WriteTextSafe(DateTime.Now.DayOfWeek.ToString(), day);
-                Thread.Sleep(1000);*/
-            }
+                Thread.Sleep(1000);
+            }*/
         }
 
         public void Stop()
@@ -304,6 +322,31 @@ namespace Dashboard
         private void TimePanel_MouseUp(object sender, EventArgs e)
         {
             timePanel.BackgroundImage = Image.FromFile("button-pictures/add-time-button-hovered.png");
+        }
+
+        ///
+        ///Обработка кнопки настроек
+        ///
+        private void SettingsPanel_MouseEnter(object sender, EventArgs e)
+        {
+            settingsPanel.BackgroundImage = Image.FromFile("button-pictures/setting-button-hovered.png");
+        }
+
+        private void SettingsPanel_MouseLeave(object sender, EventArgs e)
+        {
+            settingsPanel.BackgroundImage = Image.FromFile("button-pictures/setting-button.png");
+        }
+
+        private void SettingsPanel_MouseDown(object sender, EventArgs e)
+        {
+            settingsPanel.BackgroundImage = Image.FromFile("button-pictures/setting-button-pressed.png");
+            SettingsForm settingsForm = new SettingsForm();
+            settingsForm.Show();
+        }
+
+        private void SettingsPanel_MouseUp(object sender, EventArgs e)
+        {
+            settingsPanel.BackgroundImage = Image.FromFile("button-pictures/setting-button-hovered.png");
         }
     }
 }

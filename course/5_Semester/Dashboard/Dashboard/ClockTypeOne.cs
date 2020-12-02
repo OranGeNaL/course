@@ -15,6 +15,7 @@ namespace Dashboard
         Thread process;
         Point location;
 
+        public string Name { get; set; } = "clock";
         public Guid ID { get; set; }
 
         int defaultWidth;
