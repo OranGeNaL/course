@@ -33,6 +33,7 @@ namespace Dashboard
 
         public static void LoadFromFile()
         {
+            try {
             string jRes;
             using (StreamReader streamReader = new StreamReader(SettingsFile, Encoding.UTF8))
             {
@@ -50,6 +51,11 @@ namespace Dashboard
                     widgets.Add(new CurrencyWidget(form, new Point(0, Settings.widgets.Count * 100)));
                 else if (i == "clock")
                     widgets.Add(new ClockTypeOne(form, new Point(0, Settings.widgets.Count * 100)));
+                }
+            }
+            catch
+            {
+
             }
         }
 

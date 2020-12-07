@@ -61,7 +61,7 @@ namespace Dashboard
             backImage.SizeMode = PictureBoxSizeMode.Zoom;
             backImage.ImageLocation = "sunny.png";*/
 
-            panel.BackgroundImage = Image.FromFile("sunny.png");
+            //panel.BackgroundImage = Image.FromFile("sunny.png");
             panel.BackgroundImageLayout = ImageLayout.Zoom;
 
             removeButton.BackgroundImage = Image.FromFile("button-pictures/remove-button.png");
