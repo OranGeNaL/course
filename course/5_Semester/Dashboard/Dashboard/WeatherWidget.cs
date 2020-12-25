@@ -150,7 +150,8 @@ namespace Dashboard
                     WeatherResponse responseObject = JsonSerializer.Deserialize<WeatherResponse>(weatherResponse);
 
                     //image.ImageLocation = "http://openweathermap.org/img/wn/" + responseObject.weather[0].icon + "@2x.png";
-                    panel.BackgroundImage = Image.FromFile("weather-pictures/" + responseObject.weather[0].icon + ".png");
+                    if (panel.BackgroundImage != Image.FromFile("weather-pictures/" + responseObject.weather[0].icon + ".png"))
+                        panel.BackgroundImage = Image.FromFile("weather-pictures/" + responseObject.weather[0].icon + ".png");
 
                     SafeWriter.WriteTextSafe(Math.Round(responseObject.main.temp).ToString() + "°", temperature);
                     SafeWriter.WriteTextSafe(DateTime.Now.DayOfWeek.ToString() + ", " + DateTime.Now.Date.Day.ToString() + " " + DateTime.Now.ToString("MMMM"), date);
