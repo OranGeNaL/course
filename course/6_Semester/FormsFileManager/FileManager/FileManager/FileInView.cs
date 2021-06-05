@@ -65,7 +65,7 @@ namespace FileManager
         private void File_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             //throw new NotImplementedException();
-            Process.Start(FullName);
+            //Process.Start(FullName);
         }
 
         private void File_MouseLeave(object sender, EventArgs e)

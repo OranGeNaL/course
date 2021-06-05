@@ -108,6 +108,7 @@ namespace FileManager
             this.button2.TabIndex = 1;
             this.button2.Text = "-->";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -133,14 +134,13 @@ namespace FileManager
             // fileViewer
             // 
             this.fileViewer.AutoScroll = true;
-            this.fileViewer.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.fileViewer.ColumnCount = 6;
             this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
             this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
             this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 896F));
+            this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 897F));
             this.fileViewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileViewer.Location = new System.Drawing.Point(169, 0);
             this.fileViewer.Name = "fileViewer";

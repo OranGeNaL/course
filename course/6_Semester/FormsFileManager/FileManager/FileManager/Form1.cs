@@ -17,6 +17,7 @@ namespace FileManager
         private List<DirectoryInView> directoriesInView = new List<DirectoryInView>();
 
         private List<string> dirHistory = new List<string>();
+        private List<string> dirHistoryBack = new List<string>();
 
         private string currentDirectory = @"C:\Users\pshen\Downloads";
 
@@ -75,16 +76,33 @@ namespace FileManager
         {
             dirHistory.Add(currentDirectory);
             currentDirectory = newDName;
+            dirHistoryBack.Clear();
 
             RewatchDirectory();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            currentDirectory = dirHistory.Last<string>();
-            dirHistory.Remove(dirHistory.Last<string>());
+            if(dirHistory.Count > 0)
+            {
+                dirHistoryBack.Add(currentDirectory);
+                currentDirectory = dirHistory.Last<string>();
+                dirHistory.Remove(dirHistory.Last<string>());
 
-            RewatchDirectory();
+                RewatchDirectory();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(dirHistoryBack.Count > 0)
+            {
+                dirHistory.Add(currentDirectory);
+                currentDirectory = dirHistoryBack.Last<string>();
+                dirHistoryBack.Remove(dirHistoryBack.Last<string>());
+
+                RewatchDirectory();
+            }
         }
     }
 }
