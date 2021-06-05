@@ -19,7 +19,10 @@ namespace FileManager
         private List<string> dirHistory = new List<string>();
         private List<string> dirHistoryBack = new List<string>();
 
-        private string currentDirectory = @"C:\Users\pshen\Downloads";
+        private string currentDirectory = @"C:\Users\pshen\Downloads\testing";
+
+        private List<FileInView> selectedFiles = new List<FileInView>();
+        private FileInView selectedFile = null;
 
         public Form1()
         {
@@ -33,8 +36,13 @@ namespace FileManager
         public void UpdateView()
         {
             fileViewer.ColumnCount = fileViewer.Width / 115;
+            //MessageBox.Show(fileViewer.ColumnCount.ToString());
+            //fileViewer.Style
+            //MessageBox.Show(fileViewer.ColumnStyles.Count.ToString());
+
             foreach( ColumnStyle i in fileViewer.ColumnStyles)
             {
+                i.SizeType = SizeType.Absolute;
                 i.Width = 115;
             }    
             //MessageBox.Show(fileViewer.ColumnCount.ToString());
@@ -44,6 +52,7 @@ namespace FileManager
         private void RewatchDirectory()
         {
             textBox1.Text = currentDirectory;
+            this.Text = currentDirectory;
 
             foreach (var i in filesInView)
                 i.RemoveFromView();
@@ -103,6 +112,62 @@ namespace FileManager
 
                 RewatchDirectory();
             }
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Directory.Exists(textBox1.Text) && e.KeyCode == Keys.Enter)
+            {
+                ChangeDirectoryDirectly(textBox1.Text.Substring(0, textBox1.Text.Length));
+            }
+        }
+
+        public void DirStateChanged(string message)
+        {
+            RewatchDirectory();
+        }
+        
+        public void DeleteFile()
+        {
+            if (selectedFiles.Count > 1)
+                foreach (var i in selectedFiles)
+                    File.Delete(i.FullName);
+            else
+                File.Delete(selectedFile.FullName);
+            RewatchDirectory();
+        }
+
+        public void SelectFile(FileInView file)
+        {
+            if (!selectedFiles.Contains(file))
+            {
+                foreach (var i in selectedFiles)
+                    i.Selected = false;
+                selectedFiles.Clear();
+
+                if (selectedFile != null)
+                    selectedFile.Selected = false;
+
+                selectedFile = file;
+                selectedFiles.Add(file);
+            }
+        }
+
+        public void SelectFiles(FileInView file)
+        {
+            selectedFile = file;
+            selectedFiles.Add(file);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ChangeDirectoryDirectly(currentDirectory.Substring(0, currentDirectory.LastIndexOf('\\')));
+            //MessageBox.Show(currentDirectory.Substring(0, currentDirectory.LastIndexOf('\\')));
         }
     }
 }

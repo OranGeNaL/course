@@ -12,6 +12,7 @@ namespace FileManager
     {
         public string FullName { get; set; }
         public string ViewName { get; set; }
+        public bool Selected { get; set; }
 
         Form1 mainForm;
 
@@ -30,6 +31,9 @@ namespace FileManager
             directoryPanel = new Panel();
             directoryIcon = new PictureBox();
             directoryName = new Label();
+
+            directoryIcon.Image = Image.FromFile("folder-icon.png");
+            directoryIcon.SizeMode = PictureBoxSizeMode.Zoom;
 
             directoryPanel.Size = new Size(100, 115);
             directoryPanel.Controls.Add(directoryIcon);
@@ -57,7 +61,6 @@ namespace FileManager
 
 
             directoryIcon.MouseDoubleClick += Directory_MouseDoubleClick;
-
         }
 
 
