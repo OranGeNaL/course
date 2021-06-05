@@ -33,17 +33,17 @@ namespace FileManager
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.fileViewer = new System.Windows.Forms.TableLayoutPanel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.fileViewer = new System.Windows.Forms.TableLayoutPanel();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -80,40 +80,14 @@ namespace FileManager
             this.panel1.Size = new System.Drawing.Size(1360, 54);
             this.panel1.TabIndex = 1;
             // 
-            // panel2
+            // textBox1
             // 
-            this.panel2.Controls.Add(this.fileViewer);
-            this.panel2.Controls.Add(this.treeView1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 54);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1360, 641);
-            this.panel2.TabIndex = 2;
-            // 
-            // treeView1
-            // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(169, 641);
-            this.treeView1.TabIndex = 0;
-            // 
-            // fileViewer
-            // 
-            this.fileViewer.AutoScroll = true;
-            this.fileViewer.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.fileViewer.ColumnCount = 6;
-            this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
-            this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
-            this.fileViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileViewer.Location = new System.Drawing.Point(169, 0);
-            this.fileViewer.Name = "fileViewer";
-            this.fileViewer.RowCount = 2;
-            this.fileViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 130F));
-            this.fileViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 130F));
-            this.fileViewer.Size = new System.Drawing.Size(1191, 641);
-            this.fileViewer.TabIndex = 1;
-            this.fileViewer.Resize += new System.EventHandler(this.fileViewer_Resize);
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Location = new System.Drawing.Point(169, 0);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(1191, 54);
+            this.textBox1.TabIndex = 1;
             // 
             // panel3
             // 
@@ -125,25 +99,6 @@ namespace FileManager
             this.panel3.Size = new System.Drawing.Size(169, 54);
             this.panel3.TabIndex = 0;
             // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(169, 0);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(1191, 54);
-            this.textBox1.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 54);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "<--";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // button2
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Right;
@@ -154,6 +109,56 @@ namespace FileManager
             this.button2.Text = "-->";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 54);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "<--";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.fileViewer);
+            this.panel2.Controls.Add(this.treeView1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 54);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1360, 641);
+            this.panel2.TabIndex = 2;
+            // 
+            // fileViewer
+            // 
+            this.fileViewer.AutoScroll = true;
+            this.fileViewer.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.fileViewer.ColumnCount = 6;
+            this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
+            this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
+            this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.fileViewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 896F));
+            this.fileViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileViewer.Location = new System.Drawing.Point(169, 0);
+            this.fileViewer.Name = "fileViewer";
+            this.fileViewer.RowCount = 2;
+            this.fileViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.fileViewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.fileViewer.Size = new System.Drawing.Size(1191, 641);
+            this.fileViewer.TabIndex = 1;
+            this.fileViewer.Resize += new System.EventHandler(this.fileViewer_Resize);
+            // 
+            // treeView1
+            // 
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(169, 641);
+            this.treeView1.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -162,15 +167,15 @@ namespace FileManager
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Files";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

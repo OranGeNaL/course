@@ -14,8 +14,11 @@ namespace FileManager
     public partial class Form1 : Form
     {
         private List<FileInView> filesInView = new List<FileInView>();
-        private string currentDirectory = @"c:\Windows";
+        private List<DirectoryInView> directoriesInView = new List<DirectoryInView>();
 
+        private List<string> dirHistory = new List<string>();
+
+        private string currentDirectory = @"C:\Users\pshen\Downloads";
 
         public Form1()
         {
@@ -29,6 +32,10 @@ namespace FileManager
         public void UpdateView()
         {
             fileViewer.ColumnCount = fileViewer.Width / 115;
+            foreach( ColumnStyle i in fileViewer.ColumnStyles)
+            {
+                i.Width = 115;
+            }    
             //MessageBox.Show(fileViewer.ColumnCount.ToString());
             //foreach(var i in fileViewer.Col)
         }
@@ -37,16 +44,47 @@ namespace FileManager
         {
             textBox1.Text = currentDirectory;
 
+            foreach (var i in filesInView)
+                i.RemoveFromView();
             filesInView.Clear();
+
+
+            foreach (var i in directoriesInView)
+                i.RemoveFromView();
+            directoriesInView.Clear();
+
+            foreach (var i in Directory.GetDirectories(currentDirectory))
+            {
+                directoriesInView.Add(new DirectoryInView(i, this));
+            }
+
             foreach (var i in Directory.GetFiles(currentDirectory))
             {
                 filesInView.Add(new FileInView(i, this));
             }
+
         }
 
         private void fileViewer_Resize(object sender, EventArgs e)
         {
             UpdateView();
+        }
+
+
+        public void ChangeDirectoryDirectly(string newDName)
+        {
+            dirHistory.Add(currentDirectory);
+            currentDirectory = newDName;
+
+            RewatchDirectory();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            currentDirectory = dirHistory.Last<string>();
+            dirHistory.Remove(dirHistory.Last<string>());
+
+            RewatchDirectory();
         }
     }
 }
