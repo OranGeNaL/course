@@ -24,8 +24,8 @@ namespace FileManager
             } 
         }
 
-        private delegate void DirStateChangedHandler(string message);
-        event DirStateChangedHandler DirStateChanged;
+        /*private delegate void DirStateChangedHandler(string message);
+        event DirStateChangedHandler DirStateChanged;*/
 
         private delegate void DeleteFileHandler();
         event DeleteFileHandler Deleted;
@@ -35,6 +35,9 @@ namespace FileManager
 
         private delegate void SelectFilesHandler(FileInView file);
         event SelectFilesHandler SelectAdditional;
+
+        private delegate void OpenArchiveHandler(string name);
+        event OpenArchiveHandler OpenArchive;
 
         Form1 mainForm;
 
@@ -54,6 +57,7 @@ namespace FileManager
             Deleted += mainForm.DeleteFile;
             Select += mainForm.SelectFile;
             SelectAdditional += mainForm.SelectFiles;
+            OpenArchive += mainForm.OpenArchive;
 
 
             filePanel = new Panel();
@@ -89,6 +93,8 @@ namespace FileManager
                 Path.GetExtension(ViewName) == ".7zip")
             {
                 menuStrip.Items.Add(openArchMenyItem);
+                openArchMenyItem.Click += OpenArchMenyItem_Click;
+                fileIcon.Image = Image.FromFile("archive-icon.png");
             }
 
             openMenyItem.Click += OpenMenyItem_Click;
@@ -117,6 +123,11 @@ namespace FileManager
 
             fileIcon.MouseDoubleClick += File_MouseDoubleClick;
             fileName.MouseDoubleClick += File_MouseDoubleClick;
+        }
+
+        private void OpenArchMenyItem_Click(object sender, EventArgs e)
+        {
+            OpenArchive(FullName);
         }
 
         private void File_MouseClick(object sender, MouseEventArgs e)

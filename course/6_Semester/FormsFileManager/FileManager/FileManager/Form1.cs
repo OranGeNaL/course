@@ -24,9 +24,16 @@ namespace FileManager
         private List<FileInView> selectedFiles = new List<FileInView>();
         private FileInView selectedFile = null;
 
+        private ArchiveForm archiveForm;
+        private WinRarPathForm winRarForm;
+
         public Form1()
         {
             InitializeComponent();
+            winRarForm = new WinRarPathForm();
+
+            winRarForm.ShowDialog();
+
             /*foreach (var i in Directory.GetFiles(@"c:\"))
                 MessageBox.Show(i);*/
             RewatchDirectory();
@@ -162,6 +169,18 @@ namespace FileManager
         {
             selectedFile = file;
             selectedFiles.Add(file);
+        }
+
+        public void OpenArchive(string name)
+        {
+            if (Settings.winrarPath == "")
+                winRarForm.ShowDialog();
+
+            archiveForm = new ArchiveForm();
+            archiveForm.SetArchive(name);
+            archiveForm.ShowDialog();
+
+            RewatchDirectory();
         }
 
         private void button3_Click(object sender, EventArgs e)
