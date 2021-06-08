@@ -214,13 +214,14 @@ namespace FileManager
         
         public void OpenArchive(string name)
         {
-            if (Settings.winrarPath == "")
+            if (Settings.WinrarPath == "")
                 winRarForm.ShowDialog();
 
             archiveForm = new ArchiveForm();
             archiveForm.SetArchive(name);
             archiveForm.ShowDialog();
 
+            RewatchDirectory();
             RewatchDirectory();
         }
 
@@ -235,6 +236,7 @@ namespace FileManager
             ArchiveForm.SetArchiveToCreate(currentDirectory);
             ArchiveForm.ArchiveSelected(selectedFiles, selectedDirectories);
             
+            RewatchDirectory();
             RewatchDirectory();
         }
     }

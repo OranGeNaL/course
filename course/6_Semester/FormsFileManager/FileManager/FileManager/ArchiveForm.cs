@@ -14,14 +14,14 @@ namespace FileManager
 {
     public partial class ArchiveForm : Form
     {
-        private static string archive;
-        private static Process rarProc;
-        private static string tempListFile;
+        private static string _archive;
+        private static Process _rarProc;
+        private static string _tempListFile;
 
         public ArchiveForm()
         {
             InitializeComponent();
-            rarProc = new Process();
+            _rarProc = new Process();
         }
 
         private void ArchiveForm_Load(object sender, EventArgs e)
@@ -31,16 +31,23 @@ namespace FileManager
 
         private void GetArchiveContent()
         {
-            rarProc.StartInfo.Arguments = "/C lb " + archive;
-            //rarProc.StartInfo.StandardOutputEncoding = Encoding.UTF32;
-            rarProc.StartInfo.UseShellExecute = false;
-            rarProc.StartInfo.RedirectStandardOutput = true;
+            string content = "";
 
-            rarProc.Start();
-            foreach(var i in ParseAnswer(rarProc.StandardOutput.ReadToEnd()))
+            ProcessStartInfo si = new ProcessStartInfo();
+            _rarProc.StartInfo.Arguments = " /C lb \"" + _archive + "\"";
+            //MessageBox.Show(_rarProc.StartInfo.FileName + _rarProc.StartInfo.Arguments);
+            //_rarProc.StartInfo.StandartInputEncoding = Encoding.UTF32;
+            _rarProc.StartInfo.UseShellExecute = false;
+            _rarProc.StartInfo.RedirectStandardOutput = true;
+
+            _rarProc.Start();
+            foreach(var i in ParseAnswer(_rarProc.StandardOutput.ReadToEnd()))
             {
                 listBox1.Items.Add(i);
+                content += i + "\n";
             }
+
+            //MessageBox.Show(content);
         }
 
         public static void ArchiveSelected(List<FileInView> files, List<DirectoryInView> directories)
@@ -49,26 +56,27 @@ namespace FileManager
             
             foreach (var i in files)
             {
-                enumeration += i.FullName + '\n';
+                enumeration += "\"" + i.FullName + "\"" + '\n';
             }
             
             foreach (var i in directories)
             {
-                enumeration += i.FullName + '\n';
+                enumeration += "\"" + i.FullName + "\"" + '\n';
             }
 
             CreateTempListFile(enumeration);
             
-            rarProc.StartInfo.UseShellExecute = false;
-            rarProc.StartInfo.RedirectStandardOutput = true;
+            _rarProc.StartInfo.UseShellExecute = false;
+            _rarProc.StartInfo.RedirectStandardOutput = true;
             
             //CreateTempListFile(listContent);
-            rarProc.StartInfo.FileName = Settings.winrarPath;
-            rarProc.StartInfo.Arguments = " A " + archive + " " + " @" + tempListFile;
+            _rarProc.StartInfo.FileName = Settings.WinrarPath;
+            _rarProc.StartInfo.Arguments = " A " + _archive + " " + " @" + _tempListFile;
             //MessageBox.Show(rarProc.StartInfo.Arguments);
-            rarProc.Start();
+            _rarProc.Start();
 
-            MessageBox.Show(rarProc.StandardOutput.ReadToEnd());
+            //MessageBox.Show(_rarProc.StandardOutput.ReadToEnd());
+            string shit = _rarProc.StandardOutput.ReadToEnd();
 
             DeleteTempListFile();
             //MessageBox.Show(enumeration);
@@ -88,13 +96,13 @@ namespace FileManager
 
         public void SetArchive(string name)
         {
-            archive = name;
+            _archive = name;
             Text = name;
 
-            rarProc.StartInfo.FileName = Settings.winrarPath;
+            _rarProc.StartInfo.FileName = Settings.WinrarPath;
 
             FileInfo info = new FileInfo(name);
-            tempListFile = "temp_" + info.Name.Replace(info.Extension, ".txt");
+            _tempListFile = "temp_" + info.Name.Replace(info.Extension, ".txt");
 
             GetArchiveContent();
         }
@@ -102,12 +110,12 @@ namespace FileManager
         public static void SetArchiveToCreate(string name)
         {
             DirectoryInfo info = new DirectoryInfo(name);
-            archive = name + "\\" + info.Name + ".rar";
+            _archive = name + "\\" + info.Name + ".rar";
             
-            rarProc = new Process();
-            rarProc.StartInfo.FileName = Settings.winrarPath;
+            _rarProc = new Process();
+            _rarProc.StartInfo.FileName = Settings.WinrarPath;
 
-            tempListFile = "temp_" + info.Name + ".txt";
+            _tempListFile = "temp_" + info.Name + ".txt";
 
             //GetArchiveContent();
         }
@@ -126,9 +134,9 @@ namespace FileManager
         
         private static void CreateTempListFile(string content)
         {
-            var file = File.OpenWrite(tempListFile);
+            var file = File.OpenWrite(_tempListFile);
 
-            Byte[] info = new UTF8Encoding(true).GetBytes(content);
+            Byte[] info = new UTF8Encoding().GetBytes(content);
 
             file.Write(info, 0, info.Length);
             file.Close();
@@ -136,7 +144,7 @@ namespace FileManager
 
         private static void DeleteTempListFile()
         {
-            File.Delete(tempListFile);
+            File.Delete(_tempListFile);
         }
 
         private void button1_Click(object sender, EventArgs e) //Извлечь выбранное
@@ -145,13 +153,14 @@ namespace FileManager
             foreach (var i in GetSelectedNames())
                 listContent += i + '\n';
 
-            FileInfo info = new FileInfo(archive);
+            FileInfo info = new FileInfo(_archive);
 
             CreateTempListFile(listContent);
-            rarProc.StartInfo.Arguments = " x " + archive + " " + archive.Replace(info.Extension, "\\") + " -n@" + tempListFile;
-            rarProc.Start();
+            _rarProc.StartInfo.Arguments = " x \"" + _archive + "\" \"" + _archive.Replace(info.Extension, "\"\\") + " -n@" + _tempListFile;
+            _rarProc.Start();
 
             //MessageBox.Show(rarProc.StandardOutput.ReadToEnd());
+            string shit = _rarProc.StandardOutput.ReadToEnd();
             DeleteTempListFile();
             
             Close();
@@ -159,13 +168,14 @@ namespace FileManager
 
         private void button2_Click(object sender, EventArgs e) //Извлечь всё
         {
-            FileInfo info = new FileInfo(archive);
+            FileInfo info = new FileInfo(_archive);
 
-            rarProc.StartInfo.Arguments = " x " + archive + " " + archive.Replace(info.Extension, "\\");// + " -n@" + tempListFile;
+            _rarProc.StartInfo.Arguments = " x \"" + _archive + "\" \"" + _archive.Replace(info.Extension, "\"\\");// + " -n@" + tempListFile;
             //MessageBox.Show(rarProc.StartInfo.Arguments);
-            rarProc.Start();
+            _rarProc.Start();
 
             //MessageBox.Show(rarProc.StandardOutput.ReadToEnd());
+            string shit = _rarProc.StandardOutput.ReadToEnd();
             
             Close();
         }

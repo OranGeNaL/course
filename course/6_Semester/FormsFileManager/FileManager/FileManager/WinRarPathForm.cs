@@ -34,7 +34,7 @@ namespace FileManager
                 FileInfo info = new FileInfo(textBox1.Text);
                 if (info.Name.ToUpper() == "Rar.exe".ToUpper())
                 { 
-                    Settings.winrarPath = textBox1.Text;
+                    Settings.WinrarPath = textBox1.Text;
                     this.Close(); 
                 }
                 else

@@ -8,6 +8,6 @@ namespace FileManager
 {
     public static class Settings
     {
-        public static string winrarPath = "";
+        public static string WinrarPath = "";
     }
 }
