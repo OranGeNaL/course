@@ -18,7 +18,7 @@ namespace FileManager
         private  bool selected = false;
         public bool Selected { get { return selected; } set
             {
-                if(selected)
+                if(value == false)
                     filePanel.BackColor = Color.Transparent;
                 selected = value;
             } 
@@ -86,6 +86,7 @@ namespace FileManager
             ToolStripMenuItem copyMenyItem = new ToolStripMenuItem("Копировать");
             ToolStripMenuItem cutMenyItem = new ToolStripMenuItem("Вырезать");
             ToolStripMenuItem deleteMenyItem = new ToolStripMenuItem("Удалить");
+            ToolStripMenuItem addToArchiveMenuItem = new ToolStripMenuItem("Добавить в архив");
             ToolStripMenuItem openArchMenyItem = new ToolStripMenuItem("Открыть как архив");
 
             if(Path.GetExtension(ViewName) == ".rar" ||
@@ -99,8 +100,9 @@ namespace FileManager
 
             openMenyItem.Click += OpenMenyItem_Click;
             deleteMenyItem.Click += DeleteMenyItem_Click;
+            addToArchiveMenuItem.Click += AddToArchiveMenuItem_Click;
 
-            menuStrip.Items.AddRange(new[] {openMenyItem, copyMenyItem, cutMenyItem, deleteMenyItem});
+            menuStrip.Items.AddRange(new[] {openMenyItem, copyMenyItem, cutMenyItem, deleteMenyItem, addToArchiveMenuItem});
 
             fileIcon.ContextMenuStrip = menuStrip;
             fileName.ContextMenuStrip = menuStrip;
@@ -138,7 +140,13 @@ namespace FileManager
             else
                 Select(this);
         }
-
+        private void AddToArchiveMenuItem_Click(object sender, EventArgs e)
+        {
+            //DirStateChanged("DELETE");
+            Selected = true;
+            Select(this);
+            mainForm.ArchiveSelected();
+        }
         private void DeleteMenyItem_Click(object sender, EventArgs e)
         {
             //DirStateChanged("DELETE");

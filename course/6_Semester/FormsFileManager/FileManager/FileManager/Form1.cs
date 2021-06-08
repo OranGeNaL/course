@@ -24,6 +24,9 @@ namespace FileManager
         private List<FileInView> selectedFiles = new List<FileInView>();
         private FileInView selectedFile = null;
 
+        private List<DirectoryInView> selectedDirectories = new List<DirectoryInView>();
+        private DirectoryInView selectedDirectory = null;
+
         private ArchiveForm archiveForm;
         private WinRarPathForm winRarForm;
 
@@ -148,7 +151,8 @@ namespace FileManager
                 File.Delete(selectedFile.FullName);
             RewatchDirectory();
         }
-
+        
+        //Выбор файлов
         public void SelectFile(FileInView file)
         {
             if (!selectedFiles.Contains(file))
@@ -159,6 +163,13 @@ namespace FileManager
 
                 if (selectedFile != null)
                     selectedFile.Selected = false;
+                
+                foreach (var i in selectedDirectories)
+                    i.Selected = false;
+                selectedDirectories.Clear();
+
+                if (selectedDirectory != null)
+                    selectedDirectory.Selected = false;
 
                 selectedFile = file;
                 selectedFiles.Add(file);
@@ -171,6 +182,36 @@ namespace FileManager
             selectedFiles.Add(file);
         }
 
+        //Выбор папок
+        public void SelectDirectory(DirectoryInView directory)
+        {
+            if (!selectedDirectories.Contains(directory))
+            {
+                foreach (var i in selectedDirectories)
+                    i.Selected = false;
+                selectedDirectories.Clear();
+
+                if (selectedDirectory != null)
+                    selectedDirectory.Selected = false;
+                
+                foreach (var i in selectedFiles)
+                    i.Selected = false;
+                selectedFiles.Clear();
+
+                if (selectedFile != null)
+                    selectedFile.Selected = false;
+
+                selectedDirectory = directory;
+                selectedDirectories.Add(directory);
+            }
+        }
+
+        public void SelectDirectories(DirectoryInView directory)
+        {
+            selectedDirectory = directory;
+            selectedDirectories.Add(directory);
+        }
+        
         public void OpenArchive(string name)
         {
             if (Settings.winrarPath == "")
@@ -187,6 +228,14 @@ namespace FileManager
         {
             ChangeDirectoryDirectly(currentDirectory.Substring(0, currentDirectory.LastIndexOf('\\')));
             //MessageBox.Show(currentDirectory.Substring(0, currentDirectory.LastIndexOf('\\')));
+        }
+
+        public void ArchiveSelected()
+        {
+            ArchiveForm.SetArchiveToCreate(currentDirectory);
+            ArchiveForm.ArchiveSelected(selectedFiles, selectedDirectories);
+            
+            RewatchDirectory();
         }
     }
 }
