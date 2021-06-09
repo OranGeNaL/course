@@ -100,7 +100,9 @@ namespace FileManager
 
             openMenyItem.Click += OpenMenyItem_Click;
             deleteMenyItem.Click += DeleteMenyItem_Click;
+            copyMenyItem.Click += CopyMenyItemOnClick;
             addToArchiveMenuItem.Click += AddToArchiveMenuItem_Click;
+            cutMenyItem.Click += CutMenyItemOnClick;
 
             menuStrip.Items.AddRange(new[] {openMenyItem, copyMenyItem, cutMenyItem, deleteMenyItem, addToArchiveMenuItem});
 
@@ -125,6 +127,16 @@ namespace FileManager
 
             fileIcon.MouseDoubleClick += File_MouseDoubleClick;
             fileName.MouseDoubleClick += File_MouseDoubleClick;
+        }
+
+        private void CutMenyItemOnClick(object sender, EventArgs e)
+        {
+            mainForm.SetFilesToMove();
+        }
+
+        private void CopyMenyItemOnClick(object sender, EventArgs e)
+        {
+            mainForm.SetFilesToCopy();
         }
 
         private void OpenArchMenyItem_Click(object sender, EventArgs e)

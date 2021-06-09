@@ -19,7 +19,13 @@ namespace FileManager
         private List<string> dirHistory = new List<string>();
         private List<string> dirHistoryBack = new List<string>();
 
-        private string currentDirectory = @"C:\Users\pshen\Downloads\testing";
+        private List<DirectoryInView> directoriesToCopy = new List<DirectoryInView>();
+        private List<FileInView> filesToCopy = new List<FileInView>();
+        
+        private List<DirectoryInView> directoriesToMove = new List<DirectoryInView>();
+        private List<FileInView> filesToMove = new List<FileInView>();
+
+        private string currentDirectory = @"C:\Users\pshen\playground";
 
         private List<FileInView> selectedFiles = new List<FileInView>();
         private FileInView selectedFile = null;
@@ -30,12 +36,28 @@ namespace FileManager
         private ArchiveForm archiveForm;
         private WinRarPathForm winRarForm;
 
+        private ContextMenuStrip menuStrip;
+        ToolStripMenuItem createFolderMenuItem;
+        private ToolStripMenuItem pasteFileMenuItem;
         public Form1()
         {
             InitializeComponent();
             winRarForm = new WinRarPathForm();
 
             winRarForm.ShowDialog();
+            menuStrip = new ContextMenuStrip();
+
+            createFolderMenuItem = new ToolStripMenuItem("Создать папку");
+            pasteFileMenuItem = new ToolStripMenuItem("Вставить");
+            pasteFileMenuItem.Enabled = false;
+            
+            menuStrip.Items.Add(createFolderMenuItem);
+            menuStrip.Items.Add(pasteFileMenuItem);
+
+            createFolderMenuItem.Click += CreateFolderMenyItem_Click;
+            pasteFileMenuItem.Click += PasteFileMenuItemOnClick;
+
+            fileViewer.ContextMenuStrip = menuStrip;
 
             /*foreach (var i in Directory.GetFiles(@"c:\"))
                 MessageBox.Show(i);*/
@@ -43,6 +65,62 @@ namespace FileManager
             UpdateView();
         }
 
+        private void PasteFileMenuItemOnClick(object sender, EventArgs e)
+        {
+            if(filesToCopy.Count > 0 || directoriesToCopy.Count > 0)
+            {
+                //MessageBox.Show("Copy");
+                foreach (var i in filesToCopy)
+                {
+                    File.Copy(i.FullName, currentDirectory + "\\" + i.ViewName, true);
+                }
+
+                foreach (var i in directoriesToCopy)
+                {
+                    // MessageBox.Show(i.FullName);
+                    // MessageBox.Show(currentDirectory + "\\" + i.ViewName);
+                    CopyFilesRecursively(i.FullName, currentDirectory + "\\" + i.ViewName);
+                }
+            }
+            
+            else if(filesToMove.Count > 0 || directoriesToMove.Count > 0)
+            {
+                //MessageBox.Show("Move");
+                foreach (var i in filesToMove)
+                {
+                    File.Copy(i.FullName, currentDirectory + "\\" + i.ViewName, true);
+                    File.Delete(i.FullName);
+                }
+
+                foreach (var i in directoriesToMove)
+                {
+                    CopyFilesRecursively(i.FullName, currentDirectory + "\\" + i.ViewName);
+                    Directory.Delete(i.FullName, true);
+                }
+                
+                filesToMove.Clear();
+                directoriesToMove.Clear();
+            }
+            
+            RewatchDirectory();
+        }
+
+        private static void CopyFilesRecursively(string sourcePath, string targetPath)
+        {
+            Directory.CreateDirectory(targetPath);
+            //Now Create all of the directories
+            foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+            {
+                MessageBox.Show(dirPath.Replace(sourcePath, targetPath));
+                Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+            }
+
+            //Copy all the files & Replaces any files with the same name
+            foreach (string newPath in Directory.GetFiles(sourcePath, "*.*",SearchOption.AllDirectories))
+            {
+                File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+            }
+        }
         public void UpdateView()
         {
             fileViewer.ColumnCount = fileViewer.Width / 115;
@@ -238,6 +316,74 @@ namespace FileManager
             
             RewatchDirectory();
             RewatchDirectory();
+        }
+        
+        private void CreateFolderMenyItem_Click(object sender, EventArgs e)
+        {
+            CreateFolderDialog cf = new CreateFolderDialog();
+            
+            cf.ShowDialog();
+            if (cf.DialogResult == DialogResult.OK)
+            {
+                Directory.CreateDirectory(currentDirectory + "\\" + cf.folderNameRes);
+                //MessageBox.Show(currentDirectory + "\\" + cf.folderNameRes);
+                RewatchDirectory();
+            }
+        }
+
+        public void SetFilesToCopy()
+        {
+            if(selectedFiles.Count == 0 && selectedDirectories.Count == 0)
+                return;
+            
+            filesToCopy.Clear();
+            directoriesToCopy.Clear();
+            filesToMove.Clear();
+            directoriesToMove.Clear();
+            
+            string filesList = "";
+            
+            foreach (var i in selectedFiles)
+            {
+                filesToCopy.Add(i);
+                filesList += i.FullName + "\n";
+            }
+
+            foreach (var i in selectedDirectories)
+            {
+                directoriesToCopy.Add(i);
+                filesList += i.FullName + "\n";
+            }
+
+            pasteFileMenuItem.Enabled = true;
+            //MessageBox.Show(filesList);
+        }
+        
+        public void SetFilesToMove()
+        {
+            if (selectedFiles.Count == 0 && selectedDirectories.Count == 0)
+                return;
+
+            filesToCopy.Clear();
+            directoriesToCopy.Clear();
+            filesToMove.Clear();
+            directoriesToMove.Clear();
+            
+            string filesList = "";
+            
+            foreach (var i in selectedFiles)
+            {
+                filesToMove.Add(i);
+                filesList += i.FullName + "\n";
+            }
+
+            foreach (var i in selectedDirectories)
+            {
+                directoriesToMove.Add(i);
+                filesList += i.FullName + "\n";
+            }
+            pasteFileMenuItem.Enabled = true;
+            MessageBox.Show(filesList);
         }
     }
 }

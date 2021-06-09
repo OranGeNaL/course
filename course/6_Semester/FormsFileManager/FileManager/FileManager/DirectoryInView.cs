@@ -79,6 +79,8 @@ namespace FileManager
             directoryIcon.ContextMenuStrip = menuStrip;
             directoryName.ContextMenuStrip = menuStrip;
             addToArchiveMenuItem.Click += AddToArchiveMenuItem_Click;
+            copyMenyItem.Click += CopyMenyItemOnClick;
+            cutMenyItem.Click += CutMenyItemOnClick;
 
             mainForm.Controls.Find("fileViewer", true)[0].Controls.Add(directoryPanel);
 
@@ -97,6 +99,16 @@ namespace FileManager
 
 
             directoryIcon.MouseDoubleClick += Directory_MouseDoubleClick;
+        }
+
+        private void CutMenyItemOnClick(object sender, EventArgs e)
+        {
+            mainForm.SetFilesToMove();
+        }
+
+        private void CopyMenyItemOnClick(object sender, EventArgs e)
+        {
+            mainForm.SetFilesToCopy();
         }
 
         private void Directory_MouseClick(object sender, MouseEventArgs e)

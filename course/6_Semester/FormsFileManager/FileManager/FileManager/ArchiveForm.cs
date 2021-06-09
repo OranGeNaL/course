@@ -179,5 +179,57 @@ namespace FileManager
             
             Close();
         }
+
+        private void textBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            FolderBrowserDialog fBrows = new FolderBrowserDialog();
+            fBrows.ShowDialog();
+            textBox1.Text = fBrows.SelectedPath;
+            // MessageBox.Show(textBox1.Text);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("Указанной директории не существует!");
+                return;
+            }
+            FileInfo info = new FileInfo(_archive);
+
+            _rarProc.StartInfo.Arguments = " x \"" + _archive + "\" \"" + textBox1.Text + "\\\"";// + " -n@" + tempListFile;
+            // MessageBox.Show(_rarProc.StartInfo.Arguments);
+            _rarProc.Start();
+
+            //MessageBox.Show(rarProc.StandardOutput.ReadToEnd());
+            string shit = _rarProc.StandardOutput.ReadToEnd();
+            
+            Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("Указанной директории не существует!");
+                return;
+            }
+            string listContent = "";
+            foreach (var i in GetSelectedNames())
+                listContent += i + '\n';
+
+            FileInfo info = new FileInfo(_archive);
+
+            CreateTempListFile(listContent);
+            _rarProc.StartInfo.Arguments = " x \"" + _archive + "\" \"" + textBox1.Text + "\\\"" + " -n@" + _tempListFile;
+            MessageBox.Show(_rarProc.StartInfo.Arguments);
+            _rarProc.Start();
+
+            //MessageBox.Show(rarProc.StandardOutput.ReadToEnd());
+            string shit = _rarProc.StandardOutput.ReadToEnd();
+            DeleteTempListFile();
+            
+            Close();
+        }
     }
 }

@@ -10,3 +10,4 @@ C:\Users\pshen\Documents\GitHub\course\course\6_Semester\FormsFileManager\FileMa
 C:\Users\pshen\Documents\GitHub\course\course\6_Semester\FormsFileManager\FileManager\FileManager\obj\Debug\FileManager.pdb
 C:\Users\pshen\Documents\GitHub\course\course\6_Semester\FormsFileManager\FileManager\FileManager\obj\Debug\FileManager.ArchiveForm.resources
 C:\Users\pshen\Documents\GitHub\course\course\6_Semester\FormsFileManager\FileManager\FileManager\obj\Debug\FileManager.WinRarPathForm.resources
+C:\Users\pshen\Documents\GitHub\course\course\6_Semester\FormsFileManager\FileManager\FileManager\obj\Debug\FileManager.CreateFolderDialog.resources

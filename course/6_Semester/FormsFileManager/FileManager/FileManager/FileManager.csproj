@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,6 +59,12 @@
     <Compile Include="ArchiveForm.Designer.cs">
       <DependentUpon>ArchiveForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateFolderDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateFolderDialog.Designer.cs">
+      <DependentUpon>CreateFolderDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="DirectoryInView.cs" />
     <Compile Include="FileInView.cs" />
     <Compile Include="Form1.cs">
@@ -78,6 +85,9 @@
     </Compile>
     <EmbeddedResource Include="ArchiveForm.resx">
       <DependentUpon>ArchiveForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateFolderDialog.resx">
+      <DependentUpon>CreateFolderDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
