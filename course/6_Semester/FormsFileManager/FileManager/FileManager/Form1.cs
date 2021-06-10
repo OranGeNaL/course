@@ -383,7 +383,7 @@ namespace FileManager
                 filesList += i.FullName + "\n";
             }
             pasteFileMenuItem.Enabled = true;
-            MessageBox.Show(filesList);
+            //MessageBox.Show(filesList);
         }
     }
 }
